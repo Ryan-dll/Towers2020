@@ -10,8 +10,6 @@
 #include "MainFrm.h"
 
 #include "ChildFrm.h"
-#include "Towers2020Doc.h"
-#include "Towers2020View.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -20,13 +18,9 @@
 
 // CTowers2020App
 
-BEGIN_MESSAGE_MAP(CTowers2020App, CWinAppEx)
+BEGIN_MESSAGE_MAP(CTowers2020App, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, &CTowers2020App::OnAppAbout)
-	// Standard file based document commands
-	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
-	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
-	// Standard print setup command
-	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
+	ON_COMMAND(ID_FILE_NEW, &CTowers2020App::OnFileNew)
 END_MESSAGE_MAP()
 
 
@@ -34,8 +28,6 @@ END_MESSAGE_MAP()
 
 CTowers2020App::CTowers2020App() noexcept
 {
-	m_bHiColorIcons = TRUE;
-
 	// support Restart Manager
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
 #ifdef _MANAGED
@@ -72,7 +64,7 @@ BOOL CTowers2020App::InitInstance()
 	InitCtrls.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&InitCtrls);
 
-	CWinAppEx::InitInstance();
+	CWinApp::InitInstance();
 
 
 	// Initialize OLE libraries
@@ -84,7 +76,7 @@ BOOL CTowers2020App::InitInstance()
 
 	AfxEnableControlContainer();
 
-	EnableTaskbarInteraction();
+	EnableTaskbarInteraction(FALSE);
 
 	// AfxInitRichEdit2() is required to use RichEdit control
 	// AfxInitRichEdit2();
@@ -97,53 +89,30 @@ BOOL CTowers2020App::InitInstance()
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
-	LoadStdProfileSettings(4);  // Load standard INI file options (including MRU)
 
 
-	InitContextMenuManager();
-
-	InitKeyboardManager();
-
-	InitTooltipManager();
-	CMFCToolTipInfo ttParams;
-	ttParams.m_bVislManagerTheme = TRUE;
-	theApp.GetTooltipManager()->SetTooltipParams(AFX_TOOLTIP_TYPE_ALL,
-		RUNTIME_CLASS(CMFCToolTipCtrl), &ttParams);
-
-	// Register the application's document templates.  Document templates
-	//  serve as the connection between documents, frame windows and views
-	CMultiDocTemplate* pDocTemplate;
-	pDocTemplate = new CMultiDocTemplate(IDR_Towers2020TYPE,
-		RUNTIME_CLASS(CTowers2020Doc),
-		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
-		RUNTIME_CLASS(CTowers2020View));
-	if (!pDocTemplate)
+	// To create the main window, this code creates a new frame window
+	// object and then sets it as the application's main window object
+	CMDIFrameWnd* pFrame = new CMainFrame;
+	if (!pFrame)
 		return FALSE;
-	AddDocTemplate(pDocTemplate);
-
-	// create main MDI Frame window
-	CMainFrame* pMainFrame = new CMainFrame;
-	if (!pMainFrame || !pMainFrame->LoadFrame(IDR_MAINFRAME))
-	{
-		delete pMainFrame;
+	m_pMainWnd = pFrame;
+	// create main MDI frame window
+	if (!pFrame->LoadFrame(IDR_MAINFRAME))
 		return FALSE;
-	}
-	m_pMainWnd = pMainFrame;
+	// try to load shared MDI menus and accelerator table
+	//TODO: add additional member variables and load calls for
+	//	additional menu types your application may need
+	HINSTANCE hInst = AfxGetResourceHandle();
+	m_hMDIMenu  = ::LoadMenu(hInst, MAKEINTRESOURCE(IDR_Towers2020TYPE));
+	m_hMDIAccel = ::LoadAccelerators(hInst, MAKEINTRESOURCE(IDR_Towers2020TYPE));
 
 
-	// Parse command line for standard shell commands, DDE, file open
-	CCommandLineInfo cmdInfo;
-	ParseCommandLine(cmdInfo);
 
 
-
-	// Dispatch commands specified on the command line.  Will return FALSE if
-	// app was launched with /RegServer, /Register, /Unregserver or /Unregister.
-	if (!ProcessShellCommand(cmdInfo))
-		return FALSE;
 	// The main window has been initialized, so show and update it
-	pMainFrame->ShowWindow(m_nCmdShow);
-	pMainFrame->UpdateWindow();
+	pFrame->ShowWindow(m_nCmdShow);
+	pFrame->UpdateWindow();
 
 	return TRUE;
 }
@@ -151,13 +120,25 @@ BOOL CTowers2020App::InitInstance()
 int CTowers2020App::ExitInstance()
 {
 	//TODO: handle additional resources you may have added
+	if (m_hMDIMenu != nullptr)
+		FreeResource(m_hMDIMenu);
+	if (m_hMDIAccel != nullptr)
+		FreeResource(m_hMDIAccel);
+
 	AfxOleTerm(FALSE);
 
-	return CWinAppEx::ExitInstance();
+	return CWinApp::ExitInstance();
 }
 
 // CTowers2020App message handlers
 
+void CTowers2020App::OnFileNew()
+{
+	CMainFrame* pFrame = STATIC_DOWNCAST(CMainFrame, m_pMainWnd);
+	// create a new MDI child window
+	pFrame->CreateNewChild(
+		RUNTIME_CLASS(CChildFrame), IDR_Towers2020TYPE, m_hMDIMenu, m_hMDIAccel);
+}
 
 // CAboutDlg dialog used for App About
 
@@ -196,28 +177,6 @@ void CTowers2020App::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
-}
-
-// CTowers2020App customization load/save methods
-
-void CTowers2020App::PreLoadState()
-{
-	BOOL bNameValid;
-	CString strName;
-	bNameValid = strName.LoadString(IDS_EDIT_MENU);
-	ASSERT(bNameValid);
-	GetContextMenuManager()->AddMenu(strName, IDR_POPUP_EDIT);
-	bNameValid = strName.LoadString(IDS_EXPLORER);
-	ASSERT(bNameValid);
-	GetContextMenuManager()->AddMenu(strName, IDR_POPUP_EXPLORER);
-}
-
-void CTowers2020App::LoadCustomState()
-{
-}
-
-void CTowers2020App::SaveCustomState()
-{
 }
 
 // CTowers2020App message handlers

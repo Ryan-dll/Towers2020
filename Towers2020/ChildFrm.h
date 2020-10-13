@@ -3,8 +3,9 @@
 //
 
 #pragma once
+#include "ChildView.h"
 
-class CChildFrame : public CMDIChildWndEx
+class CChildFrame : public CMDIChildWnd
 {
 	DECLARE_DYNCREATE(CChildFrame)
 public:
@@ -12,17 +13,21 @@ public:
 
 // Attributes
 protected:
-	CSplitterWndEx m_wndSplitter;
+	CSplitterWnd m_wndSplitter;
 public:
 
 // Operations
 public:
 
 // Overrides
+	public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
 
 // Implementation
 public:
+	// view for the client area of the frame.
+	CChildView m_wndView;
 	virtual ~CChildFrame();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
@@ -31,5 +36,8 @@ public:
 
 // Generated message map functions
 protected:
+	afx_msg void OnFileClose();
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	DECLARE_MESSAGE_MAP()
 };

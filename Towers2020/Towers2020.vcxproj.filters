@@ -30,31 +30,16 @@
     <ClInclude Include="ChildFrm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Towers2020Doc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Towers2020View.h">
+    <ClInclude Include="ChildView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewTree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OutputWnd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PropertiesWnd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="\\vmware-host\Shared Folders\Desktop\XmlNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,28 +53,13 @@
     <ClCompile Include="ChildFrm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Towers2020Doc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Towers2020View.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FileView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ClassView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ViewTree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OutputWnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PropertiesWnd.cpp">
+    <ClCompile Include="ChildView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="\\vmware-host\Shared Folders\Desktop\XmlNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,85 +69,16 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\file_view.ico">
+    <None Include="res\Towers2020.rc2">
       <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\file_view_hc.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\class_view.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\class_view_hc.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\fileview.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\fileview_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\classview.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\classview_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\explorer.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\explorer_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\sort.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\sort_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\menuimages.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\menuimages_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\output_wnd.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\output_wnd_hc.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\properties_wnd.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\properties_wnd_hc.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\properties.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\properties_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\userimages.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Towers2020Doc.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="res\Towers2020.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\Toolbar.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\Toolbar256.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\Towers2020.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@
 // See Towers2020.cpp for the implementation of this class
 //
 
-class CTowers2020App : public CWinAppEx
+class CTowers2020App : public CWinApp
 {
 public:
 	CTowers2020App() noexcept;
@@ -26,14 +26,13 @@ public:
 	virtual int ExitInstance();
 
 // Implementation
-	UINT  m_nAppLook;
-	BOOL  m_bHiColorIcons;
+protected:
+	HMENU  m_hMDIMenu;
+	HACCEL m_hMDIAccel;
 
-	virtual void PreLoadState();
-	virtual void LoadCustomState();
-	virtual void SaveCustomState();
-
+public:
 	afx_msg void OnAppAbout();
+	afx_msg void OnFileNew();
 	DECLARE_MESSAGE_MAP()
 };
 
