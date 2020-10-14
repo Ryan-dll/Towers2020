@@ -47,6 +47,16 @@ void CGame::Load(const std::wstring& filename)
             //  XmlItem(node);
             //}
 
+            if (node->GetName() == L"level")
+            {
+                for (auto subNode : node->GetChildren()) {
+                    mHeight = subNode->GetAttributeIntValue(L"height", 0);
+                    mWidth = subNode->GetAttributeIntValue(L"width", 0);
+                    mStartX = subNode->GetAttributeIntValue(L"start-x", 0);
+                    mStartY = subNode->GetAttributeIntValue(L"start-y", 0);
+                }
+            }
+
             if (node->GetName() == L"declarations")
             {
                 for (auto subNode : node->GetChildren()) {

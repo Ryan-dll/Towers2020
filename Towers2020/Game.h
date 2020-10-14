@@ -25,5 +25,17 @@ public:
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
+
+	/// Width of level
+	int mWidth = 0;
+
+	/// Height of level
+	int mHeight = 0;
+
+	/// Start position X
+	int mStartX = 0;
+
+	/// Start position Y
+	int mStartY = 0;
 };
 
