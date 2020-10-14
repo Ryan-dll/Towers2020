@@ -20,10 +20,22 @@
 
 using namespace std;
 using namespace xmlnode;
+using namespace Gdiplus;
 
 /// This multi dimentional map holds information defined in XML declarations for when
 /// the objects are later created
 map<wstring, map<wstring, wstring>> declarations;
+
+std::unique_ptr<Gdiplus::Bitmap> image; 
+
+CGame::CGame()
+{
+    // Load test image from file
+    std::wstring testimage = L"test.png";
+    image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
+
+
+}
 
 /**
  * Load the game from XML file.
@@ -123,5 +135,69 @@ void CGame::XmlItem(const std::shared_ptr<xmlnode::CXmlNode>& node)
         // Add item to the All Items array.
         // TODO: This should be abstracted more, Game should have Add()
         mAllGameItems.push_back(item);
+    }
+}
+
+/**
+ * Draw the game area
+ * \param graphics The GDI+ graphics context to draw on
+ * \param width Width of the client window
+ * \param height Height of the client window
+ */
+void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
+{
+    // Fill the background with black
+    SolidBrush brush(Color::Black);
+    graphics->FillRectangle(&brush, 0, 0, width, height);
+
+    //
+    // Automatic Scaling
+    //
+    float scaleX = float(width) / float(Width);
+    float scaleY = float(height) / float(Height);
+    mScale = min(scaleX, scaleY);
+
+    // Ensure it is centered horizontally
+    mXOffset = (float)((width - Width * mScale) / 2);
+
+    // Ensure it is centered vertically
+    mYOffset = (float)((height - Height * mScale) / 2);
+
+    graphics->TranslateTransform(mXOffset, mYOffset);
+    graphics->ScaleTransform(mScale, mScale);
+
+    // From here on you are drawing virtual pixels 
+    
+    
+    /// Draw a test image to the screen
+    if (image != nullptr)
+    {
+        int wid = image->GetWidth();
+        int hit = image->GetHeight();
+        
+        graphics->DrawImage(image.get(), 0, 0, CGame::Width, CGame::Height);
+    }
+}
+
+/**
+* Handle a click on the game area
+* \param x X location clicked on
+* \param y Y location clicked on
+*/
+void CGame::OnLButtonDown(int x, int y)
+{
+    double oX = (x - mXOffset) / mScale;
+    double oY = (y - mYOffset) / mScale;
+}
+
+/**
+* Update objects in the playing area
+* \param elapsed Elapsed time since last update
+*/
+void CGame::Update(double elapsed)
+{
+    for (auto item : mAllGameItems)
+    {
+        //item->update() when implemented
     }
 }

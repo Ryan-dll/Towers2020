@@ -42,5 +42,6 @@ public:
 
 	afx_msg void OnFileLoad32776();
 	afx_msg void OnUpdateFileLoad32776(CCmdUI* pCmdUI);
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 };
 

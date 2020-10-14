@@ -19,8 +19,8 @@
 // CTowers2020App
 
 BEGIN_MESSAGE_MAP(CTowers2020App, CWinApp)
-	ON_COMMAND(ID_APP_ABOUT, &CTowers2020App::OnAppAbout)
-	ON_COMMAND(ID_FILE_NEW, &CTowers2020App::OnFileNew)
+	//ON_COMMAND(ID_APP_ABOUT, &CTowers2020App::OnAppAbout)
+	//ON_COMMAND(ID_FILE_NEW, &CTowers2020App::OnFileNew)
 END_MESSAGE_MAP()
 
 
@@ -29,7 +29,7 @@ END_MESSAGE_MAP()
 CTowers2020App::CTowers2020App() noexcept
 {
 	// support Restart Manager
-	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
+	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_RESTART;
 #ifdef _MANAGED
 	// If the application is built using Common Language Runtime support (/clr):
 	//     1) This additional setting is needed for Restart Manager support to work properly.
@@ -65,6 +65,8 @@ BOOL CTowers2020App::InitInstance()
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
+    Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
 
 
 	// Initialize OLE libraries
@@ -93,12 +95,12 @@ BOOL CTowers2020App::InitInstance()
 
 	// To create the main window, this code creates a new frame window
 	// object and then sets it as the application's main window object
-	CMDIFrameWnd* pFrame = new CMainFrame;
+	CFrameWnd* pFrame = new CMainFrame;
 	if (!pFrame)
 		return FALSE;
 	m_pMainWnd = pFrame;
 	// create main MDI frame window
-	if (!pFrame->LoadFrame(IDR_MAINFRAME))
+	/*if (!pFrame->LoadFrame(IDR_MAINFRAME))
 		return FALSE;
 	// try to load shared MDI menus and accelerator table
 	//TODO: add additional member variables and load calls for
@@ -106,12 +108,18 @@ BOOL CTowers2020App::InitInstance()
 	HINSTANCE hInst = AfxGetResourceHandle();
 	m_hMDIMenu  = ::LoadMenu(hInst, MAKEINTRESOURCE(IDR_Towers2020TYPE));
 	m_hMDIAccel = ::LoadAccelerators(hInst, MAKEINTRESOURCE(IDR_Towers2020TYPE));
-
-
+	*/
+	// create and load the frame with its resources
+	pFrame->LoadFrame(IDR_MAINFRAME,
+		WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, NULL,
+		NULL);
+		
+	// The one and only window has been initialized, so show and update it
+	pFrame->ShowWindow(SW_SHOW);
 
 
 	// The main window has been initialized, so show and update it
-	pFrame->ShowWindow(m_nCmdShow);
+	//pFrame->ShowWindow(m_nCmdShow);
 	pFrame->UpdateWindow();
 
 	return TRUE;
@@ -119,19 +127,20 @@ BOOL CTowers2020App::InitInstance()
 
 int CTowers2020App::ExitInstance()
 {
+	Gdiplus::GdiplusShutdown(gdiplusToken);	
 	//TODO: handle additional resources you may have added
-	if (m_hMDIMenu != nullptr)
+	/*if (m_hMDIMenu != nullptr)
 		FreeResource(m_hMDIMenu);
 	if (m_hMDIAccel != nullptr)
 		FreeResource(m_hMDIAccel);
-
+	*/
 	AfxOleTerm(FALSE);
 
 	return CWinApp::ExitInstance();
 }
 
 // CTowers2020App message handlers
-
+/*
 void CTowers2020App::OnFileNew()
 {
 	CMainFrame* pFrame = STATIC_DOWNCAST(CMainFrame, m_pMainWnd);
@@ -139,7 +148,7 @@ void CTowers2020App::OnFileNew()
 	pFrame->CreateNewChild(
 		RUNTIME_CLASS(CChildFrame), IDR_Towers2020TYPE, m_hMDIMenu, m_hMDIAccel);
 }
-
+*/
 // CAboutDlg dialog used for App About
 
 class CAboutDlg : public CDialogEx
@@ -171,14 +180,14 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
-
+/*
 // App command to run the dialog
 void CTowers2020App::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
-
+*/
 // CTowers2020App message handlers
 
 

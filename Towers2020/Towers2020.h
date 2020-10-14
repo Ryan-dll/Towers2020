@@ -34,14 +34,18 @@ public:
 	virtual int ExitInstance();
 
 // Implementation
-protected:
-	HMENU  m_hMDIMenu;
-	HACCEL m_hMDIAccel;
+//protected:
+//	HMENU  m_hMDIMenu;
+//	HACCEL m_hMDIAccel;
 
 public:
-	afx_msg void OnAppAbout();
-	afx_msg void OnFileNew();
+	//afx_msg void OnAppAbout();
+	//afx_msg void OnFileNew();
 	DECLARE_MESSAGE_MAP()
+
+private:
+    Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+    ULONG_PTR gdiplusToken = 0;
 };
 
 extern CTowers2020App theApp;

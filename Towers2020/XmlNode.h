@@ -3,7 +3,7 @@
  *
  * \author Charles B. Owen
  *
- * \brief Class that implements a wrapper for msxml nodes. 
+ *  Class that implements a wrapper for msxml nodes. 
  */
 #pragma once
 
@@ -16,7 +16,7 @@ namespace xmlnode
 {
 
     /**
-     * \brief A wrapper for msxml nodes.
+     *  A wrapper for msxml nodes.
 
      * MSXML was designed to be used by a variety of languages,
      * including C++, C#, and Visual Basic. Consequently, it is
@@ -76,15 +76,14 @@ namespace xmlnode
         class Children;
 
         /**
-         * \brief Support for iterating over the children of a node
+         *  Support for iterating over the children of a node
          */
         class Iterator
         {
         public:
-			/// Friend class
             friend class CXmlNode;
 
-            /** \brief Test to see if two iterator are at the same location
+            /**  Test to see if two iterator are at the same location
              * \param other The other object we are testing against
              * \returns true if they are equal.
              */
@@ -97,7 +96,7 @@ namespace xmlnode
             // since it needs to use it
             std::shared_ptr<CXmlNode> operator* ();
 
-            /** \brief Advance to the next item in the collection
+            /**  Advance to the next item in the collection
              * \returns Reference to this iterator.
              */
             const Iterator& operator++ ()
@@ -107,7 +106,7 @@ namespace xmlnode
             }
 
         private:
-            /** \brief Constructor
+            /**  Constructor
             * \param children The children object we iterate over
             * \param pos Initial position in the collection
             */
@@ -122,7 +121,7 @@ namespace xmlnode
         };
 
         /**
-         * \brief Representation of children to support iteration
+         *  Representation of children to support iteration
          */
         class Children
         {
@@ -130,10 +129,7 @@ namespace xmlnode
             Iterator begin();
             Iterator end();
 
-			/// Friend class 
             friend class Iterator;
-
-			/// Friend class
             friend class CXmlNode;
 
         private:
@@ -144,12 +140,12 @@ namespace xmlnode
         };
 
         /**
-         * \brief Exceptions for CXmlNode
+         *  Exceptions for CXmlNode
          */
         class Exception : public std::exception
         {
         public:
-            /** \brief Exception types */
+            /**  Exception types */
             enum Types {
                 None,           ///< No exception type indicated
                 UnableToOpen,   ///< Unable to open file to read
@@ -158,27 +154,27 @@ namespace xmlnode
                 NoRoot          ///< Not XML document root node
             };
 
-            /** \brief Default Constructor */
+            /**  Default Constructor */
             Exception() {}
 
-            /** \brief Copy Constructor 
+            /**  Copy Constructor 
              * \param other Object to copy */
             Exception(const Exception &other) : mType(other.mType), mMsg(other.mMsg) {}
             
-            /** \brief Assignment operator
+            /**  Assignment operator
             * \param other Object to copy 
             * \returns Reference to this object */
             Exception& operator= (const Exception &other) { mMsg = other.mMsg; mType = other.mType; }
             
-            /** \brief Constructor
+            /**  Constructor
              * \param type Exception type
              * \param msg Message associated with exception */
             Exception(Types type, const std::wstring &msg) : mType(type), mMsg(msg) {}
             
-            /** \brief Destructor */
+            /**  Destructor */
             virtual ~Exception() {}
 
-            /** \brief Exception message
+            /**  Exception message
              *
              * More verbose exception messages are provided in 
              * Unicode as they should be by the Message() function.
@@ -188,11 +184,11 @@ namespace xmlnode
                 return "CXmlNode exception.";
             }
 
-            /** \brief Exception message
+            /**  Exception message
             * \returns Exception message */
             std::wstring Message() { return mMsg; }
 
-            /** \brief Exception type
+            /**  Exception type
             * \returns Exception type of type CXmlNode::Exception::Types */
             Types Type() { return mType; }
 
@@ -214,7 +210,7 @@ namespace xmlnode
     private:
         CXmlNode(CXmlNode *parent, IXMLDOMNode *node);
 
-        /// \brief Nested class for an object that describes one XML document
+        ///  Nested class for an object that describes one XML document
         class Document
         {
         public:
@@ -226,11 +222,11 @@ namespace xmlnode
             void Save(const std::wstring &filename);
             std::wstring GetXML();
 
-            /** \brief Get pointer to the root node
+            /**  Get pointer to the root node
              * \returns Pointer to root node */
             IXMLDOMNode *GetRoot() { return mRoot; }
 
-            /** \brief Get pointer to underlying document
+            /**  Get pointer to underlying document
              * \returns Pointer to underlying document */
             IXMLDOMDocument *GetDoc() { return mDoc; }
 

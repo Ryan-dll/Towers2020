@@ -6,6 +6,7 @@
 #include "framework.h"
 #include "Towers2020.h"
 #include "ChildView.h"
+#include "DoubleBufferDC.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -13,11 +14,13 @@
 #include "Game.h"
 #include <iostream>
 
+using namespace Gdiplus;
 
 // CChildView
 
 CChildView::CChildView()
 {
+	mGame = CGame();
 }
 
 CChildView::~CChildView()
@@ -29,6 +32,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
 	ON_COMMAND(ID_FILE_LOAD32776, &CChildView::OnFileLoad32776)
 	ON_UPDATE_COMMAND_UI(ID_FILE_LOAD32776, &CChildView::OnUpdateFileLoad32776)
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 
@@ -53,8 +57,15 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 */
 void CChildView::OnPaint()
 {
-	CPaintDC dc(this); // device context for painting
+    CPaintDC paintDC(this);     // device context for painting
+    CDoubleBufferDC dc(&paintDC); // device context for painting
 
+    Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context
+
+	CRect rect;
+    GetClientRect(&rect);
+		
+	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
 	// TODO: Add your message handler code here
 
 	// Do not call CWnd::OnPaint() for painting messages
@@ -79,4 +90,11 @@ void CChildView::OnFileLoad32776()
 void CChildView::OnUpdateFileLoad32776(CCmdUI* pCmdUI)
 {
 	pCmdUI->Enable(true);
+}
+
+
+BOOL CChildView::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+	return FALSE;
 }
