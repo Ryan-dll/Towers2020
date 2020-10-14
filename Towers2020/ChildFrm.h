@@ -5,6 +5,9 @@
 #pragma once
 #include "ChildView.h"
 
+/**
+* CChildFrame class
+*/
 class CChildFrame : public CMDIChildWnd
 {
 	DECLARE_DYNCREATE(CChildFrame)

@@ -1,6 +1,11 @@
+/**
+ * \file Towers2020.h
+ *
+ * \author Craig Smith
+ *
+ * Main header file for the Towers2020 application
+ */
 
-// Towers2020.h : main header file for the Towers2020 application
-//
 #pragma once
 
 #ifndef __AFXWIN_H__
@@ -14,6 +19,9 @@
 // See Towers2020.cpp for the implementation of this class
 //
 
+/**
+*CTowers2020App:
+*/
 class CTowers2020App : public CWinApp
 {
 public:

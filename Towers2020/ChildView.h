@@ -4,15 +4,21 @@
 
 
 #pragma once
+#include "Game.h"
 
 
-// CChildView window
-
+/**
+* CChildView window
+*/
 class CChildView : public CWnd
 {
 // Construction
 public:
 	CChildView();
+
+private:
+	/// An object that describes our Game
+	CGame mGame;
 
 // Attributes
 public:
@@ -32,5 +38,9 @@ public:
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+public:
+
+	afx_msg void OnFileLoad32776();
+	afx_msg void OnUpdateFileLoad32776(CCmdUI* pCmdUI);
 };
 

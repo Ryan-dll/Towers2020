@@ -24,16 +24,24 @@ END_MESSAGE_MAP()
 
 // CChildFrame construction/destruction
 
+/**
+* ChildFrm's constructor
+*/
 CChildFrame::CChildFrame() noexcept
 {
 	// TODO: add member initialization code here
 }
 
+/**
+* ChildFrm's destructor
+*/
 CChildFrame::~CChildFrame()
 {
 }
 
-
+/**
+* ChildFrm's PreCreateWindow function
+*/
 BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: Modify the Window class or styles here by modifying the CREATESTRUCT cs
@@ -48,11 +56,17 @@ BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 // CChildFrame diagnostics
 
 #ifdef _DEBUG
+/**
+* ChildFrm's AssertValid function
+*/
 void CChildFrame::AssertValid() const
 {
 	CMDIChildWnd::AssertValid();
 }
 
+/**
+* ChildFrm's Dump function
+*/
 void CChildFrame::Dump(CDumpContext& dc) const
 {
 	CMDIChildWnd::Dump(dc);
@@ -67,6 +81,9 @@ void CChildFrame::OnFileClose()
 	SendMessage(WM_CLOSE);
 }
 
+/**
+* ChildFrm's OnCreate function
+*/
 int CChildFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) 
 {
 	if (CMDIChildWnd::OnCreate(lpCreateStruct) == -1)
@@ -83,6 +100,9 @@ int CChildFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
+/**
+* ChildFrm's OnSetFocus function
+*/
 void CChildFrame::OnSetFocus(CWnd* pOldWnd) 
 {
 	CMDIChildWnd::OnSetFocus(pOldWnd);
@@ -90,6 +110,9 @@ void CChildFrame::OnSetFocus(CWnd* pOldWnd)
 	m_wndView.SetFocus();
 }
 
+/**
+* ChildFrm's OnCmdMsg function
+*/
 BOOL CChildFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo) 
 {
 	// let the view have first crack at the command
