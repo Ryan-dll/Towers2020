@@ -193,16 +193,22 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Open.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Tower.h" />
+    <ClInclude Include="TowerEight.h" />
     <ClInclude Include="Towers2020.h" />
+    <ClInclude Include="TowerVisitor.h" />
     <ClInclude Include="Trees.h" />
     <ClInclude Include="XmlNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -215,7 +221,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Road.cpp" />
+    <ClCompile Include="TowerEight.cpp" />
     <ClCompile Include="Towers2020.cpp" />
+    <ClCompile Include="TowerVisitor.cpp" />
     <ClCompile Include="Trees.cpp" />
     <ClCompile Include="XmlNode.cpp" />
   </ItemGroup>
