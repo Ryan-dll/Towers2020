@@ -23,6 +23,7 @@ public:
 	/// \param yPos desired Y position
 	void setY(int yPos) { mY = yPos; }
 
+	/// Load item from xml
 	void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
 protected:

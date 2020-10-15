@@ -36,6 +36,9 @@ public:
 
 	/// Mouse click	
 	void OnLButtonDown(int x, int y);
+
+	/// Add item to the collection
+	void Add(std::shared_ptr<CItem> item);
 	
 private:
 	/// All game items

@@ -133,8 +133,7 @@ void CGame::XmlItem(const std::shared_ptr<xmlnode::CXmlNode>& node)
         item->XmlLoad(node);
 
         // Add item to the All Items array.
-        // TODO: This should be abstracted more, Game should have Add()
-        mAllGameItems.push_back(item);
+        Add(item);
     }
 }
 
@@ -177,6 +176,8 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
         
         graphics->DrawImage(image.get(), 0, 0, CGame::Width, CGame::Height);
     }
+
+    // Comments describing in what order to render the images
 }
 
 /**
@@ -201,3 +202,14 @@ void CGame::Update(double elapsed)
         //item->update() when implemented
     }
 }
+
+	
+/**
+* Update objects in the playing area
+* \param elapsed Elapsed time since last update
+*/
+void CGame::Add(std::shared_ptr<CItem> item)
+{
+    mAllGameItems.push_back(item);
+}
+
