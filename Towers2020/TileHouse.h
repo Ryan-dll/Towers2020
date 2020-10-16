@@ -7,13 +7,13 @@
  */
 
 #pragma once
-#include "Item.h"
+#include "Tile.h"
 
  /**
  * CHouse class
  */
 class CHouse :
-    public CItem
+    public CTile
 {
 public:
     /// Default constructor (disabled)

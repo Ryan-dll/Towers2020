@@ -45,21 +45,6 @@
     <ClInclude Include="XmlNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Road.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Open.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="House.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Trees.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DoubleBufferDC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -73,6 +58,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TowerVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileHouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileOpen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileRoad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileTrees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -101,18 +104,6 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Road.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Open.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="House.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Trees.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Tower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -123,6 +114,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TowerVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileTrees.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileRoad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileHouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileOpen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

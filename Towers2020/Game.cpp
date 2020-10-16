@@ -11,10 +11,10 @@
 #include <memory>
 #include "XmlNode.h"
 #include "Item.h"
-#include "Road.h"
-#include "House.h"
-#include "Trees.h"
-#include "Open.h"
+#include "TileRoad.h"
+#include "TileHouse.h"
+#include "TileTrees.h"
+#include "TileOpen.h"
 #include <iostream>
 #include <map>
 

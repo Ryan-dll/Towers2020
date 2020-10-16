@@ -7,7 +7,7 @@
  */
 
 #include "pch.h"
-#include "House.h"
+#include "TileHouse.h"
 
 CHouse::CHouse(std::wstring image)
 {

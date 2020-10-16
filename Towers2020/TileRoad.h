@@ -7,13 +7,13 @@
  */
 
 #pragma once
-#include "Item.h"
+#include "Tile.h"
 
  /**
  * CRoad class
  */
 class CRoad :
-    public CItem
+    public CTile
 {
 public:
     /// Default constructor (disabled)
