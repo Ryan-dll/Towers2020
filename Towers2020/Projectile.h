@@ -10,7 +10,11 @@
 #include <memory>
 #include "Item.h"
 
-class CProjectile : public CItem
+ /**
+ * CProjectile class
+ */
+class CProjectile : 
+	public CItem
 {
 public:
 

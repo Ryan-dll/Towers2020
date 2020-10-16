@@ -9,14 +9,18 @@
 #pragma once
 #include "Tower.h"
 #include <memory>
-
+ /**
+ * CTowerVisitor class instantiation
+ */
 class CTowerVisitor;
-
+/**
+* CTowerEight class
+*/
 class CTowerEight : public CTower
 {
 public:
 	/// Accepts the Tower visitor
-	/// /param Pointer to the visitor
+	/// /param visitor Pointer to the visitor
 	virtual void Accept(CTowerVisitor* visitor);
 
 	/// Overridden Arm Tower Function

@@ -12,11 +12,14 @@
 #include <vector>
 #include <memory>
 
+ /**
+ * CTower class
+ */
 class CTower : public CItem
 {
 public:
 	/// Determines if a location is valid for tower placement
-	/// /returns true if location is valid
+	/// \returns true if location is valid
 	bool CanPlace();
 
 	/// Arms the tower with X number of projectiles
