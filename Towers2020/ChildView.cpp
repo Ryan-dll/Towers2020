@@ -71,6 +71,10 @@ void CChildView::OnPaint()
 	// Do not call CWnd::OnPaint() for painting messages
 }
 
+
+/**
+* File Load
+*/
 void CChildView::OnFileLoad32776()
 {
 	CFileDialog dlg(true,  // true = Open dialog box
@@ -87,12 +91,20 @@ void CChildView::OnFileLoad32776()
 }
 
 
+/**
+* Load file
+* \param: pCmdUI UI
+*/
 void CChildView::OnUpdateFileLoad32776(CCmdUI* pCmdUI)
 {
 	pCmdUI->Enable(true);
 }
 
 
+/**
+* Override Default function
+* \param pDC idk
+*/
 BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 {
 	// TODO: Add your message handler code here and/or call default

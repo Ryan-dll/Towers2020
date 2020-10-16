@@ -206,7 +206,7 @@ void CGame::Update(double elapsed)
 	
 /**
 * Update objects in the playing area
-* \param elapsed Elapsed time since last update
+* \param item Item to add to the collection
 */
 void CGame::Add(std::shared_ptr<CItem> item)
 {
