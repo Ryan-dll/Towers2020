@@ -19,6 +19,6 @@ public:
 	/// Destructor
 	virtual ~CTowerVisitor() {}
 	/// Visits Tower8
-	/// /param tower pointer to Tower8 tower
+	/// \param tower pointer to Tower8 tower
 	virtual void VisitTowerEight(CTowerEight* tower) {}
 };

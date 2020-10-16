@@ -20,7 +20,7 @@ class CTowerEight : public CTower
 {
 public:
 	/// Accepts the Tower visitor
-	/// /param visitor Pointer to the visitor
+	/// \param visitor Pointer to the visitor
 	virtual void Accept(CTowerVisitor* visitor);
 
 	/// Overridden Arm Tower Function
