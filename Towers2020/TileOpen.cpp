@@ -8,3 +8,11 @@
 
 #include "pch.h"
 #include "TileOpen.h"
+#include "Game.h"
+
+using namespace std;
+
+CTileOpen::CTileOpen(CGame* game) : CTile(game)
+{
+	// Load the open image
+}

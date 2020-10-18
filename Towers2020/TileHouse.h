@@ -1,30 +1,29 @@
 /**
- * \file House.h
+ * \file TileHouse.h
  *
  * \author Craig Smith
  *
- * Class that implements the House
+ * Class that implements the TileHouse
  */
 
 #pragma once
 #include "Tile.h"
-
+#include "Game.h"
  /**
- * CHouse class
+ * CTileHouse class
  */
-class CHouse :
-    public CTile
+class CTileHouse : public CTile
 {
 public:
     /// Default constructor (disabled)
-    CHouse() = delete;
+    CTileHouse() = delete;
 
     /// Copy constructor (disabled)
-    CHouse(const CHouse&) = delete;
+    CTileHouse(const CTileHouse&) = delete;
 
     /// Constructor
     /// \param image Image for house
-    CHouse(std::wstring image);
+    CTileHouse(CGame* game, std::wstring image);
 
 private:
     /// Image for house

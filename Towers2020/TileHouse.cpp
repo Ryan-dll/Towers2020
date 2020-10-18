@@ -9,7 +9,14 @@
 #include "pch.h"
 #include "TileHouse.h"
 
-CHouse::CHouse(std::wstring image)
+using namespace std;
+
+//CHouse::CHouse()
+//{
+//	mImage = image;
+//}
+
+CTileHouse::CTileHouse(CGame* game, wstring image) : CTile(game)
 {
-	mImage = image;
+	// Load the correct house from file given the image
 }

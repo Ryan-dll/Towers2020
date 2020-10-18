@@ -31,7 +31,7 @@ std::unique_ptr<Gdiplus::Bitmap> image;
 CGame::CGame()
 {
     // Load test image from file
-    std::wstring testimage = L"test.png";
+    std::wstring testimage = L"Images/test.png";
     image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
 
 
@@ -113,19 +113,19 @@ void CGame::XmlItem(const std::shared_ptr<xmlnode::CXmlNode>& node)
 
     if (type == L"road")
     {
-        item = make_shared<CRoad>(image_dec, type_dec);
+        item = make_shared<CTileRoad>(this, image_dec, type_dec);
     }
     else if (type == L"open")
     {
-        item = make_shared<COpen>();
+        item = make_shared<CTileOpen>(this);
     }
     else if (type == L"house")
     {
-        item = make_shared<CHouse>(image_dec);
+        item = make_shared<CTileHouse>(this, image_dec);
     }
     else if (type == L"trees")
     {
-        item = make_shared<CTrees>(image_dec);
+        item = make_shared<CTileTrees>(this, image_dec);
     }
 
     if (item != nullptr)
@@ -147,7 +147,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
 {
     // Fill the background with black
     SolidBrush brush(Color::Black);
-    graphics->FillRectangle(&brush, 0, 0, width, height);
+    //graphics->FillRectangle(&brush, 0, 0, width, height);
 
     //
     // Automatic Scaling
@@ -175,7 +175,12 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
         int hit = image->GetHeight();
         
         graphics->DrawImage(image.get(), 0, 0, CGame::Width, CGame::Height);
+
+        graphics->DrawImage(image.get(), 0, 0, CGame::Width/4, CGame::Height/4);
     }
+    wstring asd = L"asdf";
+    CTileTrees tre(this, asd);
+    //tre.Draw(graphics);
 
     // Comments describing in what order to render the images
 }
@@ -212,4 +217,6 @@ void CGame::Add(std::shared_ptr<CItem> item)
 {
     mAllGameItems.push_back(item);
 }
+
+
 

@@ -8,10 +8,12 @@
 
 #pragma once
 #include <string>
+#include "Item.h"
 #include <vector>
 #include <memory>
 #include "XmlNode.h"
-#include "Item.h"
+
+class CItem;
 
  /**
  * CGame class
@@ -39,10 +41,18 @@ public:
 
 	/// Add item to the collection
 	void Add(std::shared_ptr<CItem> item);
+
+	void GetImage(std::wstring& filename);
+	
+	// Load images at the beginning of the game
+	void LoadImages();
 	
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
+	
+	// All the image files, used for any instance of an item
+	//std::map<std::wstring, unique_ptr<Bitmap>> mImagefiles;
 
 	/// Width of level
 	int mWidth = 0;

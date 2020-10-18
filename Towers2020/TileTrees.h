@@ -1,30 +1,30 @@
 /**
- * \file Trees.h
+ * \file TileTrees.h
  *
  * \author Craig Smith
  *
- * Class that implements the Trees
+ * Class that implements the TileTrees
  */
 
 #pragma once
 #include "Tile.h"
 
  /**
- * CTrees class
+ * CTileTrees class
  */
-class CTrees :
+class CTileTrees :
     public CTile
 {
 public:
     /// Default constructor (disabled)
-    CTrees() = delete;
+    CTileTrees() = delete;
 
     /// Copy constructor (disabled)
-    CTrees(const CTrees&) = delete;
+    CTileTrees(const CTileTrees&) = delete;
 
     /// Constructor
     /// \param image Image for trees
-    CTrees(std::wstring image);
+    CTileTrees(CGame * game, std::wstring image);
 
 private:
 

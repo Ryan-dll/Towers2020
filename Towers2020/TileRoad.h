@@ -1,5 +1,5 @@
 /**
- * \file Road.h
+ * \file TileRoad.h
  *
  * \author Craig Smith
  *
@@ -12,17 +12,18 @@
  /**
  * CRoad class
  */
-class CRoad :
+class CTileRoad :
     public CTile
 {
 public:
+
     /// Default constructor (disabled)
-    CRoad() = delete;
+    CTileRoad() = delete;
 
     /// Copy constructor (disabled)
-    CRoad(const CRoad&) = delete;
+    CTileRoad(const CTileRoad&) = delete;
 
-    CRoad(std::wstring image, std::wstring type);
+    CTileRoad(CGame *game, std::wstring image, std::wstring type);
 
 protected:
     /// Image for road

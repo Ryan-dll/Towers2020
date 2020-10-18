@@ -8,13 +8,28 @@
 
 #pragma once
 #include "Item.h"
+#include "Tile.h"
+#include "Game.h"
 
  /**
- * COpen class
+ * CTileOpen class
  */
-class COpen :
-    public CItem
+class CTileOpen : public CTile
 {
+public:
+    /// Default constructor (disabled)
+    CTileOpen() = delete;
 
+    /// Copy constructor (disabled)
+    CTileOpen(const CTileOpen&) = delete;
+
+    /// Constructor
+    /// \param image Image for house
+    CTileOpen(CGame * game);
+
+private:
+
+    /// Image for house
+    std::wstring mImage;
 };
 
