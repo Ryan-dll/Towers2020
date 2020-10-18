@@ -19,6 +19,15 @@ class CTowerVisitor;
 class CTowerEight : public CTower
 {
 public:
+	
+	CTowerEight() = delete;
+
+	CTowerEight(const CTowerEight&) = delete;
+	
+	// Construct the TowerEight
+	// \param game Pointer to the game to which we belong
+	CTowerEight(CGame* game);
+
 	/// Accepts the Tower visitor
 	/// \param visitor Pointer to the visitor
 	virtual void Accept(CTowerVisitor* visitor);

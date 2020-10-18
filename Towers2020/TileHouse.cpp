@@ -19,4 +19,5 @@ using namespace std;
 CTileHouse::CTileHouse(CGame* game, wstring image) : CTile(game)
 {
 	// Load the correct house from file given the image
+	CTile::SetImage(image);
 }

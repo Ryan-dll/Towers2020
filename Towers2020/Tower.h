@@ -18,6 +18,14 @@
 class CTower : public CItem
 {
 public:
+	CTower() = delete;
+
+	CTower(const CTower&) = delete;
+	
+	// Construct the Tower
+	// \param game Pointer to the game to which we belong
+	CTower(CGame* game);
+
 	/// Determines if a location is valid for tower placement
 	/// \returns true if location is valid
 	bool CanPlace();

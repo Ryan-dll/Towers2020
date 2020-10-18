@@ -18,6 +18,6 @@ using namespace std;
 CTileTrees::CTileTrees(CGame* game, wstring image) : CTile(game)
 {
 	mImage = image;
-	wstring test = L"Images/test.png";
-	CItem::SetImage(test);
+	wstring test = L"test.png";
+	CItem::SetImage(image);
 }

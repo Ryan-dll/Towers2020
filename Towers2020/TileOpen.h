@@ -25,7 +25,7 @@ public:
 
     /// Constructor
     /// \param image Image for house
-    CTileOpen(CGame * game);
+    CTileOpen(CGame * game, std::wstring image);
 
 private:
 

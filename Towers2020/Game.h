@@ -10,6 +10,7 @@
 #include <string>
 #include "Item.h"
 #include <vector>
+#include <map>
 #include <memory>
 #include "XmlNode.h"
 
@@ -42,7 +43,7 @@ public:
 	/// Add item to the collection
 	void Add(std::shared_ptr<CItem> item);
 
-	void GetImage(std::wstring& filename);
+	std::unique_ptr<Gdiplus::Bitmap> GetImage(std::wstring filename);
 	
 	// Load images at the beginning of the game
 	void LoadImages();
@@ -52,7 +53,7 @@ private:
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
 	
 	// All the image files, used for any instance of an item
-	//std::map<std::wstring, unique_ptr<Bitmap>> mImagefiles;
+	std::map<std::wstring, std::unique_ptr<Gdiplus::Bitmap>> mImageFiles;
 
 	/// Width of level
 	int mWidth = 0;

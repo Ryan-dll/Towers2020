@@ -15,6 +15,7 @@
 #include "TileHouse.h"
 #include "TileTrees.h"
 #include "TileOpen.h"
+#include "TowerEight.h"
 #include <iostream>
 #include <map>
 
@@ -31,8 +32,8 @@ std::unique_ptr<Gdiplus::Bitmap> image;
 CGame::CGame()
 {
     // Load test image from file
-    std::wstring testimage = L"Images/test.png";
-    image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
+    //std::wstring testimage = L"Images/test.png";
+    //image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
 
 
 }
@@ -44,6 +45,7 @@ CGame::CGame()
  */
 void CGame::Load(const std::wstring& filename)
 {
+    // TODO: Load clears the playing area
     try
     {
         // Open the document to read
@@ -87,6 +89,13 @@ void CGame::Load(const std::wstring& filename)
 
         std::cout << "Level Loaded!";
 
+        // Test code for rendering tower
+        /*
+        shared_ptr<CItem> item;
+        item = make_shared<CTowerEight>(this);
+        item->setX(100);
+        item->setY(100);
+        Add(item); */
     }
     catch (CXmlNode::Exception ex)
     {
@@ -117,7 +126,7 @@ void CGame::XmlItem(const std::shared_ptr<xmlnode::CXmlNode>& node)
     }
     else if (type == L"open")
     {
-        item = make_shared<CTileOpen>(this);
+        item = make_shared<CTileOpen>(this, image_dec);
     }
     else if (type == L"house")
     {
@@ -147,7 +156,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
 {
     // Fill the background with black
     SolidBrush brush(Color::Black);
-    //graphics->FillRectangle(&brush, 0, 0, width, height);
+    graphics->FillRectangle(&brush, 0, 0, width, height);
 
     //
     // Automatic Scaling
@@ -157,32 +166,20 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     mScale = min(scaleX, scaleY);
 
     // Ensure it is centered horizontally
-    mXOffset = (float)((width - Width * mScale) / 2);
+    mXOffset = (float)((width - CGame::Width * mScale) / 2);
 
     // Ensure it is centered vertically
-    mYOffset = (float)((height - Height * mScale) / 2);
+    mYOffset = (float)((height - CGame::Height * mScale) / 2);
 
     graphics->TranslateTransform(mXOffset, mYOffset);
     graphics->ScaleTransform(mScale, mScale);
 
     // From here on you are drawing virtual pixels 
     
-    
-    /// Draw a test image to the screen
-    if (image != nullptr)
+    for (auto i : mAllGameItems)
     {
-        int wid = image->GetWidth();
-        int hit = image->GetHeight();
-        
-        graphics->DrawImage(image.get(), 0, 0, CGame::Width, CGame::Height);
-
-        graphics->DrawImage(image.get(), 0, 0, CGame::Width/4, CGame::Height/4);
+        i->Draw(graphics);
     }
-    wstring asd = L"asdf";
-    CTileTrees tre(this, asd);
-    //tre.Draw(graphics);
-
-    // Comments describing in what order to render the images
 }
 
 /**
@@ -217,6 +214,53 @@ void CGame::Add(std::shared_ptr<CItem> item)
 {
     mAllGameItems.push_back(item);
 }
+/*
+void CGame::LoadImages()
+{
 
+    const vector<std::wstring> mKeys =
+    {
+        L"button-go.png", L"castlea.png", L"castleb.png", L"dart.png",
+        L"grass1.png", L"grass2.png", L"house1.png", L"house2.png",
+        L"house3.png", L"house4a.png" L"house4b.png", L"red-balloon.png",
+        L"roadEW.png", L"roadEW.png", L"roadNE.png", L"roadNS.png",
+        L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
+        L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
+        L"trees2.png", L"trees3.png", L"trees4.png"
+    };
+    
+    for (wstring filename : mKeys)
+    {
+        unique_ptr<Bitmap> image;
+        if (!filename.empty())
+        {
+            wstring fullpath = L"images\\" + filename;
+            image = unique_ptr<Bitmap>(Bitmap::FromFile(fullpath.c_str()));
+            if (image->GetLastStatus() != Ok)
+            {
+                wstring msg(L"Failed to open ");
+                msg += filename;
+                AfxMessageBox(msg.c_str());
+                return;
+            }
+            else
+            {
+                mImageFiles.insert(make_pair(filename, image));
+            }
+        }
+        else
+        {
+            image.release();
+        }
+    }
+}
 
+unique_ptr<Bitmap> CGame::GetImage(wstring filename)
+{
+    //unique_ptr<Bitmap> image = make_unique<Bitmap>(mImageFiles.at(filename));
+    //return make_unique<Bitmap>(mImageFiles[filename]);
+    //return image;
 
+}
+
+*/

@@ -22,4 +22,6 @@ CTileRoad::CTileRoad(CGame * game, wstring image, wstring type) : CTile(game)
 {
 	mImage = image;
 	mType = type;
+	wstring name = L"grass1.png";
+	CItem::SetImage(image);
 }

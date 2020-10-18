@@ -20,7 +20,7 @@ using namespace Gdiplus;
 
 CChildView::CChildView()
 {
-	mGame = CGame();
+	//mGame = CGame();
 }
 
 CChildView::~CChildView()
@@ -88,6 +88,7 @@ void CChildView::OnFileLoad32776()
 	std::wstring filename = dlg.GetPathName();
 
 	mGame.Load(filename);
+	Invalidate();
 }
 
 

@@ -11,6 +11,14 @@
 #include "TowerVisitor.h"
 #include "Projectile.h"
 
+using namespace std;
+
+CTowerEight::CTowerEight(CGame * game) : CTower(game)
+{
+	wstring image = L"tower8.png";
+	CItem::SetImage(image);
+}
+
 void CTowerEight::Accept(CTowerVisitor* visitor)
 {
 	visitor->VisitTowerEight(this);

@@ -51,6 +51,12 @@ protected:
 	/// Y position of item
 	int mY = 0;
 
+	/// Grid X position
+	int mXGrid = 0;
+
+	/// Grid Y position
+	int mYGrid = 0;
+
 	/// ID of Item
 	std::wstring mId;
 

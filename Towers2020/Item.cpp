@@ -20,8 +20,10 @@ using namespace Gdiplus;
  */
 void CItem::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
-    mX = node->GetAttributeDoubleValue(L"x", 0);
-    mY = node->GetAttributeDoubleValue(L"y", 0);
+    mXGrid = node->GetAttributeDoubleValue(L"x", 0);
+    mX = mXGrid * 64;
+    mYGrid = node->GetAttributeDoubleValue(L"y", 0);
+    mY = mYGrid * 64;
     mId = node->GetAttributeValue(L"id", L"");
 }
 
@@ -33,9 +35,10 @@ void CItem::SetImage(const std::wstring &file)
 {
     /// Todo: Use code in game to get a poiter to the image rather
     ///  than loading it from file again
+    //mItemImage = mGame->GetImage(file);
     if (!file.empty())
     {
-        wstring filename = file;
+        wstring filename = L"images\\" + file;
         mItemImage = unique_ptr<Bitmap>(Bitmap::FromFile(filename.c_str()));
         if (mItemImage->GetLastStatus() != Ok)
         {
@@ -66,6 +69,6 @@ void CItem::Draw(Graphics* graphics)
 //            mX, mY,
 //            wid, hit);
     graphics->DrawImage(mItemImage.get(),
-            -200, 0,
-            wid, hit);
+            mX, mY,
+            65, 65);
 }
