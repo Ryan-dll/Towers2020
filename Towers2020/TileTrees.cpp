@@ -1,5 +1,5 @@
 /**
- * \file Trees.h
+ * \file TileTrees.cpp
  *
  * \author Craig Smith
  *
@@ -12,10 +12,12 @@
 
 using namespace std;
 
-/**
- * Trees constructor
+ /**
+ * Consturctor for the TileTrees tile
+ * \param game Pointer to the game
+ * \param image Filename for the image
  */
-CTileTrees::CTileTrees(CGame* game, wstring image) : CTile(game)
+CTileTrees::CTileTrees(CGame* game, std::wstring image) : CTile(game)
 {
 	mImage = image;
 	wstring test = L"test.png";

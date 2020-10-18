@@ -1,5 +1,5 @@
 /**
- * \file Game.h
+ * \file TileRoad.cpp
  *
  * \author Craig Smith
  *
@@ -18,7 +18,7 @@ using namespace std;
 * \param image The image for the road object
 * \param type The type (direction) of road
 */
-CTileRoad::CTileRoad(CGame * game, wstring image, wstring type) : CTile(game)
+CTileRoad::CTileRoad(CGame * game, std::wstring image, std::wstring type) : CTile(game)
 {
 	mImage = image;
 	mType = type;

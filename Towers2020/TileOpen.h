@@ -1,5 +1,5 @@
 /**
- * \file Open.h
+ * \file TileOpen.h
  *
  * \author Craig Smith
  *
@@ -24,7 +24,6 @@ public:
     CTileOpen(const CTileOpen&) = delete;
 
     /// Constructor
-    /// \param image Image for house
     CTileOpen(CGame * game, std::wstring image);
 
 private:

@@ -9,10 +9,12 @@
 #pragma once
 #include "Tower.h"
 #include <memory>
- /**
+
+/**
  * CTowerVisitor class instantiation
  */
 class CTowerVisitor;
+
 /**
 * CTowerEight class
 */
@@ -24,12 +26,10 @@ public:
 
 	CTowerEight(const CTowerEight&) = delete;
 	
-	// Construct the TowerEight
-	// \param game Pointer to the game to which we belong
+	/// Construct the TowerEight
 	CTowerEight(CGame* game);
 
 	/// Accepts the Tower visitor
-	/// \param visitor Pointer to the visitor
 	virtual void Accept(CTowerVisitor* visitor);
 
 	/// Overridden Arm Tower Function

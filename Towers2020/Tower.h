@@ -22,12 +22,10 @@ public:
 
 	CTower(const CTower&) = delete;
 	
-	// Construct the Tower
-	// \param game Pointer to the game to which we belong
+	/// Construct the Tower
 	CTower(CGame* game);
 
 	/// Determines if a location is valid for tower placement
-	/// \returns true if location is valid
 	bool CanPlace();
 
 	/// Arms the tower with X number of projectiles

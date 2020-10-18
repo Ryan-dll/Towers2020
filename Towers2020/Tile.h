@@ -11,7 +11,12 @@ public:
     /// Copy constructor (disabled)
     CTile(const CTile&) = delete;
 
+    /// Default constructor
+    CTile() = delete;
+
 protected:
+
+    /// Constructor
     CTile(CGame * game);
 
 };

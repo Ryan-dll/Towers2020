@@ -34,7 +34,7 @@ CGame::CGame()
     // Load test image from file
     //std::wstring testimage = L"Images/test.png";
     //image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
-
+    LoadImages();
 
 }
 
@@ -214,7 +214,11 @@ void CGame::Add(std::shared_ptr<CItem> item)
 {
     mAllGameItems.push_back(item);
 }
-/*
+
+
+/**
+* Load the images for objects into all of the main maps
+*/
 void CGame::LoadImages()
 {
 
@@ -222,7 +226,7 @@ void CGame::LoadImages()
     {
         L"button-go.png", L"castlea.png", L"castleb.png", L"dart.png",
         L"grass1.png", L"grass2.png", L"house1.png", L"house2.png",
-        L"house3.png", L"house4a.png" L"house4b.png", L"red-balloon.png",
+        L"house3.png", L"house4a.png", L"house4b.png", L"red-balloon.png",
         L"roadEW.png", L"roadEW.png", L"roadNE.png", L"roadNS.png",
         L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
         L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
@@ -231,11 +235,11 @@ void CGame::LoadImages()
     
     for (wstring filename : mKeys)
     {
-        unique_ptr<Bitmap> image;
+        shared_ptr<Bitmap> image;
         if (!filename.empty())
         {
             wstring fullpath = L"images\\" + filename;
-            image = unique_ptr<Bitmap>(Bitmap::FromFile(fullpath.c_str()));
+            image = shared_ptr<Bitmap>(Bitmap::FromFile(fullpath.c_str()));
             if (image->GetLastStatus() != Ok)
             {
                 wstring msg(L"Failed to open ");
@@ -248,19 +252,26 @@ void CGame::LoadImages()
                 mImageFiles.insert(make_pair(filename, image));
             }
         }
-        else
-        {
-            image.release();
-        }
     }
 }
 
-unique_ptr<Bitmap> CGame::GetImage(wstring filename)
+/**
+* Get an image from the map and return a pointer to it
+* \param filename The filename we want to load 
+* \returns pointer to Image
+*/
+shared_ptr<Bitmap> CGame::GetImage(wstring filename)
 {
-    //unique_ptr<Bitmap> image = make_unique<Bitmap>(mImageFiles.at(filename));
-    //return make_unique<Bitmap>(mImageFiles[filename]);
-    //return image;
-
+    shared_ptr<Bitmap> image;
+    try 
+    {
+        image = mImageFiles.at(filename);
+    }
+    catch (const out_of_range& orr)
+    {
+        image = nullptr;
+    }
+    return image;
 }
 
-*/
+

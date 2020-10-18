@@ -22,16 +22,22 @@ public:
 
 	CItem(const CItem&) = delete;
 	
-	// Construct the Item
-	// \param game Pointer to the game to which we belong
+    /**
+     * CItem constructor
+	 * \param game Pointer to the game which we belong
+     */
 	CItem(CGame * game) { mGame = game; }
 	
-	/// Setter for X position
-	/// \param xPos desired X position
+    /**
+     * Setter for X position
+	 * \param xPos desired X position
+     */
 	void setX(int xPos) { mX = xPos; }
 
-	/// Setter for Y position
-	/// \param yPos desired Y position
+    /**
+     * Setter for Y position
+	 * \param yPos desired Y position
+     */
 	void setY(int yPos) { mY = yPos; }
 
 	/// Load item from xml
@@ -40,7 +46,7 @@ public:
 	/// Set image for this Item
 	void SetImage(const std::wstring &);
 
-	// Draw the image
+	/// Draw the image
 	void Draw(Gdiplus::Graphics *graphics);
 
 protected:
@@ -61,9 +67,9 @@ protected:
 	std::wstring mId;
 
 	/// Pointer to image file
-	std::unique_ptr<Gdiplus::Bitmap> mItemImage;
+	std::shared_ptr<Gdiplus::Bitmap> mItemImage;
 	
-	// Pointer to the Game we belong to
+	/// Pointer to the Game we belong to
 	CGame* mGame;
 
 };

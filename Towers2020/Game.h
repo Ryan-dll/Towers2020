@@ -43,7 +43,8 @@ public:
 	/// Add item to the collection
 	void Add(std::shared_ptr<CItem> item);
 
-	std::unique_ptr<Gdiplus::Bitmap> GetImage(std::wstring filename);
+	// Get Pointer to image object
+	std::shared_ptr<Gdiplus::Bitmap> GetImage(std::wstring filename);
 	
 	// Load images at the beginning of the game
 	void LoadImages();
@@ -52,8 +53,8 @@ private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
 	
-	// All the image files, used for any instance of an item
-	std::map<std::wstring, std::unique_ptr<Gdiplus::Bitmap>> mImageFiles;
+	/// All the image files, used for any instance of an item
+	std::map<std::wstring, std::shared_ptr<Gdiplus::Bitmap>> mImageFiles;
 
 	/// Width of level
 	int mWidth = 0;

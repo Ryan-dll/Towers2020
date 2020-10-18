@@ -1,5 +1,5 @@
 /**
- * \file Open.h
+ * \file TileOpen.cpp
  *
  * \author Craig Smith
  *
@@ -12,7 +12,12 @@
 
 using namespace std;
 
-CTileOpen::CTileOpen(CGame* game, wstring image) : CTile(game)
+/**
+ * Consturctor for the Open tile
+ * \param game Pointer to the game
+ * \param image Filename for the image
+ */
+CTileOpen::CTileOpen(CGame* game, std::wstring image) : CTile(game)
 {
 	// Load the open image
 	wstring name = L"grass1.png";

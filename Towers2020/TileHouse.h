@@ -22,7 +22,6 @@ public:
     CTileHouse(const CTileHouse&) = delete;
 
     /// Constructor
-    /// \param image Image for house
     CTileHouse(CGame* game, std::wstring image);
 
 private:

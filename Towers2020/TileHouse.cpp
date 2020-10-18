@@ -1,5 +1,5 @@
 /**
- * \file House.h
+ * \file TileHouse.cpp
  *
  * \author Craig Smith
  *
@@ -11,12 +11,12 @@
 
 using namespace std;
 
-//CHouse::CHouse()
-//{
-//	mImage = image;
-//}
-
-CTileHouse::CTileHouse(CGame* game, wstring image) : CTile(game)
+/**
+ * Constructor for CTileHouse
+ * \param game Pointer to the game object
+ * \param image Filename for the image
+ */
+CTileHouse::CTileHouse(CGame* game, std::wstring image) : CTile(game)
 {
 	// Load the correct house from file given the image
 	CTile::SetImage(image);

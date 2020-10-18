@@ -28,18 +28,18 @@ void CItem::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
 }
 
 /**
- *  Set the image file to draw
+ * Set the image file to draw
  * \param file The base filename. Blank files are allowed
  */
 void CItem::SetImage(const std::wstring &file)
 {
     /// Todo: Use code in game to get a poiter to the image rather
     ///  than loading it from file again
-    //mItemImage = mGame->GetImage(file);
-    if (!file.empty())
+    mItemImage = mGame->GetImage(file);
+    /*if (!file.empty())
     {
         wstring filename = L"images\\" + file;
-        mItemImage = unique_ptr<Bitmap>(Bitmap::FromFile(filename.c_str()));
+        mItemImage = shared_ptr<Bitmap>(Bitmap::FromFile(filename.c_str()));
         if (mItemImage->GetLastStatus() != Ok)
         {
             wstring msg(L"Failed to open ");
@@ -50,15 +50,15 @@ void CItem::SetImage(const std::wstring &file)
     }
     else
     {
-        mItemImage.release();
-    }
+        //mItemImage.release();
+    }*/
 }
 
 
 
 /**
- *  Set the image file to draw
- * \param file The base filename. Blank files are allowed
+ * Draw the image
+ * \param graphics Pointer to the graphics context
  */
 void CItem::Draw(Graphics* graphics)
 {

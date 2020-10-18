@@ -23,7 +23,6 @@ public:
     CTileTrees(const CTileTrees&) = delete;
 
     /// Constructor
-    /// \param image Image for trees
     CTileTrees(CGame * game, std::wstring image);
 
 private:
