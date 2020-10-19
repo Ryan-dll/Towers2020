@@ -30,14 +30,13 @@ map<wstring, map<wstring, wstring>> declarations;
 
 std::unique_ptr<Gdiplus::Bitmap> image;
 
-CDashboard dashboard;
-
 CGame::CGame()
 {
     // Load test image from file
     //std::wstring testimage = L"Images/test.png";
     //image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
     LoadImages();
+    dashboard = make_unique<CDashboard>(this);
 
 }
 
@@ -185,10 +184,10 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     }
 
     // Draw the dashboard
-    dashboard.Draw(graphics);
+    dashboard->Draw(graphics);
 
     // This will need to be called repeatedly
-    dashboard.setScore(mScore);
+    dashboard->setScore(mScore);
 
 }
 

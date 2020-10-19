@@ -54,19 +54,19 @@ void CDashboard::Draw(Graphics* graphics)
         &text);    // The brush to draw the text with
 
     // 8 tower
-    graphics->DrawImage(Bitmap::FromFile(L"images\\tower8.png"),
+    graphics->DrawImage(mGame->GetImage(L"tower8.png").get(),
         1190, 300,
         100, 100);
 
     // Bomb tower
-    graphics->DrawImage(Bitmap::FromFile(L"images\\tower-bomb.png"),
+    graphics->DrawImage(mGame->GetImage(L"tower-bomb.png").get(),
         1190, 500,
         100, 100);
 
+    // Go button (only shows if level isn't started)
     if (!levelStarted)
     {
-        // Go button
-        graphics->DrawImage(Bitmap::FromFile(L"images\\button-go.png"),
+        graphics->DrawImage(mGame->GetImage(L"button-go.png").get(),
             1140, 800,
             200, 100);
     }

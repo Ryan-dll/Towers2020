@@ -13,8 +13,10 @@
 #include <map>
 #include <memory>
 #include "XmlNode.h"
+#include "Dashboard.h"
 
 class CItem;
+class CDashboard;
 
  /**
  * CGame class
@@ -56,6 +58,9 @@ private:
 	
 	/// All the image files, used for any instance of an item
 	std::map<std::wstring, std::shared_ptr<Gdiplus::Bitmap>> mImageFiles;
+
+	/// Dashboard for the game
+	std::unique_ptr<CDashboard> dashboard;
 
 	/// Game score
 	int mScore = 0;
