@@ -17,6 +17,10 @@ class CProjectile :
 	public CItem
 {
 public:
+	/// Construct the Projectile
+	CProjectile(CGame* game);
+
+	void Draw(Gdiplus::Graphics* graphics, int offsetX, int offsetY);
 
 protected:
 	/// Speed of projectile
@@ -27,6 +31,9 @@ protected:
 
 	/// Pointer to Projectile
 	std::unique_ptr<Gdiplus::Bitmap> mProjectileImage;
+
+	/// Distance from tower
+	double mT = 10;
 };
 
 
