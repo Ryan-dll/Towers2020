@@ -13,6 +13,11 @@
 using namespace std;
 using namespace Gdiplus;
 
+/*
+* Distance from center for inside of tiles.
+*/
+int InsideTolerance = 64;
+
 /**
  * Load the attributes for an item node.
  *
@@ -71,4 +76,10 @@ void CItem::Draw(Graphics* graphics)
     graphics->DrawImage(mItemImage.get(),
             mX, mY,
             65, 65);
+}
+
+
+bool CItem::HitTest(int x, int y)
+{
+    return (abs(x - mX) + abs(y - mY)) <= InsideTolerance;
 }
