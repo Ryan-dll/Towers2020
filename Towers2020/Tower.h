@@ -31,6 +31,12 @@ public:
 	/// Arms the tower with X number of projectiles
 	virtual void ArmTower() {};
 
+	/// Activate Tower when its brought into gameplay area
+	void Activate();
+
+	/// Fire projectiles out of towers.
+	virtual void Fire();
+
 protected:
 	/// Time in between firing rounds
 	double mReloadTime = 10;

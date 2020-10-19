@@ -9,6 +9,7 @@
 #pragma once
 #include "Tower.h"
 #include <memory>
+#include "Game.h"
 
 /**
  * CTowerVisitor class instantiation
@@ -21,9 +22,10 @@ class CTowerVisitor;
 class CTowerEight : public CTower
 {
 public:
-	
+	/// Delete Default Constructor
 	CTowerEight() = delete;
 
+	/// Delete Default Clone
 	CTowerEight(const CTowerEight&) = delete;
 	
 	/// Construct the TowerEight

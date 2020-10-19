@@ -8,6 +8,9 @@
 
 #include "pch.h"
 #include "Tower.h"
+#include <chrono>
+#include <thread>
+#include <stdlib.h>
 
 /**
  * Constructor for CTower
@@ -25,4 +28,18 @@ CTower::CTower(CGame * game) : CItem(game)
 bool CTower::CanPlace()
 {
     return false;
+}
+
+/**
+ * Constantly runs while the Tower object is active
+ */
+void CTower::Activate()
+{
+}
+
+/**
+ * Fires Projectiles from tower
+ */
+void CTower::Fire()
+{
 }
