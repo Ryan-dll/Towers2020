@@ -50,6 +50,9 @@ public:
 	
 	// Load images at the beginning of the game
 	void LoadImages();
+	
+	/// Hit Test for the item
+	std::shared_ptr<CItem> HitTest(int x, int y);
 
 	
 private:

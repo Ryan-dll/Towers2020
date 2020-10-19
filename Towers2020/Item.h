@@ -40,25 +40,6 @@ public:
      */
 	void setY(int yPos) { mY = yPos; }
 
-	/**
-	*  Getter for Y position
-	*  \return mY Y Position
-	*/
-	int GetY() { return mY; }
-
-	/**
-	*  Getter for X position
-	*  \return mY X Position
-	*/
-	int GetX() { return mX; }
-
-	/**
-	* Setter for Y and X positions
-	* \param yPos desired Y position
-	* \param xPos desired X position
-	*/ 
-	void setCoordinates(int yPos, int xPos) { mX = xPos; mY = yPos; }
-
 	/// Load item from xml
 	void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
@@ -66,14 +47,13 @@ public:
 	void SetImage(const std::wstring &);
 
 	/// Draw the image
-	virtual void Draw(Gdiplus::Graphics *graphics);
-
-	/// Determine distance between 2 items
-	/// \param other Item being compared
-	/// \return Distance as a double in pixels
-	double Distance(std::shared_ptr<CItem> other);
-
-
+	void Draw(Gdiplus::Graphics *graphics);
+	
+	/**  Test this item to see if it has been clicked on
+	* \param x X location on the item to test
+	* \param y Y location on the item to test
+	* \return true if clicked on */
+	virtual bool HitTest(int x, int y);
 
 protected:
 

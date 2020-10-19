@@ -283,4 +283,17 @@ shared_ptr<Bitmap> CGame::GetImage(wstring filename)
     return image;
 }
 
+std::shared_ptr<CItem> CGame::HitTest(int x, int y)
+{
+    for (auto i = mAllGameItems.rbegin(); i != mAllGameItems.rend(); i++)
+    {
+        if ((*i)->HitTest(x, y))
+        {
+            return *i;
+        }
+    }
+
+    return nullptr;
+}
+
 
