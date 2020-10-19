@@ -48,6 +48,12 @@ public:
 
 	/// Draw the image
 	void Draw(Gdiplus::Graphics *graphics);
+	
+	/**  Test this item to see if it has been clicked on
+	* \param x X location on the item to test
+	* \param y Y location on the item to test
+	* \return true if clicked on */
+	virtual bool HitTest(int x, int y);
 
 protected:
 
