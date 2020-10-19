@@ -48,6 +48,7 @@ public:
 	
 	// Load images at the beginning of the game
 	void LoadImages();
+
 	
 private:
 	/// All game items
@@ -55,6 +56,9 @@ private:
 	
 	/// All the image files, used for any instance of an item
 	std::map<std::wstring, std::shared_ptr<Gdiplus::Bitmap>> mImageFiles;
+
+	/// Game score
+	int mScore = 0;
 
 	/// Width of level
 	int mWidth = 0;

@@ -18,6 +18,7 @@
 #include "TowerEight.h"
 #include <iostream>
 #include <map>
+#include "Dashboard.h"
 
 using namespace std;
 using namespace xmlnode;
@@ -27,7 +28,9 @@ using namespace Gdiplus;
 /// the objects are later created
 map<wstring, map<wstring, wstring>> declarations;
 
-std::unique_ptr<Gdiplus::Bitmap> image; 
+std::unique_ptr<Gdiplus::Bitmap> image;
+
+CDashboard dashboard;
 
 CGame::CGame()
 {
@@ -180,6 +183,13 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     {
         i->Draw(graphics);
     }
+
+    // Draw the dashboard
+    dashboard.Draw(graphics);
+
+    // This will need to be called repeatedly
+    dashboard.setScore(mScore);
+
 }
 
 /**
