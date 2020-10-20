@@ -40,7 +40,7 @@ CGame::CGame()
     
     auto testTower = make_shared<CTowerEight>(this);
     testTower->setCoordinates(200, 200);
-    this->Add(testTower);
+    //this->Add(testTower);
 
 }
 

@@ -35,13 +35,13 @@ void CDashboard::Draw(Graphics* graphics)
     Gdiplus::Font font(&fontFamily, 24);
 
     // Background
-    graphics->FillRectangle(&background, 1040, 0, 400, 1040);
+    graphics->FillRectangle(&background, 1024, 0, 200, 1024);
 
     // "Score"
     graphics->DrawString(L"Score",  // String to draw
         -1,         // String length, -1 so it figures it out on its own
         &font,      // The font to use
-        PointF(1040, 20),   // Where to draw (top left corner)
+        PointF(1024, 20),   // Where to draw (top left corner)
         &text);    // The brush to draw the text with
 
     // Score number
@@ -50,25 +50,25 @@ void CDashboard::Draw(Graphics* graphics)
     graphics->DrawString(score_wchar,  // String to draw
         -1,         // String length, -1 so it figures it out on its own
         &font,      // The font to use
-        PointF(1040, 120),   // Where to draw (top left corner)
+        PointF(1024, 120),   // Where to draw (top left corner)
         &text);    // The brush to draw the text with
 
     // 8 tower
     graphics->DrawImage(mGame->GetImage(L"tower8.png").get(),
-        1190, 300,
+        1074, 300,
         100, 100);
 
     // Bomb tower
     graphics->DrawImage(mGame->GetImage(L"tower-bomb.png").get(),
-        1190, 500,
+        1074, 500,
         100, 100);
 
     // Go button (only shows if level isn't started)
     if (!levelStarted)
     {
         graphics->DrawImage(mGame->GetImage(L"button-go.png").get(),
-            1140, 800,
-            200, 100);
+            1034, 800,
+            180, 90);
     }
 }
 

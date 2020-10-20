@@ -7,6 +7,7 @@
  */
 
 #pragma once
+#include "Game.h"
 
 class CTileHouse;
 class CTileOpen;

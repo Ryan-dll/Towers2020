@@ -14,6 +14,7 @@
 #include <memory>
 #include "XmlNode.h"
 #include "Dashboard.h"
+#include "ItemVisitor.h"
 
 class CItem;
 class CDashboard;
