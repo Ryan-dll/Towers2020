@@ -86,8 +86,6 @@ bool CItem::HitTest(int x, int y)
 
 /**
  * Determine the distance from this item to some other item.
- * \param other Other item we are testing
- * \return Distance in pixels
  */
 double CItem::Distance(std::shared_ptr<CItem> other)
 {

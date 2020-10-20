@@ -51,11 +51,11 @@ void CTowerEight::ArmTower()
 void CTowerEight::Fire()
 {
 	Gdiplus::Graphics* graphics = mGame->GetGraphics();
-	//std::shared_ptr<CProjectile> dart = mProjectiles[0];
-	for (auto i : mProjectiles) {
-		auto dart = i;
+
+	for (auto &i : mProjectiles) 
+	{
+		i->setCoordinates(300, 300);
+		i->Draw(graphics, 10, 10);
 	}
-	//dart->setCoordinates(300, 300);
-	//dart->Draw(graphics, 10, 10);
 }
 

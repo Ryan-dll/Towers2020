@@ -301,8 +301,7 @@ std::shared_ptr<CItem> CGame::HitTest(int x, int y)
 }
 
 /** Take the item passed in and move its location to the
-* back (actually front) of the list
-* \param i Shared pointer to a fish in mItems list
+*   front of list
 */
 void CGame::LoadToFront(std::shared_ptr<CItem> item)
 {
