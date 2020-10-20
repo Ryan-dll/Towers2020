@@ -11,6 +11,9 @@
 #include <chrono>
 #include <thread>
 #include <stdlib.h>
+#include <iostream>
+
+const double pi = 3.1415926535;
 
 /**
  * Constructor for CTower
@@ -31,15 +34,21 @@ bool CTower::CanPlace()
 }
 
 /**
- * Constantly runs while the Tower object is active
- */
-void CTower::Activate()
-{
-}
-
-/**
  * Fires Projectiles from tower
  */
 void CTower::Fire()
 {
+}
+
+/**
+ * Updates Tower in elapsed intervals
+ */
+void CTower::Update(double elapsed)
+{
+    mTimeUntilFire -= elapsed;
+    if (mTimeUntilFire <= 0)
+    {
+        mTimeUntilFire += mTimeBetween;
+        Fire();
+    }
 }

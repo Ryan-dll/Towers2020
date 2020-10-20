@@ -47,13 +47,41 @@ public:
 	void SetImage(const std::wstring &);
 
 	/// Draw the image
-	void Draw(Gdiplus::Graphics *graphics);
+	virtual void Draw(Gdiplus::Graphics* graphics);
+
+	/**
+	*  Getter for Y position
+	*  \return mY Y Position
+	*/
+	int GetY() { return mY; }
+
+	/**
+	*  Getter for X position
+	*  \return mY X Position
+	*/
+	int GetX() { return mX; }
+
+	/**
+	* Setter for Y and X positions
+	* \param yPos desired Y position
+	* \param xPos desired X position
+	*/
+	void setCoordinates(int yPos, int xPos) { mX = xPos; mY = yPos; }
 	
 	/**  Test this item to see if it has been clicked on
 	* \param x X location on the item to test
 	* \param y Y location on the item to test
 	* \return true if clicked on */
 	virtual bool HitTest(int x, int y);
+
+	/// Determine distance between 2 items
+	/// \param other Item being compared
+	/// \return Distance as a double in pixels
+	double Distance(std::shared_ptr<CItem> other);
+
+	/// Handle updates for animation
+	/// \param elapsed The time since the last update
+	virtual void Update(double elapsed) {}
 
 protected:
 

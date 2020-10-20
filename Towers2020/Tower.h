@@ -31,11 +31,12 @@ public:
 	/// Arms the tower with X number of projectiles
 	virtual void ArmTower() {};
 
-	/// Activate Tower when its brought into gameplay area
-	void Activate();
-
 	/// Fire projectiles out of towers.
 	virtual void Fire();
+
+	/// Keeps the tower firing
+	/// \param elapsed elapsed time chunk
+	void Update(double elapsed);
 
 protected:
 	/// Time in between firing rounds
@@ -43,5 +44,11 @@ protected:
 
 	/// List of projectile pointers in tower
 	std::vector < std::shared_ptr<CProjectile> > mProjectiles;
+
+	/// Time it takes to reload a shot
+	double mTimeBetween = 5;
+
+	/// Used with elapse to calculate when to fire
+	double mTimeUntilFire = 5;
 };
 

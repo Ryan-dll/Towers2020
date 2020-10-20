@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Projectile.h"
+#include <math.h>
 
 /// Constant to covert radians to degrees.
 const double RtoD = 57.2957795;
@@ -28,9 +29,20 @@ void CProjectile::Draw(Gdiplus::Graphics* graphics, int offsetX, int offsetY)
     int wid = mProjectileImage->GetWidth();
     int hit = mProjectileImage->GetHeight();
     auto save = graphics->Save();
-    graphics->TranslateTransform((GetX() + offsetX),
-        (GetY() + offsetY));
-    graphics->RotateTransform((mRotation * RtoD));
+    graphics->TranslateTransform((Gdiplus::REAL)(GetX() + offsetX),
+        (Gdiplus::REAL)(GetY() + offsetY));
+    graphics->RotateTransform((Gdiplus::REAL)(mRotation * RtoD));
     graphics->DrawImage(mProjectileImage.get(), 0, 0, wid, hit);
     graphics->Restore(save);
+}
+
+void CProjectile::Update(double elapsed)
+{
+    double newY = sin(mRotation);
+    double newX = cos(mRotation);
+
+    double speedX = CItem::GetX() + newX * elapsed; 
+    double speedY = CItem::GetY() + newY * elapsed;
+    
+    CItem::setCoordinates(speedX,speedY);
 }

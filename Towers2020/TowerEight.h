@@ -37,6 +37,9 @@ public:
 	/// Overridden Arm Tower Function
 	virtual void ArmTower() override;
 
+	/// Overriden Fire Tower Function
+	virtual void Fire() override;
+
 private:
 };
 

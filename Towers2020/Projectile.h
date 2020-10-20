@@ -20,20 +20,29 @@ public:
 	/// Construct the Projectile
 	CProjectile(CGame* game);
 
+	/// Draw the Projectile
 	void Draw(Gdiplus::Graphics* graphics, int offsetX, int offsetY);
+
+	/// Moves the dart
+	/// \param elapsed elapsed time chunk
+	void Update(double elapsed);
+
+	/// Getter for Angle
+	/// \return Angle of projectile
+	double GetAngle() { return mRotation; }
 
 protected:
 	/// Speed of projectile
 	double mSpeed = 10;
 
 	/// Rotation of Projectile
-	double mRotation = 90;
+	double mRotation = 0;
 
 	/// Pointer to Projectile
 	std::unique_ptr<Gdiplus::Bitmap> mProjectileImage;
 
 	/// Distance from tower
-	double mT = 10;
+	double mT = 0;
 };
 
 

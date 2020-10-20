@@ -22,6 +22,8 @@ CTowerEight::CTowerEight(CGame * game) : CTower(game)
 {
 	wstring image = L"tower8.png";
 	CItem::SetImage(image);
+	/// Prepare for firing
+	ArmTower();
 }
 
 /**
@@ -41,8 +43,19 @@ void CTowerEight::ArmTower()
 	int numOfProjectiles = 8;
 	for (int i = 0; i < numOfProjectiles; i++)
 	{
-		std::shared_ptr<CProjectile> needle;
+		auto needle = std::make_shared<CProjectile>(mGame);
 		mProjectiles.push_back(needle);
 	}
+}
+
+void CTowerEight::Fire()
+{
+	Gdiplus::Graphics* graphics = mGame->GetGraphics();
+	//std::shared_ptr<CProjectile> dart = mProjectiles[0];
+	for (auto i : mProjectiles) {
+		auto dart = i;
+	}
+	//dart->setCoordinates(300, 300);
+	//dart->Draw(graphics, 10, 10);
 }
 

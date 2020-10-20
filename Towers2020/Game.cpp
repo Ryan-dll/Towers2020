@@ -37,6 +37,10 @@ CGame::CGame()
     //image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
     LoadImages();
     dashboard = make_unique<CDashboard>(this);
+    
+    auto testTower = make_shared<CTowerEight>(this);
+    testTower->setCoordinates(200, 200);
+    this->Add(testTower);
 
 }
 
@@ -210,7 +214,7 @@ void CGame::Update(double elapsed)
 {
     for (auto item : mAllGameItems)
     {
-        //item->update() when implemented
+        item->Update(elapsed);
     }
 }
 
@@ -296,4 +300,17 @@ std::shared_ptr<CItem> CGame::HitTest(int x, int y)
     return nullptr;
 }
 
+/** Take the item passed in and move its location to the
+* back (actually front) of the list
+* \param i Shared pointer to a fish in mItems list
+*/
+void CGame::LoadToFront(std::shared_ptr<CItem> item)
+{
+    auto loc = find(begin(mAllGameItems), end(mAllGameItems), item);
 
+    if (loc != end(mAllGameItems))
+    {
+        mAllGameItems.erase(loc);
+        mAllGameItems.push_back(item);
+    }
+}
