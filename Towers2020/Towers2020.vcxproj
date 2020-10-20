@@ -189,6 +189,7 @@
     <ClInclude Include="DoubleBufferDC.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ItemVisitor.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileHouse.h" />
     <ClInclude Include="Item.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="Dashboard.cpp" />
+    <ClCompile Include="ItemVisitor.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Tower.cpp" />

@@ -313,3 +313,28 @@ void CGame::LoadToFront(std::shared_ptr<CItem> item)
         mAllGameItems.push_back(item);
     }
 }
+
+/**
+* Setup the path for the balloons to follow
+*/
+void CGame::SetupPath()
+{
+    // Get a list of all the road tiles from the Road Visitor
+
+    // From the start path, iterate through the path setting up prev road
+    // and next road for all of the tiles
+
+}
+
+
+/**
+* Accept the visitor so it can visit the items
+* \param visitor The visitor we are using to visit
+*/
+void CGame::Accept(CItemVisitor* visitor)
+{
+    for (auto item : mAllGameItems)
+    {
+        item->Accept(visitor);
+    }
+}

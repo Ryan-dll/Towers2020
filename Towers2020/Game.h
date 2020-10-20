@@ -65,7 +65,13 @@ public:
 	/// Setter for graphics to the pointer in Childview
 	/// \return graphics pointer from childview
 	Gdiplus::Graphics* GetGraphics() { return mGraphics; }
-	
+
+	/// Iterate through the field to place all the roads
+	void SetupPath();
+
+	/// Allow the visitor to visit all of the children
+	void Accept(CItemVisitor* visitor);
+
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;

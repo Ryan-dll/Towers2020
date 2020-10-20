@@ -9,6 +9,7 @@
 #pragma once
 #include <memory>
 #include "Item.h"
+#include "ItemVisitor.h"
 
  /**
  * CProjectile class
@@ -30,6 +31,11 @@ public:
 	/// Getter for Angle
 	/// \return Angle of projectile
 	double GetAngle() { return mRotation; }
+
+	 /** Accept a visitor (not really)
+     * \param visitor The visitor we accept */
+	virtual void Accept(CItemVisitor* visitor) {};
+	
 
 protected:
 	/// Speed of projectile

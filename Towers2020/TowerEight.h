@@ -10,6 +10,7 @@
 #include "Tower.h"
 #include <memory>
 #include "Game.h"
+#include "ItemVisitor.h"
 
 /**
  * CTowerVisitor class instantiation
@@ -39,6 +40,10 @@ public:
 
 	/// Overriden Fire Tower Function
 	virtual void Fire() override;
+
+    /** Accept a visitor
+     * \param visitor The visitor we accept */
+    virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTowerEight(this); }
 
 private:
 };

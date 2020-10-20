@@ -11,6 +11,7 @@
 #include "Game.h"
 
 class CGame;
+class CItemVisitor;
 
  /**
  * CItem class
@@ -82,6 +83,10 @@ public:
 	/// Handle updates for animation
 	/// \param elapsed The time since the last update
 	virtual void Update(double elapsed) {}
+
+	/** Accept a visitor 
+     * \param visitor The visitor we accept */
+    virtual void Accept(CItemVisitor *visitor) = 0;
 
 protected:
 

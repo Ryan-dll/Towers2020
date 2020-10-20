@@ -8,6 +8,7 @@
 
 #pragma once
 #include "Tile.h"
+#include "ItemVisitor.h"
 
  /**
  * CTileTrees class
@@ -24,6 +25,10 @@ public:
 
     /// Constructor
     CTileTrees(CGame * game, std::wstring image);
+
+    /** Accept a visitor
+     * \param visitor The visitor we accept */
+    virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTileTrees(this); }
 
 private:
 
