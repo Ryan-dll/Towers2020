@@ -77,6 +77,9 @@ private:
 	/// Dashboard for the game
 	std::unique_ptr<CDashboard> dashboard;
 
+	/// Any item we are currently dragging
+	std::shared_ptr<CItem> mGrabbedItem;
+
 	/// Game score
 	int mScore = 0;
 

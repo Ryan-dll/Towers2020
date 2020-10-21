@@ -82,7 +82,10 @@ void CItem::Draw(Graphics* graphics)
 
 bool CItem::HitTest(int x, int y)
 {
-    return (abs(x - mX) + abs(y - mY)) <= InsideTolerance;
+    if (x >= 0 && x <= 16 && y >= 0 && y <= 16)
+    {
+        return true;
+    }
 }
 
 /**

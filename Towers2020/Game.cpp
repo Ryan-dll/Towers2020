@@ -225,6 +225,8 @@ void CGame::OnLButtonDown(int x, int y)
 {
     double oX = (x - mXOffset) / mScale;
     double oY = (y - mYOffset) / mScale;
+
+    mGrabbedItem = HitTest(oX, oY);
 }
 
 /**
