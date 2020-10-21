@@ -21,5 +21,5 @@ CTileOpen::CTileOpen(CGame* game, std::wstring image) : CTile(game)
 {
 	// Load the open image
 	wstring name = L"grass1.png";
-	CItem::SetImage(name);
+	CItem::SetImage(image);
 }

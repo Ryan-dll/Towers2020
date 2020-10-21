@@ -14,6 +14,7 @@
 #include <memory>
 #include "XmlNode.h"
 #include "Dashboard.h"
+#include "ItemVisitor.h"
 
 class CItem;
 class CDashboard;
@@ -114,5 +115,8 @@ private:
 
 	/// Pointer to graphics for Draw
 	Gdiplus::Graphics* mGraphics;
+
+	/// Pointer to the first tile in the road
+	CTileRoad* mStart;
 };
 

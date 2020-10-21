@@ -42,7 +42,7 @@ public:
 	void setY(int yPos) { mY = yPos; }
 
 	/// Load item from xml
-	void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
+	virtual void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
 	/// Set image for this Item
 	void SetImage(const std::wstring &);
@@ -96,10 +96,10 @@ protected:
 	/// Y position of item
 	int mY = 0;
 
-	/// Grid X position
+	/// X grid position
 	int mXGrid = 0;
 
-	/// Grid Y position
+	/// Y grid position
 	int mYGrid = 0;
 
 	/// ID of Item

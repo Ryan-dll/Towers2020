@@ -19,6 +19,9 @@
 #include <iostream>
 #include <map>
 #include "Dashboard.h"
+#include "TileCollector.h"
+#include "RoadCollector.h"
+#include "Balloon.h"
 
 using namespace std;
 using namespace xmlnode;
@@ -38,9 +41,9 @@ CGame::CGame()
     LoadImages();
     dashboard = make_unique<CDashboard>(this);
     
-    auto testTower = make_shared<CTowerEight>(this);
-    testTower->setCoordinates(200, 200);
-    this->Add(testTower);
+    //auto testTower = make_shared<CTowerEight>(this);
+    //testTower->setCoordinates(200, 200);
+    //this->Add(testTower);
 
 }
 
@@ -59,23 +62,19 @@ void CGame::Load(const std::wstring& filename)
 
         // Clear the current level?
 
+        
+        // Get root info
+        if (root->GetName() == L"level")
+        {
+            mHeight = root->GetAttributeIntValue(L"height", 0);
+            mWidth = root->GetAttributeIntValue(L"width", 0);
+            mStartX = root->GetAttributeIntValue(L"start-x", 0);
+            mStartY = root->GetAttributeIntValue(L"start-y", 0);
+        }
+
         // Traverse the children of the root
         for (auto node : root->GetChildren())
         {
-            //if (node->GetType() == NODE_ELEMENT)
-            //{
-            //  XmlItem(node);
-            //}
-
-            if (node->GetName() == L"level")
-            {
-                for (auto subNode : node->GetChildren()) {
-                    mHeight = subNode->GetAttributeIntValue(L"height", 0);
-                    mWidth = subNode->GetAttributeIntValue(L"width", 0);
-                    mStartX = subNode->GetAttributeIntValue(L"start-x", 0);
-                    mStartY = subNode->GetAttributeIntValue(L"start-y", 0);
-                }
-            }
 
             if (node->GetName() == L"declarations")
             {
@@ -95,18 +94,21 @@ void CGame::Load(const std::wstring& filename)
 
         std::cout << "Level Loaded!";
 
-        // Test code for rendering tower
-        /*
-        shared_ptr<CItem> item;
-        item = make_shared<CTowerEight>(this);
-        item->setX(100);
-        item->setY(100);
-        Add(item); */
     }
     catch (CXmlNode::Exception ex)
     {
         AfxMessageBox(ex.Message().c_str());
     }
+
+    // This will eventually need to move to the load menu function
+    SetupPath();
+    // Add test balloon
+    shared_ptr<CBalloon> balloon;
+    balloon = make_shared<CBalloon>(this);
+    //item->setX(100);
+    //item->setY(100);
+    Add(shared_ptr<CItem>(balloon));
+    mStart->GiveBalloon(balloon);
 }
 
 /**
@@ -320,10 +322,76 @@ void CGame::LoadToFront(std::shared_ptr<CItem> item)
 void CGame::SetupPath()
 {
     // Get a list of all the road tiles from the Road Visitor
-
+    CRoadCollector coll;
+    Accept(&coll);
+    std::vector<CTileRoad *> roads = coll.GetTiles();
+    
     // From the start path, iterate through the path setting up prev road
     // and next road for all of the tiles
+    // Look through the collection for the starting
+    CTileRoad * start = nullptr;
+    for (auto road : roads)
+    {
+        if (road->GetXGrid() == mStartX && road->GetYGrid() == mStartY)
+        {
+            // Found the start position
+            start = road;
+            break;
+        }
 
+    }
+    if (start == nullptr)
+    {
+        return;
+    }
+    // Give a starting direction and a road type find the next direction
+    wstring current = L"E"; // Hardcode this for now, we can fix later
+    int gridX = mStartX;
+    int gridY = mStartY;
+    
+    auto oldPtr = start;
+    mStart = start;
+    // Move through all the roads until we get to the end
+    bool done = false;
+    while (!done)
+    {
+        wstring type = oldPtr->GetType();
+        wstring flipped;
+        if (current == L"E") { flipped = L"W"; }
+        else if (current == L"W") { flipped = L"E"; }
+        else if (current == L"N") { flipped = L"S"; }
+        else if (current == L"S") { flipped = L"N"; }
+        string::size_type pos = type.find(flipped);
+        if (pos != string::npos)
+        {
+            type.erase(pos, 1);
+        }
+        oldPtr->SetIn(flipped);
+        if (type == L"N") gridY--;
+        else if (type == L"S") gridY++;
+        else if (type == L"W") gridX--;
+        else if (type == L"E") gridX++;
+        oldPtr->SetOut(type);
+        auto newIt = find_if(roads.begin(), roads.end(), [gridX, gridY](CTileRoad* road)
+            {
+                return (road->GetXGrid() == gridX && road->GetYGrid() == gridY);
+            });
+        if (newIt == roads.end())
+        {
+            // path stops here.
+            oldPtr->SetNext(nullptr);
+            break;
+        }
+        if (gridX > 15 || gridX < 0 || gridY > 15 || gridY < 0)
+        {
+            /// Bad Xml, return
+            oldPtr->SetNext(nullptr);
+            break;
+        }
+        oldPtr->SetNext(*newIt);
+        oldPtr = *newIt;
+        current = type;
+    }
 }
 
 
