@@ -34,6 +34,9 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_UPDATE_COMMAND_UI(ID_FILE_LOAD32776, &CChildView::OnUpdateFileLoad32776)
 	ON_WM_ERASEBKGND()
 	ON_WM_TIMER()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 
@@ -158,4 +161,57 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
 	Invalidate();
 	CWnd::OnTimer(nIDEvent);
+}
+
+
+/**
+ * Called when there is a left mouse button press
+ * \param nFlags Flags associated with the mouse button press
+ * \param point Where the button was pressed
+*/
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	mGrabbedItem = mGame.HitTest(point.x,point.y);
+	if (mGrabbedItem != nullptr)
+	{
+		Invalidate();
+	}
+}
+
+/**
+ * Called when the left mouse button is released
+ * \param nFlags Flags associated with the mouse button release
+ * \param point Where the button was pressed
+ */
+void CChildView::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	OnMouseMove(nFlags, point);
+}
+
+/**
+ * Called when the mouse is moved
+ * \param nFlags Flags associated with the mouse movement
+ * \param point Where the button was pressed
+ */
+void CChildView::OnMouseMove(UINT nFlags, CPoint point)
+{
+	// See if an item is currently being moved by the mouse
+	if (mGrabbedItem != nullptr)
+	{
+		// If an item is being moved, we only continue to 
+		// move it while the left button is down.
+		if (nFlags & MK_LBUTTON)
+		{
+			mGrabbedItem->setCoordinates(point.x, point.y);
+		}
+		else
+		{
+			// When the left button is released, we release the
+			// item.
+			mGrabbedItem = nullptr;
+		}
+
+		// Force the screen to redraw
+		Invalidate();
+	}
 }

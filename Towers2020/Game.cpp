@@ -49,10 +49,10 @@ CGame::CGame()
     //testTower->ArmTower();
     //this->Add(testTower);
 
-    //auto testTower2 = make_shared<CTowerCross>(this);
-    //testTower2->setCoordinates(300, 600);
-    //testTower2->ArmTower();
-    //this->Add(testTower2);
+    auto testTower2 = make_shared<CTowerCross>(this);
+    testTower2->setCoordinates(100, 200);
+    testTower2->ArmTower();
+    this->Add(testTower2);
 
     // Test adding ring
     //auto ring = make_shared<CRing>(this);

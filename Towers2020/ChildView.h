@@ -21,6 +21,8 @@ public:
 private:
 	/// An object that describes our Game
 	CGame mGame;
+	/// Any item we are currently dragging
+	std::shared_ptr<CItem> mGrabbedItem;
 
 // Attributes
 private:
@@ -53,5 +55,8 @@ public:
 	afx_msg void OnUpdateFileLoad32776(CCmdUI* pCmdUI);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
