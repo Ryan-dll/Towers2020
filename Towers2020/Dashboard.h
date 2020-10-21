@@ -29,7 +29,6 @@ public:
 	CDashboard(CGame* game);
 
 	void Draw(Gdiplus::Graphics* graphics);
-	void setScore(int newScore);
 	void setLevelStarted(bool started);
 
 private:

@@ -21,7 +21,6 @@ using namespace std;
 */
 CTileRoad::CTileRoad(CGame * game, std::wstring image, std::wstring type) : CTile(game)
 {
-	mImage = image;
 	mType = type;
 	CItem::SetImage(image);
 }

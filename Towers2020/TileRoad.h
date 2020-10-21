@@ -33,7 +33,6 @@ public:
      * \param visitor The visitor we accept */
     virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTileRoad(this); }
 
-
     /**
      * Return the type of the road
      * \returns type of the road
@@ -64,16 +63,17 @@ public:
      */
     void GiveBalloon(std::shared_ptr<CBalloon> balloon) { mBalloons.push_back(balloon); }
 
-	/// Handle updates for animation
-	/// \param elapsed The time since the last update
+	/** Handle updates for animation
+	 * \param elapsed The time since the last update
+     */
     void Update(double elapsed);
 
-    /// Place a balloon in the XY coordinate space using t
+    /** Place a balloon in the XY coordinate space using t
+     * \param balloon The balloon to place
+     */
     void Place(std::shared_ptr<CBalloon> balloon);
 
 protected:
-    /// Image for road
-    std::wstring mImage;
 
     /// Type of road
     std::wstring mType;
