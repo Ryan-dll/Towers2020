@@ -211,9 +211,6 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     // Draw the dashboard
     dashboard->Draw(graphics);
 
-    // This will need to be called repeatedly
-    dashboard->setScore(mScore);
-
 }
 
 /**

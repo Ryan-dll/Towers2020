@@ -87,15 +87,6 @@ void CDashboard::Draw(Graphics* graphics)
 }
 
 /**
- * Set the score shown on Dashboard
- * \param newScore score to show
- */
-void CDashboard::setScore(int newScore)
-{
-    score = newScore;
-}
-
-/**
  * Set the status of if level is started. Go button only shows
  * if not started.
  * 
