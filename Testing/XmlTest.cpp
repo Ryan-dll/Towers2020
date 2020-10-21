@@ -7,7 +7,6 @@
 #include <streambuf>
 #include <iostream>
 #include <Game.h>
-#include <Game.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
