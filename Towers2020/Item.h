@@ -53,20 +53,20 @@ public:
 	*  Getter for Y position
 	*  \return mY Y Position
 	*/
-	int GetY() { return mY; }
+	double GetY() { return mY; }
 
 	/**
 	*  Getter for X position
 	*  \return mY X Position
 	*/
-	int GetX() { return mX; }
+	double GetX() { return mX; }
 
 	/**
 	* Setter for Y and X positions
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	void setCoordinates(int yPos, int xPos) { mX = xPos; mY = yPos; }
+	void setCoordinates(double xPos, double yPos) { mX = xPos; mY = yPos; }
 	
 	/**  Test this item to see if it has been clicked on
 	* \param x X location on the item to test
@@ -86,10 +86,10 @@ public:
 protected:
 
 	/// X position of item
-	int mX = 0;
+	double mX = 0;
 
 	/// Y position of item
-	int mY = 0;
+	double mY = 0;
 
 	/// Grid X position
 	int mXGrid = 0;
@@ -105,6 +105,9 @@ protected:
 	
 	/// Pointer to the Game we belong to
 	CGame* mGame;
+
+	/// Constant to be used for pi
+	const double pi = 3.1415926535;
 
 };
 

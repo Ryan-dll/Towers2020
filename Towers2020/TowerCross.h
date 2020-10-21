@@ -1,5 +1,5 @@
 /**
- * \file TowerEight.h
+ * \file TowerCross.h
  *
  * \author RyanShore
  *
@@ -11,25 +11,25 @@
 #include <memory>
 #include "Game.h"
 
-/**
- * CTowerVisitor class instantiation
- */
+ /**
+  * CTowerVisitor class instantiation
+  */
 class CTowerVisitor;
 
 /**
-* CTowerEight class
+* CTowerCross class
 */
-class CTowerEight : public CTowerProjectile
+class CTowerCross : public CTowerProjectile
 {
 public:
 	/// Delete Default Constructor
-	CTowerEight() = delete;
+	CTowerCross() = delete;
 
 	/// Delete Default Clone
-	CTowerEight(const CTowerEight&) = delete;
-	
-	/// Construct the TowerEight
-	CTowerEight(CGame* game);
+	CTowerCross(const CTowerCross&) = delete;
+
+	/// Construct the TowerCross
+	CTowerCross(CGame* game);
 
 	/// Accepts the Tower visitor
 	virtual void Accept(CTowerVisitor* visitor);
@@ -38,5 +38,8 @@ public:
 	virtual void Fire() override;
 
 private:
+
+	/// Determines which darts fire
+	bool mCrossPattern = true;
 };
 

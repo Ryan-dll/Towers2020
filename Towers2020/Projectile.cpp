@@ -21,28 +21,53 @@ CProjectile::CProjectile(CGame* game) : CItem(game)
  * variable mAngle, which is the rotation in radians.
  *
  * @param graphics The graphics context to draw on.
- * @param offsetX An X offset added to the position of the dart.
- * @param offsetY A Y offset added to the position of the dart.
  */
-void CProjectile::Draw(Gdiplus::Graphics* graphics, int offsetX, int offsetY)
+void CProjectile::Draw(Gdiplus::Graphics* graphics)
 {
-    int wid = mProjectileImage->GetWidth();
-    int hit = mProjectileImage->GetHeight();
-    auto save = graphics->Save();
-    graphics->TranslateTransform((Gdiplus::REAL)(GetX() + offsetX),
-        (Gdiplus::REAL)(GetY() + offsetY));
-    graphics->RotateTransform((Gdiplus::REAL)(mRotation * RtoD));
-    graphics->DrawImage(mProjectileImage.get(), 0, 0, wid, hit);
-    graphics->Restore(save);
+    if (mActive == true) 
+    {
+        int wid = mItemImage->GetWidth();
+        int hit = mItemImage->GetHeight();
+        auto save = graphics->Save();
+        graphics->TranslateTransform((Gdiplus::REAL)(GetX()),
+            (Gdiplus::REAL)(GetY()));
+        graphics->RotateTransform((Gdiplus::REAL)(mRotation * RtoD));
+        graphics->DrawImage(mItemImage.get(), 0, 0, wid, hit);
+        graphics->Restore(save);
+    }
 }
 
 void CProjectile::Update(double elapsed)
 {
-    double newY = sin(mRotation);
-    double newX = cos(mRotation);
+    if (mActive == true)
+    {
+        double newY = sin(mRotation);
+        double newX = cos(mRotation);
 
-    double speedX = CItem::GetX() + newX * elapsed; 
-    double speedY = CItem::GetY() + newY * elapsed;
+        double velocity = elapsed * mSpeed;
+
+        newY *= velocity;
+        newX *= velocity;
+
+        mX += newX;
+        mY += newY;
+
+        ResetDart();
+    }
+}
+
+void CProjectile::ResetDart()
+{
+    double dx = mX - mOriginX;
+    double dy = mY - mOriginY;
+
+    // Determine how far away we are
+    double result = sqrt(dx * dx + dy * dy);
     
-    CItem::setCoordinates(speedX,speedY);
+    if (result >= 90)
+    {
+        mX = mOriginX;
+        mY = mOriginY;
+        mActive = false;
+    }
 }

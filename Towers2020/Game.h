@@ -57,14 +57,6 @@ public:
 	/// Adds item to front of the list in display
 	///  \param item to be loaded up
 	void LoadToFront(std::shared_ptr<CItem> item);
-
-	/// Setter for graphics to the pointer in Childview
-	/// \param graphics pointer from childview
-	void SetGraphics(Gdiplus::Graphics* graphics) { mGraphics = graphics; }
-
-	/// Setter for graphics to the pointer in Childview
-	/// \return graphics pointer from childview
-	Gdiplus::Graphics* GetGraphics() { return mGraphics; }
 	
 private:
 	/// All game items
@@ -105,8 +97,5 @@ private:
 
     /// Game area height in virtual pixels
     const static int Height = 1024;
-
-	/// Pointer to graphics for Draw
-	Gdiplus::Graphics* mGraphics;
 };
 

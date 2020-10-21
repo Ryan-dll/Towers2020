@@ -19,6 +19,7 @@
 #include <iostream>
 #include <map>
 #include "Dashboard.h"
+#include "TowerCross.h"
 
 using namespace std;
 using namespace xmlnode;
@@ -40,7 +41,13 @@ CGame::CGame()
     
     auto testTower = make_shared<CTowerEight>(this);
     testTower->setCoordinates(200, 200);
+    testTower->ArmTower();
     this->Add(testTower);
+
+    auto testTower2 = make_shared<CTowerCross>(this);
+    testTower2->setCoordinates(300, 600);
+    testTower2->ArmTower();
+    this->Add(testTower2);
 
 }
 

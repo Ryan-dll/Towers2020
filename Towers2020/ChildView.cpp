@@ -105,7 +105,6 @@ void CChildView::OnPaint()
 	{
 		mGame.Update(elapsed);
 	}
-	mGame.SetGraphics(&graphics);
 	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
 }
 
