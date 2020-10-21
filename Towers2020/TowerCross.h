@@ -37,6 +37,10 @@ public:
 	/// Overriden Fire Tower Function
 	virtual void Fire() override;
 
+	/// Getter For Cross Pattern Status
+	/// \return mCrossPattern Current status
+	bool GetCrossStatus() { return mCrossPattern; }
+
 private:
 
 	/// Determines which darts fire
