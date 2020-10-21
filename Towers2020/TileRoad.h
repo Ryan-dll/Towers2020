@@ -7,13 +7,13 @@
  */
 
 #pragma once
+#include "pch.h"
 #include "Tile.h"
-#include "ItemVisitor.h"
 #include "Balloon.h"
+#include "ItemVisitor.h"
+#include <vector>
 
-class CBalloon;
-class CItemVisitor;
-
+//class CItemVisitor;
  /**
  * CRoad class
  */

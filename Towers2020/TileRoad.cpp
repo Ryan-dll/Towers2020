@@ -8,6 +8,7 @@
 
 #include "pch.h"
 #include "TileRoad.h"
+#include "ItemVisitor.h"
 #include "Game.h"
 
 using namespace std;

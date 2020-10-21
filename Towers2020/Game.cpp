@@ -340,6 +340,7 @@ void CGame::LoadToFront(std::shared_ptr<CItem> item)
 */
 void CGame::SetupPath()
 {
+    
     // Get a list of all the road tiles from the Road Visitor
     CRoadCollector coll;
     Accept(&coll);

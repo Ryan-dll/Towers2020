@@ -9,6 +9,7 @@
 #include "pch.h"
 #include "Item.h"
 #include "XmlNode.h"
+#include "Game.h"
 
 using namespace std;
 using namespace Gdiplus;

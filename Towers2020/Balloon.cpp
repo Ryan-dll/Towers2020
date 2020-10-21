@@ -6,6 +6,7 @@
  * Implements a Balloon
  */
 #include "pch.h"
+#include "Item.h"
 #include "Balloon.h"
 
 using namespace std;

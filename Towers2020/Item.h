@@ -8,11 +8,10 @@
 
 #pragma once
 #include "XmlNode.h"
-#include "Game.h"
 
 //class CGame;
 class CItemVisitor;
-
+class CGame;
  /**
  * CItem class
  */

@@ -15,6 +15,7 @@
 #include "XmlNode.h"
 #include "Dashboard.h"
 #include "ItemVisitor.h"
+#include "Tile.h"
 #include "TileRoad.h"
 
 class CItem;
