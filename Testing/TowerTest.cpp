@@ -47,6 +47,14 @@ namespace Testing
 
 			Assert::IsTrue(testTower1->GetX() == 100);
 			Assert::IsTrue(testTower1->GetY() == 100);
+
+			testTower1->Fire();
+			Assert::IsTrue(testTower1->GetListLen() == 8);
+
+			testTower1->setCoordinates(200, 200);
+
+			Assert::IsTrue(testTower1->GetX() == 200);
+			Assert::IsTrue(testTower1->GetY() == 200);
 		}
 
 		TEST_METHOD(TowerCross)
@@ -68,6 +76,11 @@ namespace Testing
 
 			testTower2->Fire();
 			Assert::IsTrue(testTower2->GetCrossStatus() == true);
+
+			testTower2->setCoordinates(200, 200);
+
+			Assert::IsTrue(testTower2->GetX() == 200);
+			Assert::IsTrue(testTower2->GetY() == 200);
 
 		}
 	};
