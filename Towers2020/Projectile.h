@@ -22,7 +22,7 @@ public:
 	CProjectile(CGame* game);
 
 	/// Draw the Projectile
-	void Draw(Gdiplus::Graphics* graphics, int offsetX, int offsetY);
+	void Draw(Gdiplus::Graphics* graphics) override;
 
 	/// Moves the dart
 	/// \param elapsed elapsed time chunk
@@ -32,23 +32,42 @@ public:
 	/// \return Angle of projectile
 	double GetAngle() { return mRotation; }
 
-	 /** Accept a visitor (not really)
-     * \param visitor The visitor we accept */
-	virtual void Accept(CItemVisitor* visitor) {};
-	
+	/// Getter for Active
+	/// \return Projectile status
+	bool GetActive() { return mActive; }
+
+	/// Setter for Angle
+	/// \param Angle of projectile
+	void SetAngle(double Angle) { mRotation = Angle; }
+
+	/// Setter for Active
+	/// \param set Sets Projectile status
+	void SetActive(bool set) { mActive = set; }
+
+	/// Setter for original X and Y Locations
+	/// \param y desired Y position
+	/// \param x desired X position
+	void SetOrigin(double x, double y) { mOriginX = x; mOriginY = y; }
+
+	/// Resets Projectile Position and Disables it
+	void ResetDart();
 
 protected:
 	/// Speed of projectile
-	double mSpeed = 10;
+	double mSpeed = 100;
 
 	/// Rotation of Projectile
 	double mRotation = 0;
+	
+	/// Is this currently being used?
+	bool mActive = false;
 
-	/// Pointer to Projectile
-	std::unique_ptr<Gdiplus::Bitmap> mProjectileImage;
+	/// X axis location upon being created
+	double mOriginX = 0;
 
-	/// Distance from tower
-	double mT = 0;
+	/// Y axis locaion upon being created
+	double mOriginY = 0;
+
 };
 
 

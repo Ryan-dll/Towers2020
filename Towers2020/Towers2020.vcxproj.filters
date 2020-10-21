@@ -90,6 +90,12 @@
     <ClInclude Include="TowerRing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TowerProjectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerCross.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Towers2020.cpp">
@@ -153,6 +159,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TowerRing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerProjectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerCross.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

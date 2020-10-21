@@ -8,12 +8,8 @@
 
 #include "pch.h"
 #include "Tower.h"
-#include <chrono>
-#include <thread>
 #include <stdlib.h>
 #include <iostream>
-
-const double pi = 3.1415926535;
 
 /**
  * Constructor for CTower
@@ -22,22 +18,6 @@ const double pi = 3.1415926535;
 CTower::CTower(CGame * game) : CItem(game)
 {
 	// Dont need this guy now, but maybe later...
-}
-
-/**
- * Determines if a location is valid for tower placement
- * \returns true if location is valid
- */
-bool CTower::CanPlace()
-{
-    return false;
-}
-
-/**
- * Fires Projectiles from tower
- */
-void CTower::Fire()
-{
 }
 
 /**

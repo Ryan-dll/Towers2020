@@ -9,6 +9,7 @@
 #pragma once
 
 class CTowerEight;
+class CTowerCross;
 
 /**
 * CTowerVisitor class
@@ -21,4 +22,7 @@ public:
 	/// Visits Tower8
 	/// \param tower pointer to Tower8 tower
 	virtual void VisitTowerEight(CTowerEight* tower) {}
+	/// Visits TowerCross
+	/// \param tower pointer to TowerCross tower
+	virtual void VisitTowerCross(CTowerCross* tower) {}
 };
