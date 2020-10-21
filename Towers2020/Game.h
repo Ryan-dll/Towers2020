@@ -67,6 +67,9 @@ public:
 	/// Allow the visitor to visit all of the children
 	void Accept(CItemVisitor* visitor);
 
+	/// Return pointer to item of mAllGameItems at given index
+	std::shared_ptr<CItem> GetItem(int index);
+
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;

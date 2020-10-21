@@ -60,9 +60,9 @@ CGame::CGame()
     //this->Add(ring);
 
     // Test adding ring Tower
-    auto ringTower = make_shared<CTowerRing>(this);
-    ringTower->setCoordinates(600, 300);
-    this->Add(ringTower);
+    //auto ringTower = make_shared<CTowerRing>(this);
+    //ringTower->setCoordinates(600, 300);
+    //this->Add(ringTower);
 
 }
 
@@ -425,4 +425,14 @@ void CGame::Accept(CItemVisitor* visitor)
     {
         item->Accept(visitor);
     }
+}
+
+/**
+* Return pointer to item of mAllGameItems at given index
+* \param index Index of item to get
+* \return Item from vector
+*/
+std::shared_ptr<CItem> CGame::GetItem(int index)
+{
+    return mAllGameItems[index];
 }
