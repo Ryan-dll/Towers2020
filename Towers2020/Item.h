@@ -11,6 +11,7 @@
 #include "Game.h"
 
 class CGame;
+class CItemVisitor;
 
  /**
  * CItem class
@@ -32,13 +33,13 @@ public:
      * Setter for X position
 	 * \param xPos desired X position
      */
-	void setX(int xPos) { mX = xPos; }
+	virtual void setX(int xPos) { mX = xPos; }
 
     /**
      * Setter for Y position
 	 * \param yPos desired Y position
      */
-	void setY(int yPos) { mY = yPos; }
+	virtual void setY(int yPos) { mY = yPos; }
 
 	/// Load item from xml
 	void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
@@ -82,6 +83,10 @@ public:
 	/// Handle updates for animation
 	/// \param elapsed The time since the last update
 	virtual void Update(double elapsed) {}
+
+	/** Accept a visitor 
+     * \param visitor The visitor we accept */
+    virtual void Accept(CItemVisitor *visitor) = 0;
 
 protected:
 

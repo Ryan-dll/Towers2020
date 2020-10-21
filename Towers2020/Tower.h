@@ -11,6 +11,7 @@
 #include "Projectile.h"
 #include <vector>
 #include <memory>
+#include "ItemVisitor.h"
 
  /**
  * CTower class
@@ -33,6 +34,10 @@ public:
 	/// Keeps the tower firing
 	/// \param elapsed elapsed time chunk
 	void Update(double elapsed);
+
+    /** Accept a visitor 
+     * \param visitor The visitor we accept */
+    virtual void Accept(CItemVisitor *visitor) = 0;
 
 protected:
 	/// Time it takes to reload a shot

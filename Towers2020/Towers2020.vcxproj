@@ -189,6 +189,8 @@
     <ClInclude Include="DoubleBufferDC.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ItemVisitor.h" />
+    <ClInclude Include="Ring.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileHouse.h" />
     <ClInclude Include="Item.h" />
@@ -202,6 +204,7 @@
     <ClInclude Include="Tower.h" />
     <ClInclude Include="TowerCross.h" />
     <ClInclude Include="TowerEight.h" />
+    <ClInclude Include="TowerRing.h" />
     <ClInclude Include="TowerProjectile.h" />
     <ClInclude Include="Towers2020.h" />
     <ClInclude Include="TowerVisitor.h" />
@@ -212,7 +215,9 @@
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="Dashboard.cpp" />
+    <ClCompile Include="ItemVisitor.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Ring.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -229,6 +234,7 @@
     <ClCompile Include="TileRoad.cpp" />
     <ClCompile Include="TowerCross.cpp" />
     <ClCompile Include="TowerEight.cpp" />
+    <ClCompile Include="TowerRing.cpp" />
     <ClCompile Include="TowerProjectile.cpp" />
     <ClCompile Include="Towers2020.cpp" />
     <ClCompile Include="TowerVisitor.cpp" />

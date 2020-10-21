@@ -9,6 +9,8 @@
 #pragma once
 #include "Tile.h"
 #include "Game.h"
+#include "ItemVisitor.h"
+
  /**
  * CTileHouse class
  */
@@ -23,6 +25,10 @@ public:
 
     /// Constructor
     CTileHouse(CGame* game, std::wstring image);
+
+    /** Accept a visitor
+     * \param visitor The visitor we accept */
+    virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTileHouse(this); }
 
 private:
     /// Image for house

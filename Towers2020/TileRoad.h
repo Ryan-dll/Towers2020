@@ -8,12 +8,12 @@
 
 #pragma once
 #include "Tile.h"
+#include "ItemVisitor.h"
 
  /**
  * CRoad class
  */
-class CTileRoad :
-    public CTile
+class CTileRoad : public CTile
 {
 public:
 
@@ -24,6 +24,10 @@ public:
     CTileRoad(const CTileRoad&) = delete;
 
     CTileRoad(CGame *game, std::wstring image, std::wstring type);
+    
+    /** Accept a visitor
+     * \param visitor The visitor we accept */
+    virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTileRoad(this); }
 
 protected:
     /// Image for road

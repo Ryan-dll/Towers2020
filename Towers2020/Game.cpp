@@ -19,6 +19,8 @@
 #include <iostream>
 #include <map>
 #include "Dashboard.h"
+#include "Ring.h"
+#include "TowerRing.h"
 #include "TowerCross.h"
 
 using namespace std;
@@ -48,6 +50,16 @@ CGame::CGame()
     testTower2->setCoordinates(300, 600);
     testTower2->ArmTower();
     this->Add(testTower2);
+
+    // Test adding ring
+    //auto ring = make_shared<CRing>(this);
+    //ring->setCoordinates(600, 600);
+    //this->Add(ring);
+
+    // Test adding ring Tower
+    //auto ringTower = make_shared<CTowerRing>(this);
+    //ringTower->setCoordinates(600, 300);
+    //this->Add(ringTower);
 
 }
 
@@ -318,5 +330,30 @@ void CGame::LoadToFront(std::shared_ptr<CItem> item)
     {
         mAllGameItems.erase(loc);
         mAllGameItems.push_back(item);
+    }
+}
+
+/**
+* Setup the path for the balloons to follow
+*/
+void CGame::SetupPath()
+{
+    // Get a list of all the road tiles from the Road Visitor
+
+    // From the start path, iterate through the path setting up prev road
+    // and next road for all of the tiles
+
+}
+
+
+/**
+* Accept the visitor so it can visit the items
+* \param visitor The visitor we are using to visit
+*/
+void CGame::Accept(CItemVisitor* visitor)
+{
+    for (auto item : mAllGameItems)
+    {
+        item->Accept(visitor);
     }
 }
