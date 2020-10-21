@@ -31,9 +31,5 @@ public:
      * \param visitor The visitor we accept */
     virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTileOpen(this); }
 
-private:
-
-    /// Image for house
-    std::wstring mImage;
 };
 

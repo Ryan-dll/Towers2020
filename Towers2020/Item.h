@@ -87,6 +87,24 @@ public:
      * \param visitor The visitor we accept */
     virtual void Accept(CItemVisitor *visitor) = 0;
 
+	/**
+	* Return Id of item
+	* \return Id of item
+	*/
+	std::wstring GetId() { return mId; };
+
+	/**
+	* Return X grid positon of item
+	* \return X position
+	*/
+	int GetXGrid() { return mXGrid; };
+
+	/**
+	* Return Y grid positon of item
+	* \return Y position
+	*/
+	int GetYGrid() { return mYGrid; };
+
 protected:
 
 	/// X position of item

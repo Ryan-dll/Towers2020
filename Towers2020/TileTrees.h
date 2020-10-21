@@ -30,9 +30,5 @@ public:
      * \param visitor The visitor we accept */
     virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTileTrees(this); }
 
-private:
-
-    /// Image for trees
-    std::wstring mImage;
 };
 

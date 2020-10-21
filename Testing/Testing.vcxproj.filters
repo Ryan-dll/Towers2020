@@ -23,6 +23,12 @@
     <ClCompile Include="XmlTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TowerTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="GameTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

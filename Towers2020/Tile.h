@@ -33,6 +33,12 @@ public:
      */
     int GetYGrid() { return mYGrid; }
 
+    /**
+     * Return the image for the road
+     * \returns image for the road
+     */
+     std::wstring GetImage() { return mImage; }
+
 protected:
 
     /// Constructor
@@ -45,4 +51,6 @@ private:
 	/// Grid Y position
 	int mYGrid = 0;
 
+    /// Image for house
+    std::wstring mImage;
 };

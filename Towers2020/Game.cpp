@@ -49,10 +49,10 @@ CGame::CGame()
     //testTower->ArmTower();
     //this->Add(testTower);
 
-    //auto testTower2 = make_shared<CTowerCross>(this);
-    //testTower2->setCoordinates(300, 600);
-    //testTower2->ArmTower();
-    //this->Add(testTower2);
+    auto testTower2 = make_shared<CTowerCross>(this);
+    testTower2->setCoordinates(100, 200);
+    testTower2->ArmTower();
+    this->Add(testTower2);
 
     // Test adding ring
     //auto ring = make_shared<CRing>(this);
@@ -60,9 +60,9 @@ CGame::CGame()
     //this->Add(ring);
 
     // Test adding ring Tower
-    auto ringTower = make_shared<CTowerRing>(this);
-    ringTower->setCoordinates(600, 300);
-    this->Add(ringTower);
+    //auto ringTower = make_shared<CTowerRing>(this);
+    //ringTower->setCoordinates(600, 300);
+    //this->Add(ringTower);
 
 }
 
@@ -210,9 +210,6 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
 
     // Draw the dashboard
     dashboard->Draw(graphics);
-
-    // This will need to be called repeatedly
-    dashboard->setScore(mScore);
 
 }
 
@@ -425,4 +422,14 @@ void CGame::Accept(CItemVisitor* visitor)
     {
         item->Accept(visitor);
     }
+}
+
+/**
+* Return pointer to item of mAllGameItems at given index
+* \param index Index of item to get
+* \return Item from vector
+*/
+std::shared_ptr<CItem> CGame::GetItem(int index)
+{
+    return mAllGameItems[index];
 }
