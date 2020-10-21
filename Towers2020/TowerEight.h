@@ -7,7 +7,7 @@
  */
 
 #pragma once
-#include "Tower.h"
+#include "TowerProjectile.h"
 #include <memory>
 #include "Game.h"
 #include "ItemVisitor.h"
@@ -20,7 +20,7 @@ class CTowerVisitor;
 /**
 * CTowerEight class
 */
-class CTowerEight : public CTower
+class CTowerEight : public CTowerProjectile
 {
 public:
 	/// Delete Default Constructor
@@ -34,9 +34,6 @@ public:
 
 	/// Accepts the Tower visitor
 	virtual void Accept(CTowerVisitor* visitor);
-
-	/// Overridden Arm Tower Function
-	virtual void ArmTower() override;
 
 	/// Overriden Fire Tower Function
 	virtual void Fire() override;

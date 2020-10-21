@@ -22,6 +22,9 @@
 #include "TileCollector.h"
 #include "RoadCollector.h"
 #include "Balloon.h"
+#include "Ring.h"
+#include "TowerRing.h"
+#include "TowerCross.h"
 
 using namespace std;
 using namespace xmlnode;
@@ -41,9 +44,25 @@ CGame::CGame()
     LoadImages();
     dashboard = make_unique<CDashboard>(this);
     
-    //auto testTower = make_shared<CTowerEight>(this);
-    //testTower->setCoordinates(200, 200);
-    //this->Add(testTower);
+    auto testTower = make_shared<CTowerEight>(this);
+    testTower->setCoordinates(200, 200);
+    testTower->ArmTower();
+    this->Add(testTower);
+
+    auto testTower2 = make_shared<CTowerCross>(this);
+    testTower2->setCoordinates(300, 600);
+    testTower2->ArmTower();
+    this->Add(testTower2);
+
+    // Test adding ring
+    //auto ring = make_shared<CRing>(this);
+    //ring->setCoordinates(600, 600);
+    //this->Add(ring);
+
+    // Test adding ring Tower
+    //auto ringTower = make_shared<CTowerRing>(this);
+    //ringTower->setCoordinates(600, 300);
+    //this->Add(ringTower);
 
 }
 

@@ -113,9 +113,6 @@ private:
     /// Game area height in virtual pixels
     const static int Height = 1024;
 
-	/// Pointer to graphics for Draw
-	Gdiplus::Graphics* mGraphics;
-
 	/// Pointer to the first tile in the road
 	CTileRoad* mStart;
 };

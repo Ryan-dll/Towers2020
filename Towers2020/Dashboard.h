@@ -26,7 +26,7 @@ public:
 	 * CItem constructor
 	 * \param game Pointer to the game which we belong
 	 */
-	CDashboard(CGame* game) { mGame = game; }
+	CDashboard(CGame* game);
 
 	void Draw(Gdiplus::Graphics* graphics);
 	void setScore(int newScore);
@@ -35,5 +35,6 @@ public:
 private:
 	/// Pointer to the Game we belong to
 	CGame* mGame;
+
 };
 

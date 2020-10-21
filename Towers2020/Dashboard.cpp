@@ -19,14 +19,31 @@ int score = 0;
 /// Whether the level has started
 bool levelStarted = false;
 
+/// Pointer to image for TowerEight
+shared_ptr<Bitmap> towerEight;
+
+/// Pointer to image for TomerBomb
+shared_ptr<Bitmap> towerBomb;
+
+/// Pointer to image for Go Button
+shared_ptr<Bitmap> goBtn;
+
+
+CDashboard::CDashboard(CGame* game)
+{
+    mGame = game;
+
+    towerEight = mGame->GetImage(L"tower8.png");
+    towerBomb = mGame->GetImage(L"tower-bomb.png");
+    goBtn = mGame->GetImage(L"button-go.png");
+}
+
 /**
  * Draw the dashboard
  * \param graphics Pointer to the graphics context
  */
 void CDashboard::Draw(Graphics* graphics)
 {
-    //Pen pen(Color(0, 128, 0), 3);
-    //graphics->DrawRectangle(&pen, 1040, 0, 100, 1040);
 
     SolidBrush background(Color(120, 120, 120));
     SolidBrush text(Color(255, 255, 255));
@@ -35,13 +52,13 @@ void CDashboard::Draw(Graphics* graphics)
     Gdiplus::Font font(&fontFamily, 24);
 
     // Background
-    graphics->FillRectangle(&background, 1040, 0, 400, 1040);
+    graphics->FillRectangle(&background, 1024, 0, 200, 1024);
 
     // "Score"
     graphics->DrawString(L"Score",  // String to draw
         -1,         // String length, -1 so it figures it out on its own
         &font,      // The font to use
-        PointF(1040, 20),   // Where to draw (top left corner)
+        PointF(1024, 20),   // Where to draw (top left corner)
         &text);    // The brush to draw the text with
 
     // Score number
@@ -50,25 +67,25 @@ void CDashboard::Draw(Graphics* graphics)
     graphics->DrawString(score_wchar,  // String to draw
         -1,         // String length, -1 so it figures it out on its own
         &font,      // The font to use
-        PointF(1040, 120),   // Where to draw (top left corner)
+        PointF(1024, 120),   // Where to draw (top left corner)
         &text);    // The brush to draw the text with
 
     // 8 tower
-    graphics->DrawImage(mGame->GetImage(L"tower8.png").get(),
-        1190, 300,
+    graphics->DrawImage(towerEight.get(),
+        1074, 300,
         100, 100);
 
     // Bomb tower
-    graphics->DrawImage(mGame->GetImage(L"tower-bomb.png").get(),
-        1190, 500,
+    graphics->DrawImage(towerBomb.get(),
+        1074, 500,
         100, 100);
 
     // Go button (only shows if level isn't started)
     if (!levelStarted)
     {
-        graphics->DrawImage(mGame->GetImage(L"button-go.png").get(),
-            1140, 800,
-            200, 100);
+        graphics->DrawImage(goBtn.get(),
+            1034, 800,
+            180, 90);
     }
 }
 
