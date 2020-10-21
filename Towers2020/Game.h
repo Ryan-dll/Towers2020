@@ -70,6 +70,12 @@ public:
 	/// Return pointer to item of mAllGameItems at given index
 	std::shared_ptr<CItem> GetItem(int index);
 
+	/**
+	* Get game score
+	* \return score of the game
+	*/
+	int getScore() { return mScore; };
+
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;

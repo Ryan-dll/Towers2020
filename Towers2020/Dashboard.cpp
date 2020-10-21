@@ -13,9 +13,6 @@
 using namespace std;
 using namespace Gdiplus;
 
-/// Score of the game
-int score = 0;
-
 /// Whether the level has started
 bool levelStarted = false;
 
@@ -62,7 +59,7 @@ void CDashboard::Draw(Graphics* graphics)
         &text);    // The brush to draw the text with
 
     // Score number
-    const wstring score_wstr = to_wstring(score);
+    const wstring score_wstr = to_wstring(mGame->getScore());
     const WCHAR* score_wchar = score_wstr.c_str();
     graphics->DrawString(score_wchar,  // String to draw
         -1,         // String length, -1 so it figures it out on its own
