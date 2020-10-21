@@ -59,14 +59,6 @@ public:
 	///  \param item to be loaded up
 	void LoadToFront(std::shared_ptr<CItem> item);
 
-	/// Setter for graphics to the pointer in Childview
-	/// \param graphics pointer from childview
-	void SetGraphics(Gdiplus::Graphics* graphics) { mGraphics = graphics; }
-
-	/// Setter for graphics to the pointer in Childview
-	/// \return graphics pointer from childview
-	Gdiplus::Graphics* GetGraphics() { return mGraphics; }
-
 	/// Iterate through the field to place all the roads
 	void SetupPath();
 

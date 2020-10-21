@@ -52,6 +52,10 @@ public:
 	/// Resets Projectile Position and Disables it
 	void ResetDart();
 
+	/** Accept a visitor
+	 * \param visitor The visitor we accept */
+	virtual void Accept(CItemVisitor* visitor) {};
+
 protected:
 	/// Speed of projectile
 	double mSpeed = 100;

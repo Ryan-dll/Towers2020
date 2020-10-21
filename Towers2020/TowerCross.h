@@ -32,7 +32,7 @@ public:
 	CTowerCross(CGame* game);
 
 	/// Accepts the Tower visitor
-	virtual void Accept(CTowerVisitor* visitor);
+	virtual void Accept(CItemVisitor* visitor);
 
 	/// Overriden Fire Tower Function
 	virtual void Fire() override;

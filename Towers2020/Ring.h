@@ -66,7 +66,7 @@ public:
 
 private:
 	/// Current diameter of the ring
-	double mDiameter = 20;
+	int mDiameter = 20;
 
 	/// Initial diameter of the ring (equal to radius * 2)
 	double mDiameterInitial = 20;
