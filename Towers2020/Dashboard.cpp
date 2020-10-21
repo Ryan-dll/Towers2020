@@ -19,16 +19,31 @@ int score = 0;
 /// Whether the level has started
 bool levelStarted = false;
 
+/// Pointer to image for TowerEight
+shared_ptr<Bitmap> towerEight;
+
+/// Pointer to image for TomerBomb
+shared_ptr<Bitmap> towerBomb;
+
+/// Pointer to image for Go Button
+shared_ptr<Bitmap> goBtn;
+
+
+CDashboard::CDashboard(CGame* game)
+{
+    mGame = game;
+
+    towerEight = mGame->GetImage(L"tower8.png");
+    towerBomb = mGame->GetImage(L"tower-bomb.png");
+    goBtn = mGame->GetImage(L"button-go.png");
+}
+
 /**
  * Draw the dashboard
  * \param graphics Pointer to the graphics context
  */
 void CDashboard::Draw(Graphics* graphics)
 {
-
-    auto towerEight = mGame->GetImage(L"tower8.png");
-    auto towerBomb = mGame->GetImage(L"tower-bomb.png");
-    auto goBtn = mGame->GetImage(L"button-go.png");
 
     SolidBrush background(Color(120, 120, 120));
     SolidBrush text(Color(255, 255, 255));
