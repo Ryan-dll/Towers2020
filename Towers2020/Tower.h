@@ -44,8 +44,6 @@ public:
     virtual void Accept(CItemVisitor *visitor) = 0;
 
 protected:
-	/// Time in between firing rounds
-	double mReloadTime = 10;
 
 	/// List of projectile pointers in tower
 	std::vector < std::shared_ptr<CProjectile> > mProjectiles;

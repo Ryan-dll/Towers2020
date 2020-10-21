@@ -25,8 +25,10 @@ bool levelStarted = false;
  */
 void CDashboard::Draw(Graphics* graphics)
 {
-    //Pen pen(Color(0, 128, 0), 3);
-    //graphics->DrawRectangle(&pen, 1040, 0, 100, 1040);
+
+    auto towerEight = mGame->GetImage(L"tower8.png");
+    auto towerBomb = mGame->GetImage(L"tower-bomb.png");
+    auto goBtn = mGame->GetImage(L"button-go.png");
 
     SolidBrush background(Color(120, 120, 120));
     SolidBrush text(Color(255, 255, 255));
@@ -54,19 +56,19 @@ void CDashboard::Draw(Graphics* graphics)
         &text);    // The brush to draw the text with
 
     // 8 tower
-    graphics->DrawImage(mGame->GetImage(L"tower8.png").get(),
+    graphics->DrawImage(towerEight.get(),
         1074, 300,
         100, 100);
 
     // Bomb tower
-    graphics->DrawImage(mGame->GetImage(L"tower-bomb.png").get(),
+    graphics->DrawImage(towerBomb.get(),
         1074, 500,
         100, 100);
 
     // Go button (only shows if level isn't started)
     if (!levelStarted)
     {
-        graphics->DrawImage(mGame->GetImage(L"button-go.png").get(),
+        graphics->DrawImage(goBtn.get(),
             1034, 800,
             180, 90);
     }

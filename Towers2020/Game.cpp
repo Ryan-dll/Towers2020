@@ -19,6 +19,8 @@
 #include <iostream>
 #include <map>
 #include "Dashboard.h"
+#include "Ring.h"
+#include "TowerRing.h"
 
 using namespace std;
 using namespace xmlnode;
@@ -38,9 +40,19 @@ CGame::CGame()
     LoadImages();
     dashboard = make_unique<CDashboard>(this);
     
-    auto testTower = make_shared<CTowerEight>(this);
-    testTower->setCoordinates(200, 200);
+    //auto testTower = make_shared<CTowerEight>(this);
+    //testTower->setCoordinates(200, 200);
     //this->Add(testTower);
+
+    // Test adding ring
+    //auto ring = make_shared<CRing>(this);
+    //ring->setCoordinates(600, 600);
+    //this->Add(ring);
+
+    // Test adding ring Tower
+    //auto ringTower = make_shared<CTowerRing>(this);
+    //ringTower->setCoordinates(600, 300);
+    //this->Add(ringTower);
 
 }
 

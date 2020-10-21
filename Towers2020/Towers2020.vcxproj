@@ -190,6 +190,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ItemVisitor.h" />
+    <ClInclude Include="Ring.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileHouse.h" />
     <ClInclude Include="Item.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="TowerEight.h" />
+    <ClInclude Include="TowerRing.h" />
     <ClInclude Include="Towers2020.h" />
     <ClInclude Include="TowerVisitor.h" />
     <ClInclude Include="TileTrees.h" />
@@ -213,6 +215,7 @@
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="ItemVisitor.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Ring.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -228,6 +231,7 @@
     </ClCompile>
     <ClCompile Include="TileRoad.cpp" />
     <ClCompile Include="TowerEight.cpp" />
+    <ClCompile Include="TowerRing.cpp" />
     <ClCompile Include="Towers2020.cpp" />
     <ClCompile Include="TowerVisitor.cpp" />
     <ClCompile Include="TileTrees.cpp" />

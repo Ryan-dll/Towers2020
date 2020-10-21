@@ -33,13 +33,13 @@ public:
      * Setter for X position
 	 * \param xPos desired X position
      */
-	void setX(int xPos) { mX = xPos; }
+	virtual void setX(int xPos) { mX = xPos; }
 
     /**
      * Setter for Y position
 	 * \param yPos desired Y position
      */
-	void setY(int yPos) { mY = yPos; }
+	virtual void setY(int yPos) { mY = yPos; }
 
 	/// Load item from xml
 	void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
@@ -67,7 +67,7 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	void setCoordinates(int yPos, int xPos) { mX = xPos; mY = yPos; }
+	virtual void setCoordinates(int yPos, int xPos) { mX = xPos; mY = yPos; }
 	
 	/**  Test this item to see if it has been clicked on
 	* \param x X location on the item to test
