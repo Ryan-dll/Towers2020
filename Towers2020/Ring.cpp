@@ -25,8 +25,8 @@ void CRing::Update(double elapsed)
 		if (mDiameter < mDiameterMax)
 		{
 			mDiameter += elapsed * mFireRate;
-			mX -= elapsed * mFireRate/2.45;
-			mY -= elapsed * mFireRate/2.45;
+			mX -= elapsed * mFireRate/2.35;
+			mY -= elapsed * mFireRate/2.35;
 		}
 		else {
 			mDiameter = mDiameterInitial;

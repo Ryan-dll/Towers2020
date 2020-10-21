@@ -11,6 +11,9 @@
 #include "ItemVisitor.h"
 #include "Balloon.h"
 
+class CBalloon;
+class CItemVisitor;
+
  /**
  * CRoad class
  */

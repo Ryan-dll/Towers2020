@@ -10,7 +10,7 @@
 #include "XmlNode.h"
 #include "Game.h"
 
-class CGame;
+//class CGame;
 class CItemVisitor;
 
  /**

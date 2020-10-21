@@ -32,9 +32,9 @@ CTowerCross::CTowerCross(CGame* game) : CTowerProjectile(game)
  * Accept function for visitor
  * \param visitor Pointer to the visitor
  */
-void CTowerCross::Accept(CTowerVisitor* visitor)
+void CTowerCross::Accept(CItemVisitor* visitor)
 {
-	visitor->VisitTowerCross(this);
+	//visitor->VisitTowerCross(this);
 }
 
 void CTowerCross::Fire()
