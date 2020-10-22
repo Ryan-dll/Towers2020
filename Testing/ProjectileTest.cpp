@@ -33,7 +33,7 @@ namespace Testing
 		}
 
 
-		TEST_METHOD(DartProjectileTest)
+		TEST_METHOD(DartAngleTest)
 		{
 			CGame game;
 
@@ -55,6 +55,25 @@ namespace Testing
 			Assert::IsTrue(testDart1->GetAngle() == 10);
 
 			Assert::IsTrue(testDart1->GetActive() == false);
+		}
+
+
+		TEST_METHOD(DartResetTest)
+		{
+			CGame game;
+
+			auto testTower1 = make_shared<CTowerEight>(&game);
+			testTower1->setCoordinates(100, 100);
+
+			auto testDart1 = make_shared<CProjectile>(&game);
+			testDart1->setCoordinates(100, 100);
+			testDart1->SetOrigin(100, 100);
+
+			game.Add(testTower1);
+			game.Add(testDart1);
+
+			testDart1->SetAngle(10);
+
 
 			testDart1->ResetDart();
 			Assert::IsTrue(testDart1->GetActive() == false);
