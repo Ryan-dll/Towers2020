@@ -81,7 +81,7 @@ namespace Testing
 
 			Assert::IsTrue(testTower2->GetX() == 200);
 			Assert::IsTrue(testTower2->GetY() == 200);
-
+		
 		}
 	};
 }

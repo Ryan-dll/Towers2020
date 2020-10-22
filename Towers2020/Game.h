@@ -76,6 +76,8 @@ public:
 	*/
 	int getScore() { return mScore; };
 
+	void SetStart(int x, int y) { mStartX = x; mStartY = y; }
+
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;

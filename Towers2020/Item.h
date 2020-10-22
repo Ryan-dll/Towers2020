@@ -105,6 +105,8 @@ public:
 	*/
 	int GetYGrid() { return mYGrid; };
 
+	void SetGrid(int xGrid, int yGrid);
+
 protected:
 
 	/// X position of item

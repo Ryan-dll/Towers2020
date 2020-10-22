@@ -29,7 +29,7 @@
     <ClCompile Include="ProjectileTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameTest.cpp">
+    <ClCompile Include="RoadTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

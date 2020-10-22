@@ -97,3 +97,9 @@ double CItem::Distance(std::shared_ptr<CItem> other)
     // Determine how far away we are
     return sqrt(dx * dx + dy * dy);
 }
+
+void CItem::SetGrid( int xGrid, int yGrid) 
+{
+    mXGrid = xGrid; 
+    mYGrid = yGrid;
+}

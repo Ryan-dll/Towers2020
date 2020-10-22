@@ -191,7 +191,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="GameTest.cpp">
+    <ClCompile Include="RoadTest.cpp">
       <SubType>
       </SubType>
     </ClCompile>

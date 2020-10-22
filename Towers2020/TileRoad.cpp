@@ -22,7 +22,7 @@ using namespace std;
 CTileRoad::CTileRoad(CGame * game, std::wstring image, std::wstring type) : CTile(game)
 {
 	mType = type;
-	CItem::SetImage(image);
+	//CItem::SetImage(image);
 }
 
 /// Handle updates for animation

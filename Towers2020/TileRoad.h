@@ -73,6 +73,8 @@ public:
      */
     void Place(std::shared_ptr<CBalloon> balloon);
 
+    CTileRoad* GetNext() { return mNext; }
+
 protected:
 
     /// Type of road
