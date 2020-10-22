@@ -33,7 +33,7 @@ public:
 
 	/// Keeps the tower firing
 	/// \param elapsed elapsed time chunk
-	void Update(double elapsed);
+	virtual void Update(double elapsed);
 
     /** Accept a visitor 
      * \param visitor The visitor we accept */

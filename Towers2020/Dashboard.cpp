@@ -31,8 +31,11 @@ CDashboard::CDashboard(CGame* game)
     mGame = game;
 
     towerEight = mGame->GetImage(L"tower8.png");
+    mGame->AddDashImage(towerEight);
     towerBomb = mGame->GetImage(L"tower-bomb.png");
+    mGame->AddDashImage(towerBomb);
     goBtn = mGame->GetImage(L"button-go.png");
+    mGame->AddDashImage(goBtn);
 }
 
 /**

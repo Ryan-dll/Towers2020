@@ -222,6 +222,36 @@ void CGame::OnLButtonDown(int x, int y)
 {
     double oX = (x - mXOffset) / mScale;
     double oY = (y - mYOffset) / mScale;
+    mGrabbedItem = DashHitTest(oX, oY);
+
+}
+
+/**
+* Handle a click on the game area
+* \param nFlags Flags set in Childview
+* \param x X location clicked on
+* \param y Y location clicked on
+*/
+void CGame::OnMouseMove(UINT nFlags, int x, int y)
+{
+    double oX = ((x -50 - mXOffset) / mScale);
+    double oY = ((y - 50 - mYOffset) / mScale);
+    // See if an item is currently being moved by the mouse
+    if (mGrabbedItem != nullptr)
+    {
+        // If an item is being moved, we only continue to 
+        // move it while the left button is down.
+        if (nFlags & MK_LBUTTON)
+        {
+            mGrabbedItem->setCoordinates(oX, oY);
+        }
+        else
+        {
+            // When the left button is released, we release the
+            // item.
+            mGrabbedItem = nullptr;
+        }
+    }
 }
 
 /**
@@ -244,6 +274,15 @@ void CGame::Update(double elapsed)
 void CGame::Add(std::shared_ptr<CItem> item)
 {
     mAllGameItems.push_back(item);
+}
+
+/**
+* Update objects in the playing area
+* \param image Item to add to the collection
+*/
+void CGame::AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image)
+{
+    mAllDashboardImages.push_back(image);
 }
 
 
@@ -315,6 +354,34 @@ std::shared_ptr<CItem> CGame::HitTest(int x, int y)
         }
     }
 
+    return nullptr;
+}
+/**
+* Returns a pointer to a new tower if clicked
+* \param x Coordinate
+* \param y Coordinate
+* \return Shared pointer to new tower
+*/
+std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
+{
+    double wid = 100;
+    double hit = 100;
+
+    for (auto i = mAllDashboardImages.rbegin(); i != mAllDashboardImages.rend(); i++)
+    {
+        // Test for TowerEight
+        double testX = x - 1074.0 + wid / 2;
+        double testY = y - 300.0 + hit / 2;
+
+        if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+        {
+            std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
+            newTower->setCoordinates(300, 200);
+            newTower->ArmTower();
+            this->Add(newTower);
+            return newTower;
+        }
+    }
     return nullptr;
 }
 
