@@ -24,7 +24,7 @@ namespace Testing
 		{
 			// This is an empty test just to ensure the system is working
 			CGame testGame;
-			
+//			CTileRoad road1(testGame, L"", L"");
 		}
 	};
 }
