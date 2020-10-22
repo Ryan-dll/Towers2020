@@ -45,9 +45,15 @@ public:
 	/// Mouse click	
 	void OnLButtonDown(int x, int y);
 
+	/// Mouse mouse
+	void OnMouseMove(UINT nFlags, int x, int y);
+
 	/// Add item to the collection
 	void Add(std::shared_ptr<CItem> item);
 
+	/// Add image from Dashboard to the collection
+	void AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image);
+	
 	// Get Pointer to image object
 	std::shared_ptr<Gdiplus::Bitmap> GetImage(std::wstring filename);
 	
@@ -56,6 +62,9 @@ public:
 	
 	/// Hit Test for the item
 	std::shared_ptr<CItem> HitTest(int x, int y);
+
+	/// Hit Tesst for dash items
+	std::shared_ptr<CItem> DashHitTest(int x, int y);
 
 	/// Adds item to front of the list in display
 	///  \param item to be loaded up
@@ -82,11 +91,17 @@ private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
 	
+	/// All game items
+	std::vector<std::shared_ptr<Gdiplus::Bitmap>> mAllDashboardImages;
+
 	/// All the image files, used for any instance of an item
 	std::map<std::wstring, std::shared_ptr<Gdiplus::Bitmap>> mImageFiles;
 
 	/// Dashboard for the game
 	std::unique_ptr<CDashboard> dashboard;
+
+	/// Any item we are currently dragging
+	std::shared_ptr<CItem> mGrabbedItem;
 
 	/// Game score
 	int mScore = 0;
@@ -119,6 +134,9 @@ private:
     const static int Height = 1024;
 
 	/// Pointer to the first tile in the road
+
+	/// Current grabbed item
+	std::shared_ptr<CItem> mGrabbedItem;
 	CTileRoad* mStart = nullptr;
 
 	// Keeps track of when the balloons leave

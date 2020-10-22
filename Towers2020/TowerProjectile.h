@@ -33,6 +33,10 @@ public:
 	/// \return mProcketiles size
 	int GetListLen() { return static_cast<int>(mProjectiles.size()); }
 
+	/// Keeps the tower firing
+	/// \param elapsed elapsed time chunk
+	virtual void Update(double elapsed) override;
+
 protected:
 	/// List of projectile pointers in tower
 	std::vector < std::shared_ptr<CProjectile> > mProjectiles;

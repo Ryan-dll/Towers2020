@@ -36,3 +36,27 @@ void CTowerProjectile::ArmTower()
 		mGame->Add(needle);
 	}
 }
+
+/**
+ * Updates Tower in elapsed intervals
+ */
+void CTowerProjectile::Update(double elapsed)
+{
+	mTimeUntilFire -= elapsed;
+	if (mTimeUntilFire <= 0)
+	{
+		mTimeUntilFire += mTimeBetween;
+		Fire();
+	}
+	for (auto &i : mProjectiles)
+	{
+		double a = i->GetAngle();
+		double sn = sin(a);
+		double cs = cos(a);
+
+		double x = mX + mItemImage->GetWidth() / 2.0 + cs;
+		double y = mY + mItemImage->GetHeight() / 2.0 + sn * mT;
+
+		i->SetOrigin(x, y);
+	}
+}
