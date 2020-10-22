@@ -64,6 +64,18 @@ public:
 	*/
 	void setCoordinates(int yPos, int xPos) { this->mX = xPos; this->mY = yPos; mXInit = xPos; mYInit = yPos; }
 
+	/**
+	* Get current diameter of ring
+	* \return diameter of ring
+	*/
+	int getRingDiameter() { return mDiameter; };
+
+	/**
+	* Is ring active
+	* \return if active
+	*/
+	bool isActive() { return mActive; };
+
 private:
 	/// Current diameter of the ring
 	int mDiameter = 20;

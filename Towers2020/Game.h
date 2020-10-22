@@ -134,7 +134,6 @@ private:
     const static int Height = 1024;
 
 	/// Pointer to the first tile in the road
-
 	CTileRoad* mStart = nullptr;
 
 	// Keeps track of when the balloons leave
