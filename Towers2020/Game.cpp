@@ -49,10 +49,10 @@ CGame::CGame()
     //testTower->ArmTower();
     //this->Add(testTower);
 
-    //auto testTower2 = make_shared<CTowerCross>(this);
-    //testTower2->setCoordinates(300, 600);
-    //testTower2->ArmTower();
-    //this->Add(testTower2);
+    auto testTower2 = make_shared<CTowerCross>(this);
+    testTower2->setCoordinates(100, 200);
+    testTower2->ArmTower();
+    this->Add(testTower2);
 
     // Test adding ring
     //auto ring = make_shared<CRing>(this);
@@ -60,9 +60,9 @@ CGame::CGame()
     //this->Add(ring);
 
     // Test adding ring Tower
-    auto ringTower = make_shared<CTowerRing>(this);
-    ringTower->setCoordinates(600, 300);
-    this->Add(ringTower);
+    //auto ringTower = make_shared<CTowerRing>(this);
+    //ringTower->setCoordinates(600, 300);
+    //this->Add(ringTower);
 
 }
 
@@ -121,13 +121,6 @@ void CGame::Load(const std::wstring& filename)
 
     // This will eventually need to move to the load menu function
     SetupPath();
-    // Add test balloon
-    shared_ptr<CBalloon> balloon;
-    balloon = make_shared<CBalloon>(this);
-    //item->setX(100);
-    //item->setY(100);
-    Add(shared_ptr<CItem>(balloon));
-    mStart->GiveBalloon(balloon);
 }
 
 /**
@@ -211,9 +204,6 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     // Draw the dashboard
     dashboard->Draw(graphics);
 
-    // This will need to be called repeatedly
-    dashboard->setScore(mScore);
-
 }
 
 /**
@@ -235,9 +225,28 @@ void CGame::OnLButtonDown(int x, int y)
 */
 void CGame::Update(double elapsed)
 {
-    for (auto item : mAllGameItems)
+    if (true)
     {
-        item->Update(elapsed);
+        for (auto item : mAllGameItems)
+        {
+            item->Update(elapsed);
+        }
+        if (mStart != nullptr && mBalloonNum > 0)
+        {
+            mBalloonDispatchTime += elapsed;
+            if (mBalloonDispatchTime > 0.375)
+            {
+                mBalloonDispatchTime -= 0.375;
+                // Add test balloon
+                shared_ptr<CBalloon> balloon;
+                balloon = make_shared<CBalloon>(this);
+                balloon->setX(mStart->GetX() - 32);
+                balloon->setY(mStart->GetY());
+                Add(shared_ptr<CItem>(balloon));
+                mStart->GiveBalloon(balloon);
+                mBalloonNum--;
+            }
+        }
     }
 }
 
@@ -427,4 +436,14 @@ void CGame::Accept(CItemVisitor* visitor)
     {
         item->Accept(visitor);
     }
+}
+
+/**
+* Return pointer to item of mAllGameItems at given index
+* \param index Index of item to get
+* \return Item from vector
+*/
+std::shared_ptr<CItem> CGame::GetItem(int index)
+{
+    return mAllGameItems[index];
 }

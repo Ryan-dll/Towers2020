@@ -67,6 +67,15 @@ public:
 	/// Allow the visitor to visit all of the children
 	void Accept(CItemVisitor* visitor);
 
+	/// Return pointer to item of mAllGameItems at given index
+	std::shared_ptr<CItem> GetItem(int index);
+
+	/**
+	* Get game score
+	* \return score of the game
+	*/
+	int getScore() { return mScore; };
+
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
@@ -111,6 +120,12 @@ private:
     const static int Height = 1024;
 
 	/// Pointer to the first tile in the road
-	CTileRoad* mStart;
+	CTileRoad* mStart = nullptr;
+
+	// Keeps track of when the balloons leave
+	double mBalloonDispatchTime = 0;
+	
+	// Number of balloons to send per level
+	int mBalloonNum = 10;
 };
 

@@ -29,6 +29,10 @@ public:
 	/// Arms the tower with X number of projectiles
 	virtual void ArmTower();
 
+	/// Getter for length of mProjectiles
+	/// \return mProcketiles size
+	int GetListLen() { return static_cast<int>(mProjectiles.size()); }
+
 protected:
 	/// List of projectile pointers in tower
 	std::vector < std::shared_ptr<CProjectile> > mProjectiles;
