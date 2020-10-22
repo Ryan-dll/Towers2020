@@ -98,6 +98,9 @@ private:
 	/// Dashboard for the game
 	std::unique_ptr<CDashboard> dashboard;
 
+	/// Any item we are currently dragging
+	std::shared_ptr<CItem> mGrabbedItem;
+
 	/// Game score
 	int mScore = 0;
 
@@ -129,9 +132,15 @@ private:
     const static int Height = 1024;
 
 	/// Pointer to the first tile in the road
-	CTileRoad* mStart;
 
 	/// Current grabbed item
 	std::shared_ptr<CItem> mGrabbedItem;
+	CTileRoad* mStart = nullptr;
+
+	// Keeps track of when the balloons leave
+	double mBalloonDispatchTime = 0;
+	
+	// Number of balloons to send per level
+	int mBalloonNum = 10;
 };
 

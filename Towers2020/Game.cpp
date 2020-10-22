@@ -121,13 +121,6 @@ void CGame::Load(const std::wstring& filename)
 
     // This will eventually need to move to the load menu function
     SetupPath();
-    // Add test balloon
-    shared_ptr<CBalloon> balloon;
-    balloon = make_shared<CBalloon>(this);
-    //item->setX(100);
-    //item->setY(100);
-    Add(shared_ptr<CItem>(balloon));
-    mStart->GiveBalloon(balloon);
 }
 
 /**
@@ -260,9 +253,28 @@ void CGame::OnMouseMove(UINT nFlags, int x, int y)
 */
 void CGame::Update(double elapsed)
 {
-    for (auto item : mAllGameItems)
+    if (true)
     {
-        item->Update(elapsed);
+        for (auto item : mAllGameItems)
+        {
+            item->Update(elapsed);
+        }
+        if (mStart != nullptr && mBalloonNum > 0)
+        {
+            mBalloonDispatchTime += elapsed;
+            if (mBalloonDispatchTime > 0.375)
+            {
+                mBalloonDispatchTime -= 0.375;
+                // Add test balloon
+                shared_ptr<CBalloon> balloon;
+                balloon = make_shared<CBalloon>(this);
+                balloon->setX(mStart->GetX() - 32);
+                balloon->setY(mStart->GetY());
+                Add(shared_ptr<CItem>(balloon));
+                mStart->GiveBalloon(balloon);
+                mBalloonNum--;
+            }
+        }
     }
 }
 
