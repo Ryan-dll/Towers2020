@@ -183,6 +183,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TestBalloon.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TowerTest.cpp">
       <SubType>
       </SubType>

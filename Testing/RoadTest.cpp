@@ -17,7 +17,7 @@ using namespace std;
 
 namespace Testing
 {
-	TEST_CLASS(UnitTest1)
+	TEST_CLASS(TileRoadTest)
 	{
 	public:
 
@@ -33,10 +33,11 @@ namespace Testing
 		}
 		TEST_METHOD(TestSimpleGamePathing)
 		{
-			// This is an empty test just to ensure the system is working
 			CGame testGame;
 			testGame.SetStart(0, 0);
-			auto road1 = make_shared<CTileRoad>(&testGame, L"roadEW.png", L"WE");
+			wstring road = L"roadEW.png";
+			wstring type = L"EW";
+			auto road1 = make_shared<CTileRoad>(&testGame, road, type);
 			road1->SetGrid(0, 0);
 			testGame.Add(road1);
 			auto road2 = make_shared<CTileRoad>(&testGame, L"roadEW.png", L"WE");
@@ -60,19 +61,18 @@ namespace Testing
 		
 		TEST_METHOD(TestAdvancedGamePathing)
 		{
-			// This is an empty test just to ensure the system is working
 			CGame testGame;
-			testGame.SetStart(0, 0);
-			auto road1 = make_shared<CTileRoad>(&testGame, L"roadEW.png", L"WE");
-			road1->SetGrid(0, 0);
+			testGame.SetStart(0, 1);
+			auto road1 = make_shared<CTileRoad>(&testGame, L"roadNW.png", L"NW");
+			road1->SetGrid(0, 1);
 			testGame.Add(road1);
-			auto road2 = make_shared<CTileRoad>(&testGame, L"roadEW.png", L"WE");
-			road2->SetGrid(0, 1);
+			auto road2 = make_shared<CTileRoad>(&testGame, L"roadSE.png", L"SE");
+			road2->SetGrid(0, 0);
 			testGame.Add(road2);
-			auto road3 = make_shared<CTileRoad>(&testGame, L"roadEW.png", L"WE");
+			auto road3 = make_shared<CTileRoad>(&testGame, L"roadSW.png", L"SW");
 			road3->SetGrid(0, 2);
 			testGame.Add(road3);
-			auto road4 = make_shared<CTileRoad>(&testGame, L"roadEW.png", L"WE");
+			auto road4 = make_shared<CTileRoad>(&testGame, L"roadNS.png", L"NS");
 			road4->SetGrid(0, 3);
 			testGame.Add(road4);
 			

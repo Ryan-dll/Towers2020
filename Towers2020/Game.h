@@ -135,8 +135,6 @@ private:
 
 	/// Pointer to the first tile in the road
 
-	/// Current grabbed item
-	std::shared_ptr<CItem> mGrabbedItem;
 	CTileRoad* mStart = nullptr;
 
 	// Keeps track of when the balloons leave

@@ -75,6 +75,8 @@ public:
 
     CTileRoad* GetNext() { return mNext; }
 
+    int NumBalloons() { return mBalloons.size(); }
+
 protected:
 
     /// Type of road
