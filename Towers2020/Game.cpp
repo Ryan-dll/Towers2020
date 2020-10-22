@@ -227,8 +227,8 @@ void CGame::OnLButtonDown(int x, int y)
 */
 void CGame::OnMouseMove(UINT nFlags, int x, int y)
 {
-    double oX = ((x -50 - mXOffset) / mScale);
-    double oY = ((y - 50 - mYOffset) / mScale);
+    double oX = ((x - 25 - mXOffset) / mScale);
+    double oY = ((y - 25 - mYOffset) / mScale);
     // See if an item is currently being moved by the mouse
     if (mGrabbedItem != nullptr)
     {
@@ -376,24 +376,67 @@ std::shared_ptr<CItem> CGame::HitTest(int x, int y)
 */
 std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
 {
-    double wid = 150;
-    double hit = 150;
+    double wid = 100;
+    double hit = 100;
 
-    for (auto i = mAllDashboardImages.rbegin(); i != mAllDashboardImages.rend(); i++)
+    // Test for TowerEight
+    double testX = x - 1074.0 - 40 + wid / 2;
+    double testY = y - 200.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
-        // Test for TowerEight
-        double testX = x - 1074.0 + wid / 2;
-        double testY = y - 300.0 + hit / 2;
-
-        if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-        {
-            std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
-            newTower->setCoordinates(1050, 200);
-            newTower->ArmTower();
-            this->Add(newTower);
-            return newTower;
-        }
+        std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
+        newTower->setCoordinates(1050, 200);
+        newTower->ArmTower();
+        this->Add(newTower);
+        return newTower;
     }
+
+    // Test for TowerRing
+    testX = x - 1074.0 - 40 + wid / 2;
+    testY = y - 350.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        std::shared_ptr<CTowerRing> newTower = std::make_shared<CTowerRing>(this);
+        newTower->setCoordinates(1050, 200);
+        this->Add(newTower);
+        return newTower;
+    }
+
+    // Test for TowerCross
+    testX = x - 1074.0 - 40 + wid / 2;
+    testY = y - 500.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        std::shared_ptr<CTowerCross> newTower = std::make_shared<CTowerCross>(this);
+        newTower->setCoordinates(1050, 200);
+        newTower->ArmTower();
+        this->Add(newTower);
+        return newTower;
+    }
+
+    // Test for TowerBomb
+    testX = x - 1074.0 - 40 + wid / 2;
+    testY = y - 650.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        // Empty for now
+    }
+
+    // Test for Go Button
+    wid = 180;
+    hit = 90;
+    testX = x - 1034.0 - 40 + wid / 2;
+    testY = y - 800.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        // Empty for now
+    }
+
     return nullptr;
 }
 
