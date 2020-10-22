@@ -57,6 +57,30 @@ namespace Testing
 			Assert::IsTrue(testTower1->GetY() == 200);
 		}
 
+		TEST_METHOD(TowerRing)
+		{
+			CGame game;
+
+			auto testTower1 = make_shared<CTowerRing>(&game);
+			testTower1->setCoordinates(100, 100);
+
+			game.Add(testTower1);
+
+			Assert::IsTrue(testTower1->GetX() == 100);
+			Assert::IsTrue(testTower1->GetY() == 100);
+
+			Assert::IsFalse(testTower1->getRing()->isActive());
+
+			Assert::IsTrue(testTower1->getRing()->getRingDiameter() == 20);
+			testTower1->Fire();
+			Assert::IsTrue(testTower1->getRing()->isActive());
+			Assert::IsTrue(testTower1->getRing()->getRingDiameter() >= 20);
+
+			testTower1->setCoordinates(200, 200);
+			Assert::IsTrue(testTower1->GetX() == 200);
+			Assert::IsTrue(testTower1->GetY() == 200);
+		}
+
 		TEST_METHOD(TowerCross)
 		{
 			CGame game;

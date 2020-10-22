@@ -25,7 +25,7 @@ public:
 	/// \param game Game context
 	CTowerRing(CGame* game);
 
-	/// Fire projectiles out of towers.
+	/// Fire ring out of towers.
 	virtual void Fire();
 
 	/// Keeps the tower firing
@@ -55,6 +55,12 @@ public:
 	* \param xPos desired X position
 	*/
 	void setCoordinates(int yPos, int xPos) { mX = xPos; mY = yPos; ring->setX(xPos + 21); ring->setY(yPos + 21);}
+
+	/**
+	* Get ring
+	* \param the ring
+	*/
+	std::shared_ptr<CRing> getRing() { return ring; };
 
 protected:
 	/// Ring belonging to the tower
