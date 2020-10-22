@@ -41,6 +41,10 @@ public:
 	/// \return mCrossPattern Current status
 	bool GetCrossStatus() { return mCrossPattern; }
 
+	/// Override
+	/// \return True for towerCross
+	virtual bool IsTower() override { return false; }
+
 private:
 
 	/// Determines which darts fire

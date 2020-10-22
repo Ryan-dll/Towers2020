@@ -15,6 +15,7 @@ CTowerProjectile::CTowerProjectile(CGame* game) : CTower(game)
  */
 void CTowerProjectile::ArmTower()
 {
+	std::wstring image2 = L"special-dart.png";
 	int numOfProjectiles = 8;
 	for (double i = 1; i <= numOfProjectiles; i++)
 	{
@@ -31,6 +32,11 @@ void CTowerProjectile::ArmTower()
 
 		double newAngle = (i / 4.0) * pi;
 		needle->SetAngle(newAngle);
+		
+		if (IsTower() == false)
+		{
+			needle->SetImage(image2);
+		}
 
 		mProjectiles.push_back(needle);
 		mGame->Add(needle);

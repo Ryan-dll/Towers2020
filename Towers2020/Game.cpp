@@ -45,7 +45,7 @@ CGame::CGame()
     dashboard = make_unique<CDashboard>(this);
     
     //auto testTower = make_shared<CTowerEight>(this);
-    //testTower->setCoordinates(200, 200);
+    //testTower->setCoordinates(300, 200);
     //testTower->ArmTower();
     //this->Add(testTower);
 
@@ -312,7 +312,7 @@ void CGame::LoadImages()
         L"roadEW.png", L"roadEW.png", L"roadNE.png", L"roadNS.png",
         L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
         L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
-        L"trees2.png", L"trees3.png", L"trees4.png"
+        L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png", L"tower-cross.png"
     };
     
     for (wstring filename : mKeys)
@@ -376,8 +376,8 @@ std::shared_ptr<CItem> CGame::HitTest(int x, int y)
 */
 std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
 {
-    double wid = 100;
-    double hit = 100;
+    double wid = 150;
+    double hit = 150;
 
     for (auto i = mAllDashboardImages.rbegin(); i != mAllDashboardImages.rend(); i++)
     {
@@ -388,7 +388,7 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
         if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
         {
             std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
-            newTower->setCoordinates(300, 200);
+            newTower->setCoordinates(1050, 200);
             newTower->ArmTower();
             this->Add(newTower);
             return newTower;

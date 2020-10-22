@@ -42,6 +42,10 @@ public:
      * \param visitor The visitor we accept */
     virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTowerEight(this); }
 
+	/// Override
+	/// \return True for tower8
+	virtual bool IsTower() override { return true; }
+
 private:
 };
 

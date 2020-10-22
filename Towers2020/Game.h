@@ -85,6 +85,13 @@ public:
 	*/
 	int getScore() { return mScore; };
 
+	/**
+	* Get game score
+	* \param pixel The thing we're converting
+	* \return New virtual pixel
+	*/
+	double ConvertToVirtual(double pixel) { return (pixel - mXOffset) / mScale; }
+
 	void SetStart(int x, int y) { mStartX = x; mStartY = y; }
 
 private:

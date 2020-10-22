@@ -22,6 +22,12 @@ shared_ptr<Bitmap> towerEight;
 /// Pointer to image for TomerBomb
 shared_ptr<Bitmap> towerBomb;
 
+/// Pointer to image for TomerCross
+shared_ptr<Bitmap> towerCross;
+
+/// Pointer to image for TomerCross
+shared_ptr<Bitmap> towerRing;
+
 /// Pointer to image for Go Button
 shared_ptr<Bitmap> goBtn;
 
@@ -32,7 +38,11 @@ CDashboard::CDashboard(CGame* game)
 
     towerEight = mGame->GetImage(L"tower8.png");
     mGame->AddDashImage(towerEight);
+    towerCross = mGame->GetImage(L"tower-cross.png");
+    mGame->AddDashImage(towerCross);
     towerBomb = mGame->GetImage(L"tower-bomb.png");
+    mGame->AddDashImage(towerRing);
+    towerRing = mGame->GetImage(L"tower-rings.png");
     mGame->AddDashImage(towerBomb);
     goBtn = mGame->GetImage(L"button-go.png");
     mGame->AddDashImage(goBtn);
@@ -72,12 +82,22 @@ void CDashboard::Draw(Graphics* graphics)
 
     // 8 tower
     graphics->DrawImage(towerEight.get(),
-        1074, 300,
+        1074, 200,
+        100, 100);
+
+    // Ring tower
+    graphics->DrawImage(towerRing.get(),
+        1074, 350,
+        100, 100);
+
+    // Cross Tower
+    graphics->DrawImage(towerCross.get(),
+        1074, 500,
         100, 100);
 
     // Bomb tower
     graphics->DrawImage(towerBomb.get(),
-        1074, 500,
+        1074, 650,
         100, 100);
 
     // Go button (only shows if level isn't started)
