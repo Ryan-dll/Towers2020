@@ -39,6 +39,14 @@ public:
      * \param visitor The visitor we accept */
     virtual void Accept(CItemVisitor *visitor) = 0;
 
+	/// Used to calc distance between previous points
+	/// \return Difference in X coordinates
+	double XDifference() { return mX - mLastX; }
+
+	/// Used to calc distance between previous points
+	/// \return Difference in X coordinates
+	double YDifference() { return mY - mLastY; }
+
 protected:
 	/// Time it takes to reload a shot
 	double mTimeBetween = 5;
@@ -48,5 +56,11 @@ protected:
 
 	/// Distance from tower
 	double mT = 20;
+
+	/// Last location in X direction
+	double mLastX = 0;
+
+	/// Last location in Y direction
+	double mLastY = 0;
 };
 

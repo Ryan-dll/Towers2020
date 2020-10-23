@@ -17,7 +17,6 @@
  */
 CTower::CTower(CGame * game) : CItem(game)
 {
-	// Dont need this guy now, but maybe later...
 }
 
 /**

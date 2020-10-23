@@ -17,9 +17,11 @@
 #include "ItemVisitor.h"
 #include "Tile.h"
 #include "TileRoad.h"
+#include "TowerProjectile.h"
 
 class CItem;
 class CDashboard;
+class CTowerProjectile;
 
  /**
  * CGame class
@@ -50,6 +52,9 @@ public:
 
 	/// Add item to the collection
 	void Add(std::shared_ptr<CItem> item);
+
+	/// Add projectile tower to the collection
+	void AddProjTower(std::shared_ptr<CTowerProjectile> item);
 
 	/// Add image from Dashboard to the collection
 	void AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image);
@@ -97,6 +102,9 @@ public:
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
+
+	/// All Projectile towers
+	std::vector<std::shared_ptr<CTowerProjectile>> mAllProjectileTowers;
 	
 	/// All game items
 	std::vector<std::shared_ptr<Gdiplus::Bitmap>> mAllDashboardImages;
@@ -148,5 +156,9 @@ private:
 	
 	// Number of balloons to send per level
 	int mBalloonNum = 10;
+
+	// Has the game started yet
+	bool GameActive = false;
+
 };
 

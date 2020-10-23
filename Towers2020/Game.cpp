@@ -289,6 +289,15 @@ void CGame::Add(std::shared_ptr<CItem> item)
 }
 
 /**
+* Update list of towers holding darts
+* \param item Item to add to the collection
+*/
+void CGame::AddProjTower(std::shared_ptr<CTowerProjectile> item)
+{
+    mAllProjectileTowers.push_back(item);
+}
+
+/**
 * Update objects in the playing area
 * \param image Item to add to the collection
 */
@@ -387,8 +396,8 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
     {
         std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
         newTower->setCoordinates(1050, 200);
-        newTower->ArmTower();
         this->Add(newTower);
+        this->AddProjTower(newTower);
         return newTower;
     }
 
@@ -412,8 +421,8 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
     {
         std::shared_ptr<CTowerCross> newTower = std::make_shared<CTowerCross>(this);
         newTower->setCoordinates(1050, 200);
-        newTower->ArmTower();
         this->Add(newTower);
+        this->AddProjTower(newTower);
         return newTower;
     }
 
@@ -434,7 +443,12 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
 
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
-        // Empty for now
+        GameActive = true;
+        for (auto& i : mAllProjectileTowers)
+        {
+            i->ArmTower();
+        }
+        
     }
 
     return nullptr;

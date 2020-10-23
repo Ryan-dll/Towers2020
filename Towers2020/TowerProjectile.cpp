@@ -54,15 +54,29 @@ void CTowerProjectile::Update(double elapsed)
 		mTimeUntilFire += mTimeBetween;
 		Fire();
 	}
-	for (auto &i : mProjectiles)
-	{
-		double a = i->GetAngle();
-		double sn = sin(a);
-		double cs = cos(a);
 
-		double x = mX + mItemImage->GetWidth() / 2.0 + cs;
-		double y = mY + mItemImage->GetHeight() / 2.0 + sn * mT;
+	//for (auto &i : mProjectiles)
+	//{
+	//	double a = i->GetAngle();
+	//	double sn = sin(a);
+	//	double cs = cos(a);
 
-		i->SetOrigin(x, y);
-	}
+	//	double x = mX + mItemImage->GetWidth() / 2.0 + cs;
+	//	double y = mY + mItemImage->GetHeight() / 2.0 + sn * mT;
+
+	//	i->SetOrigin(x, y);
+	//}
+
+	//double newX = mX - mLastX;
+	//double newY = mY - mLastY;
+
+	//for (auto &i : mProjectiles)
+	//{
+	//	double x = i->GetX() + newX;
+	//	double y = i->GetY() + newY;
+	//	i->SetOrigin(x, y);
+	//}
+
+	//mLastX = mX;
+	//mLastY = mY;
 }
