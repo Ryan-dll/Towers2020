@@ -1,3 +1,11 @@
+/**
+ * \file TowerBomb.cpp
+ *
+ * \author Craig Smith
+ *
+ * Class that implements the TowerBomb
+ */
+
 #include "pch.h"
 #include "TowerBomb.h"
 #include "Game.h"

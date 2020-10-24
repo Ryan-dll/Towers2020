@@ -1,3 +1,11 @@
+/**
+ * \file Bomb.cpp
+ *
+ * \author Craig Smith
+ *
+ * Class that implements the Bomb
+ */
+
 #include "pch.h"
 #include "Bomb.h"
 

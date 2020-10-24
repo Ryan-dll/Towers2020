@@ -61,7 +61,7 @@ public:
 
 	/**
 	* Get ring
-	* \param the ring
+	* \return the ring
 	*/
 	std::shared_ptr<CRing> getRing() { return ring; };
 

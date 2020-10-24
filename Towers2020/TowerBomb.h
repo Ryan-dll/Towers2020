@@ -1,7 +1,16 @@
+/**
+ * \file TowerBomb.h
+ *
+ * \author Craig Smith
+ *
+ * Class that implements the TowerBomb
+ */
+
 #pragma once
 #include "Tower.h"
 #include "Bomb.h"
 
+/// Class CTowerBomb
 class CTowerBomb :
     public CTower
 {
@@ -51,7 +60,7 @@ public:
 
 	/**
 	* Get bomb
-	* \param the bomb
+	* \return the bomb
 	*/
 	std::shared_ptr<CBomb> getBomb() { return bomb; };
 

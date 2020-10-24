@@ -1,5 +1,15 @@
+/**
+ * \file Bomb.h
+ *
+ * \author Craig Smith
+ *
+ * Class that implements the Bomb
+ */
+
 #pragma once
 #include "Item.h"
+
+ /// Class CBomb
 class CBomb :
     public CItem
 {
