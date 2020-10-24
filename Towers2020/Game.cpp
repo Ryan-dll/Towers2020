@@ -60,9 +60,10 @@ CGame::CGame()
     //this->Add(ring);
 
     // Test adding ring Tower
-    //auto ringTower = make_shared<CTowerRing>(this);
-    //ringTower->setCoordinates(600, 300);
-    //this->Add(ringTower);
+    auto ringTower = make_shared<CTowerRing>(this);
+    ringTower->setCoordinates(500, 600);
+    this->Add(ringTower);
+    ringTower->ArmTower();
 
 }
 

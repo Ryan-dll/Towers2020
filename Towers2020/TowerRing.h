@@ -32,6 +32,9 @@ public:
 	/// \param elapsed elapsed time chunk
 	void Update(double elapsed);
 
+	/// Arms the tower
+	void ArmTower();
+
 	/** Accept a visitor
 	 * \param visitor The visitor we accept */
 	virtual void Accept(CItemVisitor* visitor) {};
