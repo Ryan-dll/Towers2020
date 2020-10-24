@@ -19,7 +19,6 @@ CTowerBomb::CTowerBomb(CGame* game) : CTower(game)
 	bomb = make_unique<CBomb>(game);
 	mGame->Add(bomb);
 	mGame->IncreaseBombCount();
-	game->IncreaseBombCount();
 	mTimeUntilFire = game->getBombCount() * 3;
 
 
@@ -39,7 +38,6 @@ void CTowerBomb::Update(double elapsed)
 	if (mTimeUntilFire <= 0 && !bombUsed)
 	{
 		Fire();
-		mGame->ClearBombs();
 		bombUsed = true;
 	}
 }

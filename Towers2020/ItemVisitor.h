@@ -56,6 +56,6 @@ public:
 
 	/** Visit a CTowerBomb object 
      * \param towerbomb The towerbomb we are visiting */
-    virtual void VisitTowerBomb(CTowerBomb *towerbomb) {}
+    //virtual void VisitTowerBomb(CTowerBomb *towerbomb) {}
 };
 
