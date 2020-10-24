@@ -81,6 +81,8 @@ public:
 	/// Allow the visitor to visit all of the children
 	void Accept(CItemVisitor* visitor);
 
+	void ClearBombs();
+
 	/// Return pointer to item of mAllGameItems at given index
 	std::shared_ptr<CItem> GetItem(int index);
 
@@ -98,6 +100,17 @@ public:
 	double ConvertToVirtual(double pixel) { return (pixel - mXOffset) / mScale; }
 
 	void SetStart(int x, int y) { mStartX = x; mStartY = y; }
+
+	/**
+	* Increase number of bombs on level by 1
+	*/
+	void IncreaseBombCount() { bombCount++; };
+
+	/**
+	* Get number of bombs on level
+	* \returm number of bombs
+	*/
+	int getBombCount() { return bombCount; };
 
 private:
 	/// All game items
@@ -159,6 +172,9 @@ private:
 
 	// Has the game started yet
 	bool GameActive = false;
+
+	// Number of bombs on the level
+	int bombCount = 0;
 
 };
 

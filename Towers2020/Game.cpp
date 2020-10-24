@@ -25,6 +25,8 @@
 #include "Ring.h"
 #include "TowerRing.h"
 #include "TowerCross.h"
+#include "TowerBomb.h"
+#include "BombTowerRemover.h"
 
 using namespace std;
 using namespace xmlnode;
@@ -64,6 +66,24 @@ CGame::CGame()
     ringTower->setCoordinates(500, 600);
     this->Add(ringTower);
     ringTower->ArmTower();
+
+    //// Test adding bomb Tower
+    //auto bombTower = make_shared<CTowerBomb>(this);
+    //bombTower->setCoordinates(200, 200);
+    //this->Add(bombTower);
+    //bombTower->ArmTower();
+
+    //// Test adding bomb Tower 2
+    //auto bombTower2 = make_shared<CTowerBomb>(this);
+    //bombTower2->setCoordinates(200, 400);
+    //this->Add(bombTower2);
+    //bombTower2->ArmTower();
+
+    //// Test adding bomb Tower 3
+    //auto bombTower3 = make_shared<CTowerBomb>(this);
+    //bombTower3->setCoordinates(200, 600);
+    //this->Add(bombTower3);
+    //bombTower3->ArmTower();
 
 }
 
@@ -558,6 +578,31 @@ void CGame::Accept(CItemVisitor* visitor)
     for (auto item : mAllGameItems)
     {
         item->Accept(visitor);
+    }
+}
+
+/**
+* Accept the visitor so it can visit the items
+* \param visitor The visitor we are using to visit
+*/
+void CGame::ClearBombs()
+{
+    vector<int> toDelete;
+    
+    for (int i = 0; i < mAllGameItems.size(); i++)
+    {
+        CBombTowerRemover visitor;
+        shared_ptr<CItem> item = mAllGameItems[i];
+        item->Accept(&visitor);
+        if (visitor.toDelete)
+        {
+            toDelete.push_back(i);
+        }
+    }
+
+    for (int i : toDelete)
+    {
+        mAllGameItems.erase(mAllGameItems.begin() + i);
     }
 }
 

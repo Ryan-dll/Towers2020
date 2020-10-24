@@ -10,6 +10,7 @@
 
 class CTowerEight;
 class CTowerCross;
+class CTowerBomb;
 
 /**
 * CTowerVisitor class
@@ -25,4 +26,7 @@ public:
 	/// Visits TowerCross
 	/// \param tower pointer to TowerCross tower
 	virtual void VisitTowerCross(CTowerCross* tower) {}
+	/// Visits TowerCross
+	/// \param tower pointer to TowerCross tower
+	virtual void VisitTowerBomb(CTowerBomb* tower) {}
 };
