@@ -34,6 +34,24 @@ void CItem::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
 }
 
 /**
+ * Save the arrtibutes to an item node
+ * 
+ * \param node The node we are going to be a child of
+ */
+std::shared_ptr<xmlnode::CXmlNode> 
+CItem::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
+{
+    auto itemNode = node->AddChild(L"tile");
+
+    itemNode->SetAttribute(L"id", mId);
+    itemNode->SetAttribute(L"x", mX);
+    itemNode->SetAttribute(L"y", mY);
+
+    return itemNode;
+    return std::shared_ptr<xmlnode::CXmlNode>();
+}
+
+/**
  * Set the image file to draw
  * \param file The base filename. Blank files are allowed
  */

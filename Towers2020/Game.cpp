@@ -99,10 +99,9 @@ void CGame::Load(const std::wstring& filename)
         // Open the document to read
         shared_ptr<CXmlNode> root = CXmlNode::OpenDocument(filename);
 
-        // Clear the current level?
+        // Clear the current level
         Clear();
 
-        
         // Get root info
         if (root->GetName() == L"level")
         {
@@ -222,6 +221,11 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
         i->Draw(graphics);
     }
 
+    for (auto i : mAllBalloons)
+    {
+        i->Draw(graphics);
+    }
+
     // Draw the dashboard
     dashboard->Draw(graphics);
 
@@ -274,7 +278,7 @@ void CGame::OnMouseMove(UINT nFlags, int x, int y)
 */
 void CGame::Update(double elapsed)
 {
-    if (true)
+    if (mGameActive)
     {
         for (auto item : mAllGameItems)
         {
@@ -291,7 +295,8 @@ void CGame::Update(double elapsed)
                 balloon = make_shared<CBalloon>(this);
                 balloon->setX(mStart->GetX() - 32);
                 balloon->setY(mStart->GetY());
-                Add(shared_ptr<CItem>(balloon));
+                AddBalloon(shared_ptr<CItem>(balloon));
+                //Add(shared_ptr<CItem>(balloon));
                 mStart->GiveBalloon(balloon);
                 mBalloonNum--;
             }
@@ -319,6 +324,15 @@ void CGame::AddTower(std::shared_ptr<CTower> item)
 }
 
 /**
+* Update list of balloon
+* \param item Item to add to the collection
+*/
+void CGame::AddBalloon(std::shared_ptr<CItem> item)
+{
+    mAllBalloons.push_back(item);
+}
+
+/**
 * Update objects in the playing area
 * \param image Item to add to the collection
 */
@@ -343,7 +357,7 @@ void CGame::LoadImages()
         L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
         L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
         L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png", L"tower-cross.png",
-        L"button-replay.png"
+        L"button-replay.png", L"button-stop.png"
     };
     
     for (wstring filename : mKeys)
@@ -462,7 +476,7 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
         return newTower;
     }
 
-    // Test for Go Button
+    // Test for Go and Stop Button
     wid = 180;
     hit = 90;
     testX = x - 1034.0 - 40 + wid / 2;
@@ -470,12 +484,33 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
 
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
-        mGameActive = true;
-        for (auto& i : mAllTowers)
+        if (mGameActive == false)
         {
-            i->ArmTower();
+            mGameActive = true;
+            for (auto& i : mAllTowers)
+            {
+                i->ArmTower();
+            }
         }
-        
+        else
+        {
+            mGameActive = false;
+        }
+    }
+
+    // Test for Replay Button
+    testX = x - 1034.0 - 40 + wid / 2;
+    testY = y - 900.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        if (mGameActive == true)
+        {
+            mGameActive = false;
+            ClearTower();
+            ClearBalloon();
+            mBalloonNum = 10;
+        }
     }
 
     return nullptr;
@@ -597,13 +632,30 @@ std::shared_ptr<CItem> CGame::GetItem(int index)
     return mAllGameItems[index];
 }
 
-
-/**
-*  Clear the game item data.
+/**  Save the game as a .tower XML file.
 *
-* Deletes all known items in the game.
+* Open an XML file and stream the city data to it.
+*
+* \param filename The filename of the file to save the city to
 */
-void CGame::Clear()
+void CGame::Save(const wstring& filename)
 {
-    mAllGameItems.clear();
+    //
+    // Create an XML document
+    //
+    auto root = CXmlNode::CreateDocument(L"level");
+
+    for (auto item : mAllGameItems)
+    {
+        item->XmlSave(root);
+    }
+
+    try
+    {
+        root->Save(filename);
+    }
+    catch (CXmlNode::Exception ex)
+    {
+        AfxMessageBox(ex.Message().c_str());
+    }
 }

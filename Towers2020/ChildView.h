@@ -5,6 +5,7 @@
 
 #pragma once
 #include "Game.h"
+#include "Message.h"
 
 /// Frame duration in milliseconds
 const int FrameDuration = 30;
@@ -34,6 +35,18 @@ private:
 	long long mLastTime = 0;
 	/// Rate the timer updates
 	double mTimeFreq = 0;
+
+	/// The in-game message
+	CMessage mMessage;
+	/// The level number
+	int mLevel = 1;
+	/// Indicator of whether draw start message
+	bool mLevelStart = false;
+	/// Indicator of whether displayed or not
+	bool mDisplayed = false;
+	/// The message timer
+	long long mDisplayTime = 0;
+
 // Operations
 public:
 
@@ -58,5 +71,9 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnLevelsLevel0();
+	afx_msg void OnLevelsLevel1();
+	afx_msg void OnLevelsLevel2();
+	afx_msg void OnFileSaveas();
 };
 

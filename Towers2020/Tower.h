@@ -50,6 +50,9 @@ public:
 	/// Arms the tower with X number of projectiles
 	virtual void ArmTower() {};
 
+	/// Save item to xml file
+	virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
 protected:
 	/// Time it takes to reload a shot
 	double mTimeBetween = 5;

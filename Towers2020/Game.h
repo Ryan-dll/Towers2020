@@ -35,6 +35,9 @@ public:
 	/// Load the level from an XML file	
 	void Load(const std::wstring& filename);
 
+	/// Save customized level to an XML file
+	void Save(const std::wstring& filename);
+
 	/// Handle each XML item
 	void XmlItem(const std::shared_ptr<xmlnode::CXmlNode>& node);
 	
@@ -55,6 +58,9 @@ public:
 
 	/// Add projectile tower to the collection
 	void AddTower(std::shared_ptr<CTower> item);
+
+	/// Add balloon to the collection
+	void AddBalloon(std::shared_ptr<CItem> item);
 
 	/// Add image from Dashboard to the collection
 	void AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image);
@@ -116,12 +122,48 @@ public:
 	*/
 	bool GetGameActive() { return mGameActive; }
 
+	/*
+	* Setter for gameactive
+	* \param status the status of the game
+	*/
+	void SetGameActive(bool status) { mGameActive = status; }
+
+	/**
+	*  Clear the game item data.
+	*
+	* Deletes all known items in the game.
+	*/
+	void Clear() { mAllGameItems.clear(); }
+
+	/**
+	*  Clear the tower data.
+	*
+	* Deletes all known towers in the game.
+	*/
+	void ClearTower() { mAllTowers.clear(); }
+
+	/**
+	*  Clear the balloon data.
+	*
+	* Deletes all known balloons in the game.
+	*/
+	void ClearBalloon() { mAllBalloons.clear(); }
+
+	/*
+	* Setter for number of balloon
+	* \param num the number of balloon
+	*/
+	void SetBalloonNum(int num) { mBalloonNum = num; }
+
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
 
 	/// All Projectile towers
 	std::vector<std::shared_ptr<CTower>> mAllTowers;
+
+	/// All balloons
+	std::vector<std::shared_ptr<CItem>> mAllBalloons;
 	
 	/// All game items
 	std::vector<std::shared_ptr<Gdiplus::Bitmap>> mAllDashboardImages;

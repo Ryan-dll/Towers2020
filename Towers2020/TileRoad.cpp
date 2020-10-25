@@ -116,3 +116,20 @@ void CTileRoad::Place(shared_ptr<CBalloon> balloon)
 		balloon->setY(y - 32);
 	}
 }
+
+/**
+ * Save TileRoad to an Xml node
+ *
+ * \param node The node we are going to be a child of
+ * \returns Allocated node
+ */
+std::shared_ptr<xmlnode::CXmlNode> CTileRoad::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
+{
+	auto itemNode = node->AddChild(L"road");
+
+	itemNode->SetAttribute(L"id", GetId());
+	itemNode->SetAttribute(L"x", GetX());
+	itemNode->SetAttribute(L"y", GetY());
+
+	return itemNode;
+}

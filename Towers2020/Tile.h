@@ -21,6 +21,9 @@ public:
 	/// Load item from xml
 	void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
+    /// Save item to xml file
+    virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
     /**
      * Return the X position in the grid
      * \returns X position in the grid
@@ -53,4 +56,5 @@ private:
 
     /// Image for house
     std::wstring mImage;
+    
 };

@@ -14,7 +14,7 @@ using namespace std;
 using namespace Gdiplus;
 
 /// Whether the level has started
-bool levelStarted = false;
+//bool levelStarted = false;
 
 /// Pointer to image for TowerEight
 shared_ptr<Bitmap> towerEight;
@@ -34,6 +34,9 @@ shared_ptr<Bitmap> goBtn;
 /// Pointer to image for Replay Button
 shared_ptr<Bitmap> replayBtn;
 
+/// Pointer to image for Stop Button
+shared_ptr<Bitmap> stopBtn;
+
 
 CDashboard::CDashboard(CGame* game)
 {
@@ -51,6 +54,8 @@ CDashboard::CDashboard(CGame* game)
     mGame->AddDashImage(goBtn);
     replayBtn = mGame->GetImage(L"button-replay.png");
     mGame->AddDashImage(replayBtn);
+    stopBtn = mGame->GetImage(L"button-stop.png");
+    mGame->AddDashImage(stopBtn);
 }
 
 /**
@@ -106,17 +111,21 @@ void CDashboard::Draw(Graphics* graphics)
         100, 100);
 
     // Go button (only shows if level isn't started)
-    if (!levelStarted)
+    if (!mGame->GetGameActive())
     {
         graphics->DrawImage(goBtn.get(),
             1034, 800,
             180, 90);
     }
-    // Replay button (only shows if level is started)
+    // Replay and stop button (only shows if level is started)
     else
     {
-        graphics->DrawImage(replayBtn.get(),
+        graphics->DrawImage(stopBtn.get(),
             1034, 800,
+            180, 90);
+
+        graphics->DrawImage(replayBtn.get(),
+            1034, 900,
             180, 90);
     }
 }
@@ -129,5 +138,6 @@ void CDashboard::Draw(Graphics* graphics)
  */
 void CDashboard::setLevelStarted(bool started)
 {
-    levelStarted = started;
+    //levelStarted = started;
+    mGame->SetGameActive(true);
 }

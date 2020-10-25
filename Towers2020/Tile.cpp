@@ -25,3 +25,15 @@ void CTile::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
     //CItem::setY(mYGrid * 64);
     //mId = node->GetAttributeValue(L"id", L"");
 }
+
+std::shared_ptr<xmlnode::CXmlNode> CTile::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
+{
+    auto itemNode = node->AddChild(L"tile");
+
+    itemNode->SetAttribute(L"id", mId);
+    itemNode->SetAttribute(L"x", mX);
+    itemNode->SetAttribute(L"y", mY);
+
+    return itemNode;
+    return std::shared_ptr<xmlnode::CXmlNode>();
+}

@@ -43,6 +43,9 @@ public:
 	/// Load item from xml
 	virtual void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
+	/// Save item to xml
+	virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
 	/// Set image for this Item
 	void SetImage(const std::wstring &);
 

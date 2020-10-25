@@ -37,6 +37,10 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
 	ON_WM_MOUSEMOVE()
+	ON_COMMAND(ID_LEVELS_LEVEL0, &CChildView::OnLevelsLevel0)
+	ON_COMMAND(ID_LEVELS_LEVEL1, &CChildView::OnLevelsLevel1)
+	ON_COMMAND(ID_LEVELS_LEVEL2, &CChildView::OnLevelsLevel2)
+	ON_COMMAND(ID_FILE_SAVEAS, &CChildView::OnFileSaveas)
 END_MESSAGE_MAP()
 
 
@@ -64,7 +68,10 @@ void CChildView::OnPaint()
     CPaintDC paintDC(this);     // device context for painting
     CDoubleBufferDC dc(&paintDC); // device context for painting
 
-    Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context
+    Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context]
+
+	CRect rect;
+	GetClientRect(&rect);
 
 	if (mFirstDraw)
 	{
@@ -81,6 +88,8 @@ void CChildView::OnPaint()
 		mLastTime = time.QuadPart;
 		mTimeFreq = double(freq.QuadPart);
 	}
+
+	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
 	/*
 	* Compute the elapsed time since the last draw
 	*/
@@ -89,9 +98,6 @@ void CChildView::OnPaint()
 	long long diff = time.QuadPart - mLastTime;
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
-
-	CRect rect;
-    GetClientRect(&rect);
 	
 	//
 	// Prevent tunnelling
@@ -103,12 +109,28 @@ void CChildView::OnPaint()
 		elapsed -= MaxElapsed;
 	}
 
+	if (mLevelStart)
+	{
+		mMessage.DrawBeginMessage(&graphics, mLevel);
+		if (!mDisplayed)
+		{
+			mDisplayTime = time.QuadPart;
+			mDisplayed = true;
+		}
+	}
+	long long continued = time.QuadPart - mDisplayTime;
+	double passTime = double(continued) / mTimeFreq;
+	if (passTime > 1)
+	{
+		mLevelStart = false;
+	}
+
 	// Consume any remaining time
 	if (elapsed > 0)
 	{
 		mGame.Update(elapsed);
 	}
-	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
+	
 }
 
 
@@ -194,4 +216,53 @@ void CChildView::OnMouseMove(UINT nFlags, CPoint point)
 {
 	mGame.OnMouseMove(nFlags, point.x, point.y);
 	Invalidate();
+}
+
+
+void CChildView::OnLevelsLevel0()
+{
+	std::wstring filename = L"levels\\level0.xml";
+	mGame.Load(filename);
+	mLevelStart = true;
+	mLevel = 0;
+	mDisplayed = false;
+	Invalidate();
+}
+
+
+void CChildView::OnLevelsLevel1()
+{
+	std::wstring filename = L"levels\\level1.xml";
+	mGame.Load(filename);
+	mLevelStart = true;
+	mLevel = 1;
+	mDisplayed = false;
+	Invalidate();
+}
+
+
+void CChildView::OnLevelsLevel2()
+{
+	std::wstring filename = L"levels\\level2.xml";
+	mGame.Load(filename);
+	mLevelStart = true;
+	mLevel = 2;
+	mDisplayed = false;
+	Invalidate();
+}
+
+
+void CChildView::OnFileSaveas()
+{
+	CFileDialog dlg(false,  // false = Save dialog box
+		L".tower",           // Default file extension
+		nullptr,            // Default file name (none)
+		OFN_OVERWRITEPROMPT,    // Flags
+		L"Tower Files (*.tower)|*.tower|All Files (*.*)|*.*||");    // Filter
+	if (dlg.DoModal() != IDOK)
+		return;
+
+	std::wstring filename = dlg.GetPathName();
+
+	mGame.Save(filename);
 }

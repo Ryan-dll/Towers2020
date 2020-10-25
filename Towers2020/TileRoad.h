@@ -77,6 +77,9 @@ public:
 
     int NumBalloons() { return mBalloons.size(); }
 
+    /// Save TileOpen to xml
+    virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
 protected:
 
     /// Type of road

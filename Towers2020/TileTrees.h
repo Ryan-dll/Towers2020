@@ -30,5 +30,9 @@ public:
      * \param visitor The visitor we accept */
     virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTileTrees(this); }
 
+    /// Save TileOpen to xml
+    virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
+
 };
 
