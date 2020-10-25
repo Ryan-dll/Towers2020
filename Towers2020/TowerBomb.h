@@ -31,7 +31,7 @@ public:
 	void Update(double elapsed);
 
 	/// Arms the tower
-	void ArmTower();
+	void ArmTower() override;
 
 	/** Accept a visitor
 	 * \param visitor The visitor we accept */
@@ -56,7 +56,7 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	void setCoordinates(int yPos, int xPos) { mX = xPos; mY = yPos; bomb->setX(xPos + 21); bomb->setY(yPos + 21); }
+	void setCoordinates(int xPos, int yPos) { mX = xPos; mY = yPos; bomb->setX(xPos + 21); bomb->setY(yPos + 21); }
 
 	/**
 	* Get bomb

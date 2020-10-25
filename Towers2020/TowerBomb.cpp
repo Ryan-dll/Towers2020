@@ -19,7 +19,7 @@ CTowerBomb::CTowerBomb(CGame* game) : CTower(game)
 	bomb = make_unique<CBomb>(game);
 	mGame->Add(bomb);
 	mGame->IncreaseBombCount();
-	mTimeUntilFire = game->getBombCount() * 3;
+	mTimeUntilFire = game->getBombCount() * 3.0;
 
 
 	wstring image = L"tower-bomb.png";
@@ -33,12 +33,15 @@ void CTowerBomb::Fire()
 
 void CTowerBomb::Update(double elapsed)
 {
-	mTimeUntilFire -= elapsed;
-
-	if (mTimeUntilFire <= 0 && !bombUsed)
+	if (mGame->GetGameActive() == true)
 	{
-		Fire();
-		bombUsed = true;
+		mTimeUntilFire -= elapsed;
+
+		if (mTimeUntilFire <= 0 && !bombUsed)
+		{
+			Fire();
+			bombUsed = true;
+		}
 	}
 }
 

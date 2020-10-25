@@ -27,7 +27,7 @@ public:
 	CTowerProjectile(CGame* game);
 
 	/// Arms the tower with X number of projectiles
-	virtual void ArmTower();
+	virtual void ArmTower() override;
 
 	/// Getter for length of mProjectiles
 	/// \return mProcketiles size

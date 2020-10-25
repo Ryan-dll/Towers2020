@@ -29,12 +29,14 @@ void CTowerRing::Fire()
 
 void CTowerRing::Update(double elapsed)
 {
-	mTimeUntilFire -= elapsed;
-
-	if (mTimeUntilFire <= 0)
+	if (mGame->GetGameActive() == true)
 	{
-		Fire();
-		mTimeUntilFire = mTimeBetween;
+		mTimeUntilFire -= elapsed;
+		if (mTimeUntilFire <= 0)
+		{
+			mTimeUntilFire += mTimeBetween;
+			Fire();
+		}
 	}
 }
 
