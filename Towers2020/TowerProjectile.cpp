@@ -48,12 +48,16 @@ void CTowerProjectile::ArmTower()
  */
 void CTowerProjectile::Update(double elapsed)
 {
-	mTimeUntilFire -= elapsed;
-	if (mTimeUntilFire <= 0)
+	if (mGame->GetGameActive() == true) 
 	{
-		mTimeUntilFire += mTimeBetween;
-		Fire();
+		mTimeUntilFire -= elapsed;
+		if (mTimeUntilFire <= 0)
+		{
+			mTimeUntilFire += mTimeBetween;
+			Fire();
+		}
 	}
+
 
 	//for (auto &i : mProjectiles)
 	//{

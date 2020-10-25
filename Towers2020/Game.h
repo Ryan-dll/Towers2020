@@ -17,11 +17,11 @@
 #include "ItemVisitor.h"
 #include "Tile.h"
 #include "TileRoad.h"
-#include "TowerProjectile.h"
+#include "Tower.h"
 
 class CItem;
 class CDashboard;
-class CTowerProjectile;
+class CTower;
 
  /**
  * CGame class
@@ -54,7 +54,7 @@ public:
 	void Add(std::shared_ptr<CItem> item);
 
 	/// Add projectile tower to the collection
-	void AddProjTower(std::shared_ptr<CTowerProjectile> item);
+	void AddTower(std::shared_ptr<CTower> item);
 
 	/// Add image from Dashboard to the collection
 	void AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image);
@@ -99,14 +99,29 @@ public:
 
 	void SetStart(int x, int y) { mStartX = x; mStartY = y; }
 
-	void Clear();
+	/**
+	* Increase number of bombs on level by 1
+	*/
+	void IncreaseBombCount() { bombCount++; };
+
+	/**
+	* Get number of bombs on level
+	* \return number of bombs
+	*/
+	int getBombCount() { return bombCount; };
+
+	/**
+	* Getter for gameactive
+	* \return If game has begun
+	*/
+	bool GetGameActive() { return mGameActive; }
 
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
 
 	/// All Projectile towers
-	std::vector<std::shared_ptr<CTowerProjectile>> mAllProjectileTowers;
+	std::vector<std::shared_ptr<CTower>> mAllTowers;
 	
 	/// All game items
 	std::vector<std::shared_ptr<Gdiplus::Bitmap>> mAllDashboardImages;
@@ -160,7 +175,10 @@ private:
 	int mBalloonNum = 10;
 
 	// Has the game started yet
-	bool GameActive = false;
+	bool mGameActive = false;
+
+	// Number of bombs on the level
+	int bombCount = 0;
 
 };
 

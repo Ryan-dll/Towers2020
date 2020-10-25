@@ -16,7 +16,7 @@ CTowerRing::CTowerRing(CGame* game) : CTower(game)
 {
 	mGame = game;
 	ring = make_unique<CRing>(game);
-	game->Add(ring);
+	mGame->Add(ring);
 
 	wstring image = L"tower-rings.png";
 	CItem::SetImage(image);
@@ -29,11 +29,19 @@ void CTowerRing::Fire()
 
 void CTowerRing::Update(double elapsed)
 {
-	mTimeUntilFire -= elapsed;
-
-	if (mTimeUntilFire <= 0)
+	if (mGame->GetGameActive() == true)
 	{
-		Fire();
-		mTimeUntilFire = mTimeBetween;
+		mTimeUntilFire -= elapsed;
+		if (mTimeUntilFire <= 0)
+		{
+			mTimeUntilFire += mTimeBetween;
+			Fire();
+		}
 	}
+}
+
+void CTowerRing::ArmTower()
+{
+	// Sets the towers position to itself, which also moves the ring
+	setCoordinates(mX, mY);
 }

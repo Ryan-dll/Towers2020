@@ -47,6 +47,9 @@ public:
 	/// \return Difference in X coordinates
 	double YDifference() { return mY - mLastY; }
 
+	/// Arms the tower with X number of projectiles
+	virtual void ArmTower() {};
+
 protected:
 	/// Time it takes to reload a shot
 	double mTimeBetween = 5;

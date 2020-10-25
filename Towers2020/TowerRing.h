@@ -32,6 +32,9 @@ public:
 	/// \param elapsed elapsed time chunk
 	void Update(double elapsed);
 
+	/// Arms the tower
+	void ArmTower() override;
+
 	/** Accept a visitor
 	 * \param visitor The visitor we accept */
 	virtual void Accept(CItemVisitor* visitor) {};
@@ -54,11 +57,11 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	void setCoordinates(int yPos, int xPos) { mX = xPos; mY = yPos; ring->setX(xPos + 21); ring->setY(yPos + 21);}
+	void setCoordinates(int xPos, int yPos) { mX = xPos; mY = yPos; ring->setX(xPos + 21); ring->setY(yPos + 21);}
 
 	/**
 	* Get ring
-	* \param the ring
+	* \return the ring
 	*/
 	std::shared_ptr<CRing> getRing() { return ring; };
 

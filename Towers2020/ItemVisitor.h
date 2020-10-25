@@ -15,7 +15,7 @@ class CTileTrees;
 class CTowerEight;
 //class CTowerRing;
 //class CTowerCross;
-//class CTowerBomb
+//class CTowerBomb;
 
 
 /**
