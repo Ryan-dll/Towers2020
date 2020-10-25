@@ -193,7 +193,7 @@ namespace xmlnode
             Types Type() { return mType; }
 
         private:
-            Types mType = None; ///< Exception type
+            Types mType =None; ///< Exception type
             std::wstring mMsg;  ///< Exception error message
         };
 

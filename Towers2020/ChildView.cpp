@@ -30,7 +30,7 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
-	ON_COMMAND(ID_FILE_LOAD32776, &CChildView::OnFileLoad32776)
+	ON_COMMAND(ID_FILE_LOAD32776, &CChildView::OnFileLoad)
 	ON_UPDATE_COMMAND_UI(ID_FILE_LOAD32776, &CChildView::OnUpdateFileLoad32776)
 	ON_WM_ERASEBKGND()
 	ON_WM_TIMER()
@@ -115,7 +115,7 @@ void CChildView::OnPaint()
 /**
 * File Load
 */
-void CChildView::OnFileLoad32776()
+void CChildView::OnFileLoad()
 {
 	CFileDialog dlg(true,  // true = Open dialog box
 		L".xml",           // Default file extension

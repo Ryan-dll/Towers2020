@@ -31,6 +31,9 @@ shared_ptr<Bitmap> towerRing;
 /// Pointer to image for Go Button
 shared_ptr<Bitmap> goBtn;
 
+/// Pointer to image for Replay Button
+shared_ptr<Bitmap> replayBtn;
+
 
 CDashboard::CDashboard(CGame* game)
 {
@@ -46,6 +49,8 @@ CDashboard::CDashboard(CGame* game)
     mGame->AddDashImage(towerBomb);
     goBtn = mGame->GetImage(L"button-go.png");
     mGame->AddDashImage(goBtn);
+    replayBtn = mGame->GetImage(L"button-replay.png");
+    mGame->AddDashImage(replayBtn);
 }
 
 /**
@@ -104,6 +109,13 @@ void CDashboard::Draw(Graphics* graphics)
     if (!levelStarted)
     {
         graphics->DrawImage(goBtn.get(),
+            1034, 800,
+            180, 90);
+    }
+    // Replay button (only shows if level is started)
+    else
+    {
+        graphics->DrawImage(replayBtn.get(),
             1034, 800,
             180, 90);
     }

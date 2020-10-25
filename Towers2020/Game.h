@@ -99,6 +99,8 @@ public:
 
 	void SetStart(int x, int y) { mStartX = x; mStartY = y; }
 
+	void Clear();
+
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;

@@ -80,6 +80,7 @@ void CGame::Load(const std::wstring& filename)
         shared_ptr<CXmlNode> root = CXmlNode::OpenDocument(filename);
 
         // Clear the current level?
+        Clear();
 
         
         // Get root info
@@ -318,10 +319,11 @@ void CGame::LoadImages()
         L"button-go.png", L"castlea.png", L"castleb.png", L"dart.png",
         L"grass1.png", L"grass2.png", L"house1.png", L"house2.png",
         L"house3.png", L"house4a.png", L"house4b.png", L"red-balloon.png",
-        L"roadEW.png", L"roadEW.png", L"roadNE.png", L"roadNS.png",
+        L"roadEW.png", L"roadEWstart.png", L"roadNE.png", L"roadNS.png",
         L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
         L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
-        L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png", L"tower-cross.png"
+        L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png", L"tower-cross.png",
+        L"button-replay.png"
     };
     
     for (wstring filename : mKeys)
@@ -568,4 +570,15 @@ void CGame::Accept(CItemVisitor* visitor)
 std::shared_ptr<CItem> CGame::GetItem(int index)
 {
     return mAllGameItems[index];
+}
+
+
+/**
+*  Clear the game item data.
+*
+* Deletes all known items in the game.
+*/
+void CGame::Clear()
+{
+    mAllGameItems.clear();
 }
