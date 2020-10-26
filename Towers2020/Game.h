@@ -138,9 +138,9 @@ public:
 	/// Arm all the towers at the start of a round
 	void ArmTowers();
 
-	void TakeBalloon(std::shared_ptr<CBalloon> balloon);
+	void TakeBalloon(CBalloon * balloon);
 
-	void ScheduleDelete(std::shared_ptr<CItem> item);
+	void ScheduleDelete(CItem * item);
 
 	void DeleteScheduled();
 
@@ -148,7 +148,7 @@ private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
 
-	std::vector<std::shared_ptr<CItem>> mToDelete;
+	std::vector<CItem *> mToDelete;
 
 	/// All game items
 	std::vector<std::shared_ptr<Gdiplus::Bitmap>> mAllDashboardImages;

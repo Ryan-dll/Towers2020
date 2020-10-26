@@ -426,7 +426,7 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
         std::shared_ptr<CTowerRing> newTower = std::make_shared<CTowerRing>(this);
-        newTower->setCoordinates(1050, 200);
+        newTower->setCoordinates(x, y);
         this->Add(newTower);
         return newTower;
     }
@@ -658,14 +658,14 @@ void CGame::ArmTowers()
 }
 
 
-void CGame::TakeBalloon(std::shared_ptr<CBalloon> balloon)
+void CGame::TakeBalloon(CBalloon * balloon)
 {
-    ScheduleDelete(shared_ptr<CItem>(balloon));
+    ScheduleDelete((CItem *) balloon);
     // TODO: reduce the score
 }
 
 
-void CGame::ScheduleDelete(std::shared_ptr<CItem> item)
+void CGame::ScheduleDelete(CItem * item)
 {
     mToDelete.push_back(item);
 }

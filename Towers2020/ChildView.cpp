@@ -65,14 +65,6 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 */
 void CChildView::OnPaint()
 {
-    CPaintDC paintDC(this);     // device context for painting
-    CDoubleBufferDC dc(&paintDC); // device context for painting
-
-    Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context]
-
-	CRect rect;
-	GetClientRect(&rect);
-
 	if (mFirstDraw)
 	{
 		mFirstDraw = false;
@@ -89,8 +81,6 @@ void CChildView::OnPaint()
 		mTimeFreq = double(freq.QuadPart);
 	}
 
-	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
-	
 	/*
 	* Compute the elapsed time since the last draw
 	*/
@@ -110,6 +100,24 @@ void CChildView::OnPaint()
 		elapsed -= MaxElapsed;
 	}
 
+	// Consume any remaining time
+	if (elapsed > 0)
+	{
+		mGame.Update(elapsed);
+	}
+
+    CPaintDC paintDC(this);     // device context for painting
+    CDoubleBufferDC dc(&paintDC); // device context for painting
+
+    Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context]
+
+	CRect rect;
+	GetClientRect(&rect);
+
+
+	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
+	
+
 	if (mLevelStart)
 	{
 		mMessage.DrawBeginMessage(&graphics, mLevel);
@@ -126,11 +134,6 @@ void CChildView::OnPaint()
 		mLevelStart = false;
 	}
 
-	// Consume any remaining time
-	if (elapsed > 0)
-	{
-		mGame.Update(elapsed);
-	}
 	
 }
 

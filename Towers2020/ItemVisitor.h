@@ -16,6 +16,7 @@ class CTowerEight;
 class CTowerRing;
 class CTowerCross;
 class CTowerBomb;
+class CBalloon;
 
 
 /**
@@ -57,5 +58,9 @@ public:
 	/** Visit a CTowerBomb object 
      * \param towerbomb The towerbomb we are visiting */
     virtual void VisitTowerBomb(CTowerBomb *towerbomb) {}
+
+	/** Visit a CBalloon object 
+     * \param balloon The balloon we are visiting */
+    virtual void VisitBalloon(CBalloon *balloon) {}
 };
 

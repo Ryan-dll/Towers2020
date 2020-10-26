@@ -9,8 +9,11 @@
 #include "pch.h"
 #include "Ring.h"
 #include "TowerRing.h"
+#include "BalloonCollector.h"
+#include <vector>
 
 using namespace Gdiplus;
+using namespace std;
 
 CRing::CRing(CGame* game) : CItem(game)
 {
@@ -27,8 +30,25 @@ void CRing::Update(double elapsed)
 			mDiameter += elapsed * mFireRate;
 			mX -= elapsed * mFireRate/2.35;
 			mY -= elapsed * mFireRate/2.35;
+			// Find all balloons within the range of the ring
+			CBalloonCollector bc;
+			CItem::GetGame()->Accept(&bc);
+			vector<CBalloon*> balloons = bc.GetBalloons();
+			for (auto balloon : balloons)
+			{
+				double dx = GetX() + mDiameter/2 - balloon->GetX()+32;
+				double dy = GetY() + mDiameter/2 - balloon->GetY()+32;
+				double distance = sqrt( dx * dx + dy * dy);
+				if (distance < mDiameter)
+				{
+					//CItem::GetGame()->TakeBalloon(balloon);
+				}
+				CItem::GetGame()->TakeBalloon(balloon);
+
+			}
 		}
-		else {
+		else 
+		{
 			mDiameter = mDiameterInitial;
 			mX = mXInit;
 			mY = mYInit;

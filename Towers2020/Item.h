@@ -69,7 +69,7 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	void setCoordinates(double xPos, double yPos) { mX = xPos; mY = yPos; }
+	virtual void setCoordinates(double xPos, double yPos) { mX = xPos; mY = yPos; }
 	
 	/**  Test this item to see if it has been clicked on
 	* \param x X location on the item to test
@@ -80,7 +80,7 @@ public:
 	/// Determine distance between 2 items
 	/// \param other Item being compared
 	/// \return Distance as a double in pixels
-	double Distance(std::shared_ptr<CItem> other);
+	double Distance(CItem* other);
 
 	/// Handle updates for animation
 	/// \param elapsed The time since the last update

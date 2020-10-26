@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Item.h"
+#include "ItemVisitor.h"
 
  /**
  * CBalloon class
@@ -24,7 +25,7 @@ public:
 
     /** Accept a visitor 
      * \param visitor The visitor we accept */
-    virtual void Accept(CItemVisitor* visitor) {}
+    virtual void Accept(CItemVisitor* visitor) { visitor->VisitBalloon(this); }
      
     /** 
     * Get the current T value for the balloon

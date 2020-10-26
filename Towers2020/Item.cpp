@@ -109,7 +109,7 @@ bool CItem::HitTest(int x, int y)
 /**
  * Determine the distance from this item to some other item.
  */
-double CItem::Distance(std::shared_ptr<CItem> other)
+double CItem::Distance(CItem* other)
 {
     // Create a vector in the direction we are from the nudger
     double dx = mX - other->mX;

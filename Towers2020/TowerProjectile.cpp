@@ -48,6 +48,8 @@ void CTowerProjectile::ArmTower()
  */
 void CTowerProjectile::Update(double elapsed)
 {
+	// This if statement probably isnt nessicary, since we now just 
+	// don't call update when the game isnt active
 	if (mGame->GetGameActive() == true) 
 	{
 		mTimeUntilFire -= elapsed;

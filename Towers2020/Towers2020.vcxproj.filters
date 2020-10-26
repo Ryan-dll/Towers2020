@@ -114,6 +114,9 @@
     <ClInclude Include="TowerCollector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BalloonCollector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Towers2020.cpp">
@@ -201,6 +204,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TowerCollector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BalloonCollector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
