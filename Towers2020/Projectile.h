@@ -10,6 +10,7 @@
 #include <memory>
 #include "Item.h"
 #include "ItemVisitor.h"
+#include "Game.h"
 
  /**
  * CProjectile class
@@ -58,7 +59,7 @@ public:
 
 protected:
 	/// Speed of projectile
-	double mSpeed = 100;
+	double mSpeed = 275;
 
 	/// Rotation of Projectile
 	double mRotation = 0;
