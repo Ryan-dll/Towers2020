@@ -68,13 +68,20 @@ public:
      */
     void Update(double elapsed);
 
-    /** Place a balloon in the XY coordinate space using t
-     * \param balloon The balloon to place
-     */
+    /// Place a balloon in the XY coordinate space using t
     void Place(std::shared_ptr<CBalloon> balloon);
 
+
+    /**
+     * Get the next road after this one
+     * \returns the next road
+     */
     CTileRoad* GetNext() { return mNext; }
 
+    /**
+     * Get the number of balloons on this road
+     * \returns the number of balloons
+     */
     int NumBalloons() { return mBalloons.size(); }
 
     /// Save TileOpen to xml

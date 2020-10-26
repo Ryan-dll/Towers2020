@@ -97,6 +97,11 @@ public:
 	*/
 	double ConvertToVirtual(double pixel) { return (pixel - mXOffset) / mScale; }
 
+	/**
+	* Set the start of the map where the balloons enter	
+	* \param x The starting X pos
+	* \param y The starting Y pos 
+	*/
 	void SetStart(int x, int y) { mStartX = x; mStartY = y; }
 
 	/**
@@ -116,7 +121,7 @@ public:
 	*/
 	bool GetGameActive() { return mGameActive; }
 
-	/*
+	/**
 	* Setter for gameactive
 	* \param status the status of the game
 	*/
@@ -129,7 +134,7 @@ public:
 	*/
 	void Clear() { mAllGameItems.clear(); }
 
-	/*
+	/**
 	* Setter for number of balloon
 	* \param num the number of balloon
 	*/
@@ -138,16 +143,20 @@ public:
 	/// Arm all the towers at the start of a round
 	void ArmTowers();
 
+	/// Take a balloon back from the road
 	void TakeBalloon(CBalloon * balloon, int points);
 
+	/// Schedule the deletion of an item
 	void ScheduleDelete(std::pair<CItem *, int> item);
 
+	/// Delete all items scheduled to be deleted
 	void DeleteScheduled();
 
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
 
+	/// Items to delete
 	std::vector<std::pair<CItem *, int>> mToDelete;
 
 	/// All game items
@@ -195,16 +204,16 @@ private:
 	/// Pointer to the first tile in the road
 	CTileRoad* mStart = nullptr;
 
-	// Keeps track of when the balloons leave
+	/// Keeps track of when the balloons leave
 	double mBalloonDispatchTime = 0;
 	
-	// Number of balloons to send per level
+	/// Number of balloons to send per level
 	int mBalloonNum = 10;
 
-	// Has the game started yet
+	/// Has the game started yet
 	bool mGameActive = false;
 
-	// Number of bombs on the level
+	/// Number of bombs on the level
 	int bombCount = 0;
 
 };

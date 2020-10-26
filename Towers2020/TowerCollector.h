@@ -1,3 +1,10 @@
+/**
+ * \file TowerCollector.h
+ *
+ * \author Evan Masters
+ *
+ * Collects the towers
+ */
 #pragma once
 #include "ItemVisitor.h"
 #include <vector>
@@ -5,6 +12,9 @@
 
 class CTower;
 
+/**
+ * Collects the towers
+ */
 class CTowerCollector : public CItemVisitor
 {
 

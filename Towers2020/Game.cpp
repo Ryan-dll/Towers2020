@@ -658,25 +658,36 @@ void CGame::ArmTowers()
 }
 
 
+/**
+* Take a balloon back from a road
+* \param balloon The balloon to take
+* \param points The number of points to add or subtract
+*/
 void CGame::TakeBalloon(CBalloon * balloon, int points)
 {
     ScheduleDelete(pair<CItem *,int>(balloon, points));
 }
 
 
+/**
+* Schedule the deletion of an item
+* Enter 0 for the second part of the pair if you 
+* don't want to edit the score
+* \param item The item and score to delete
+*/
 void CGame::ScheduleDelete(pair<CItem *, int> item)
 {
     mToDelete.push_back(item);
 }
 
+/**
+* Deletes all scheduled items, Adjusts score as well
+*/
 void CGame::DeleteScheduled()
 {
     for (auto item : mToDelete)
     {
         // Remove the item from the main collection
-        //shared_ptr<CItem> test(item);
-        //auto loc = find(mAllGameItems.begin(), mAllGameItems.end(), *item);
-
         auto loc = find_if(mAllGameItems.begin(), mAllGameItems.end(), [item](shared_ptr<CItem> shared_item) { return shared_item.get() == item.first; });
 
         if (loc != mAllGameItems.end())

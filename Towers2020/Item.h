@@ -40,6 +40,10 @@ public:
      */
 	virtual void SetY(double yPos) { mY = yPos; }
 
+    /**
+     * Setter for the Id
+	 * \param id The id
+     */
 	virtual void SetId(std::wstring id) { mId = id; }
 
 	/// Load item from xml
@@ -118,13 +122,21 @@ protected:
 
 	/**
 	* Return a pointer to the game
-	* \return Y position
+	* \return a pointer to the game
 	*/
 	CGame * GetGame() { return mGame; };
 
+	/**
+	* Return a pointer to the item image
+	* \return pointer to the item image
+	*/
 	std::shared_ptr<Gdiplus::Bitmap> GetItemImage() { return mItemImage; }
 
-	double GetPi() { return pi;  }
+	/**
+	* Return the constant pi
+	* \return the constatn pi
+	*/
+	double GetPi() { return mPi;  }
 
 private:
 	/// X position of item
@@ -149,7 +161,7 @@ private:
 	CGame* mGame;
 
 	/// Constant to be used for pi
-	const double pi = 3.1415926535;
+	const double mPi = 3.1415926535;
 
 };
 

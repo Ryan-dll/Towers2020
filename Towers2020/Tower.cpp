@@ -32,6 +32,11 @@ void CTower::Update(double elapsed)
     }
 }
 
+/**
+ * Save item to xml file
+ * \param node Xmlnode
+ * \returns Xmlnode
+*/
 std::shared_ptr<xmlnode::CXmlNode> CTower::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
     return std::shared_ptr<xmlnode::CXmlNode>();

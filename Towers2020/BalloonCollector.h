@@ -1,3 +1,10 @@
+/**
+ * \file BalloonCollector.h
+ *
+ * \author Evan Masters
+ *
+ * Collects the Balloons
+ */
 #pragma once
 #include "ItemVisitor.h"
 #include <vector>
@@ -5,6 +12,9 @@
 
 class CBalloon;
 
+/**
+ * Collects the Balloons
+ */
 class CBalloonCollector : public CItemVisitor
 {
 public:
