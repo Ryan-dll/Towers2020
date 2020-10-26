@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "Projectile.h"
 #include <math.h>
+#include "BalloonCollector.h"
+#include <vector>
+
+using namespace std;
 
 /// Constant to covert radians to degrees.
 const double RtoD = 57.2957795;
@@ -42,6 +46,8 @@ void CProjectile::Update(double elapsed)
 {
     if (mActive == true)
     {
+        double wid = 32;
+        double hit = 6;
         double newY = sin(mRotation);
         double newX = cos(mRotation);
 
@@ -52,6 +58,20 @@ void CProjectile::Update(double elapsed)
 
         mX += newX;
         mY += newY;
+        // Locate Balloons in relation to dart
+        CBalloonCollector bc;
+        mGame->Accept(&bc);
+        vector<CBalloon*> balloons = bc.GetBalloons();
+        for (auto balloon : balloons)
+        {
+            double dx = balloon->GetX() - GetX() + (wid / 2.0);
+            double dy = balloon->GetY() - GetY() + (hit / 2.0);
+            double distance = sqrt((dx * dx) + (dy * dy));
+            if (distance < 24)
+            {
+                mGame->TakeBalloon(balloon);
+            }
+        }
 
         ResetDart();
     }
