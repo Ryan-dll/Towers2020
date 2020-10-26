@@ -28,16 +28,16 @@ void CRing::Update(double elapsed)
 		if (mDiameter < mDiameterMax)
 		{
 			mDiameter += elapsed * mFireRate;
-			mX -= elapsed * mFireRate/2.35;
-			mY -= elapsed * mFireRate/2.35;
+			//mX -= elapsed * mFireRate/2.35;
+			//mY -= elapsed * mFireRate/2.35;
 			// Find all balloons within the range of the ring
 			CBalloonCollector bc;
 			CItem::GetGame()->Accept(&bc);
 			vector<CBalloon*> balloons = bc.GetBalloons();
 			for (auto balloon : balloons)
 			{
-				double dx = balloon->GetX() + 32 - GetX() + (mDiameter/2);
-				double dy = (GetY() + (mDiameter/2)) - balloon->GetY() + 32;
+				double dx = (balloon->GetX() + 32) - GetX();
+				double dy = GetY() - (balloon->GetY() + 32);
 				double distance = sqrt( (dx * dx) + (dy * dy));
 				if (distance < mDiameter/2)
 				{
@@ -48,8 +48,8 @@ void CRing::Update(double elapsed)
 		else 
 		{
 			mDiameter = mDiameterInitial;
-			mX = mXInit;
-			mY = mYInit;
+			//mX = mXInit;
+			//mY = mYInit;
 			mActive = false;
 		}
 	}
@@ -58,5 +58,5 @@ void CRing::Update(double elapsed)
 void CRing::Draw(Gdiplus::Graphics* graphics)
 {
 	Pen pen(Color(255, 0, 0), 2);
-	graphics->DrawEllipse(&pen, mX, mY, mDiameter, mDiameter);
+	graphics->DrawEllipse(&pen, mX-(mDiameter/2), mY-(mDiameter/2), mDiameter, mDiameter);
 }

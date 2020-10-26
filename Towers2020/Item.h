@@ -32,13 +32,13 @@ public:
      * Setter for X position
 	 * \param xPos desired X position
      */
-	virtual void setX(int xPos) { mX = xPos; }
+	virtual void setX(double xPos) { mX = xPos; }
 
     /**
      * Setter for Y position
 	 * \param yPos desired Y position
      */
-	virtual void setY(int yPos) { mY = yPos; }
+	virtual void setY(double yPos) { mY = yPos; }
 
 	/// Load item from xml
 	virtual void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);

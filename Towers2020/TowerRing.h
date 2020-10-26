@@ -43,13 +43,13 @@ public:
 	 * Setter for X position
 	 * \param xPos desired X position
 	 */
-	virtual void setX(int xPos) override { mX = xPos; ring->setX(xPos + 21); }
+	virtual void setX(double xPos) override { mX = xPos; ring->setX(xPos + 32.5); }
 
 	/**
 	 * Setter for Y position
 	 * \param yPos desired Y position
 	 */
-	virtual void setY(int yPos) override { mY = yPos; ring->setY(yPos + 21);
+	virtual void setY(double yPos) override { mY = yPos; ring->setY(yPos + 32.5);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	virtual void setCoordinates(double xPos, double yPos) override { mX = xPos; mY = yPos; ring->setX(xPos + 21); ring->setY(yPos + 21);}
+	virtual void setCoordinates(double xPos, double yPos) override { mX = xPos; mY = yPos; ring->setX(xPos + 32.5); ring->setY(yPos + 32.5);}
 
 	/**
 	* Get ring

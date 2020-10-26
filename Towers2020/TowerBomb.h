@@ -41,13 +41,13 @@ public:
 	 * Setter for X position
 	 * \param xPos desired X position
 	 */
-	void setX(int xPos) { mX = xPos; bomb->setX(xPos + 21); }
+	void setX(double xPos) override { mX = xPos; bomb->setX(xPos + 21); }
 
 	/**
 	 * Setter for Y position
 	 * \param yPos desired Y position
 	 */
-	void setY(int yPos) {
+	void setY(double yPos) override {
 		mY = yPos; bomb->setY(yPos + 21);
 	}
 
@@ -56,7 +56,7 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	void setCoordinates(int xPos, int yPos) { mX = xPos; mY = yPos; bomb->setX(xPos + 21); bomb->setY(yPos + 21); }
+	void setCoordinates(double xPos, double yPos) override { mX = xPos; mY = yPos; bomb->setX(xPos + 21); bomb->setY(yPos + 21); }
 
 	/**
 	* Get bomb
