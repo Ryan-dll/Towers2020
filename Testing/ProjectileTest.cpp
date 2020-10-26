@@ -38,10 +38,10 @@ namespace Testing
 			CGame game;
 
 			auto testTower1 = make_shared<CTowerEight>(&game);
-			testTower1->setCoordinates(100, 100);
+			testTower1->SetCoordinates(100, 100);
 
 			auto testDart1 = make_shared<CProjectile>(&game);
-			testDart1->setCoordinates(100, 100);
+			testDart1->SetCoordinates(100, 100);
 			testDart1->SetOrigin(100, 100);
 
 			game.Add(testTower1);
@@ -63,10 +63,10 @@ namespace Testing
 			CGame game;
 
 			auto testTower1 = make_shared<CTowerEight>(&game);
-			testTower1->setCoordinates(100, 100);
+			testTower1->SetCoordinates(100, 100);
 
 			auto testDart1 = make_shared<CProjectile>(&game);
-			testDart1->setCoordinates(100, 100);
+			testDart1->SetCoordinates(100, 100);
 			testDart1->SetOrigin(100, 100);
 
 			game.Add(testTower1);
@@ -80,7 +80,7 @@ namespace Testing
 			Assert::IsTrue(testDart1->GetX() == 100);
 			Assert::IsTrue(testDart1->GetY() == 100);
 
-			testDart1->setCoordinates(600,600);
+			testDart1->SetCoordinates(600,600);
 			testDart1->ResetDart();
 
 			// If the distance between origin and current coordinates is above 90, coordinates should be origin

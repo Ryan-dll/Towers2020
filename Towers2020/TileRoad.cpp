@@ -93,8 +93,8 @@ void CTileRoad::Place(shared_ptr<CBalloon> balloon)
 		{
 			x = GetX() + 64 + (-t * 64);
 		}
-		balloon->setX(x - 32);
-		balloon->setY(y - 32);
+		balloon->SetX(x - 32);
+		balloon->SetY(y - 32);
 	}
 	else
 	{
@@ -116,8 +116,8 @@ void CTileRoad::Place(shared_ptr<CBalloon> balloon)
 		{
 			x = GetX() + t * 64;
 		}
-		balloon->setX(x - 32);
-		balloon->setY(y - 32);
+		balloon->SetX(x - 32);
+		balloon->SetY(y - 32);
 	}
 }
 

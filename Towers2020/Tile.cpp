@@ -29,11 +29,11 @@ void CTile::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
 std::shared_ptr<xmlnode::CXmlNode> CTile::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
     auto itemNode = node->AddChild(L"tile");
-
+    /*
     itemNode->SetAttribute(L"id", mId);
     itemNode->SetAttribute(L"x", mX);
     itemNode->SetAttribute(L"y", mY);
-
+    */
     return itemNode;
     return std::shared_ptr<xmlnode::CXmlNode>();
 }

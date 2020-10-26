@@ -49,20 +49,20 @@ public:
 	 * Setter for X position
 	 * \param xPos desired X position
 	 */
-	virtual void setX(double xPos) override { mX = xPos; mXInit = xPos; }
+	virtual void SetX(double xPos) override { CItem::SetX(xPos); mXInit = xPos; }
 
 	/**
 	 * Setter for Y position
 	 * \param yPos desired Y position
 	 */
-	virtual void setY(double yPos) override { mY = yPos; mYInit = yPos; }
+	virtual void SetY(double yPos) override { CItem::SetY(yPos); mYInit = yPos; }
 
 	/**
 	* Setter for Y and X positions
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	virtual void setCoordinates(double yPos, double xPos) override { this->mX = xPos; this->mY = yPos; mXInit = xPos; mYInit = yPos; }
+	virtual void SetCoordinates(double yPos, double xPos) override { CItem::SetX(xPos); CItem::SetY(yPos); mXInit = xPos; mYInit = yPos; }
 
 	/**
 	* Get current diameter of ring

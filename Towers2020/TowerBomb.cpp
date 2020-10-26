@@ -15,10 +15,9 @@ using namespace std;
 
 CTowerBomb::CTowerBomb(CGame* game) : CTower(game)
 {
-	mGame = game;
 	bomb = make_unique<CBomb>(game);
-	mGame->Add(bomb);
-	mGame->IncreaseBombCount();
+	GetGame()->Add(bomb);
+	GetGame()->IncreaseBombCount();
 	mTimeUntilFire = game->getBombCount() * 3.0;
 
 
@@ -33,7 +32,7 @@ void CTowerBomb::Fire()
 
 void CTowerBomb::Update(double elapsed)
 {
-	if (mGame->GetGameActive() == true)
+	if (GetGame()->GetGameActive() == true)
 	{
 		mTimeUntilFire -= elapsed;
 
@@ -53,13 +52,13 @@ void CTowerBomb::Draw(Gdiplus::Graphics* graphics)
 {
 	if (mTimeUntilFire > 0) {
 		// Draw the image
-		int wid = mItemImage->GetWidth() / 2;
-		int hit = mItemImage->GetHeight() / 2;
+		int wid = GetItemImage()->GetWidth() / 2;
+		int hit = GetItemImage()->GetHeight() / 2;
 		//    graphics->DrawImage(mItemImage.get(),
 		//            mX, mY,
 		//            wid, hit);
-		graphics->DrawImage(mItemImage.get(),
-			mX, mY,
+		graphics->DrawImage(GetItemImage().get(),
+			GetX(), GetY(),
 			65, 65);
 	}
 }
@@ -67,5 +66,5 @@ void CTowerBomb::Draw(Gdiplus::Graphics* graphics)
 void CTowerBomb::ArmTower()
 {
 	// Sets the towers position to itself, which also moves the bomb
-	setCoordinates(mX, mY);
+	SetCoordinates(GetX(), GetY());
 }

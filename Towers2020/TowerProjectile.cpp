@@ -19,18 +19,18 @@ void CTowerProjectile::ArmTower()
 	int numOfProjectiles = 8;
 	for (double i = 1; i <= numOfProjectiles; i++)
 	{
-		auto needle = std::make_shared<CProjectile>(mGame);
+		auto needle = std::make_shared<CProjectile>(GetGame());
 		double a = needle->GetAngle();
 		double sn = sin(a);
 		double cs = cos(a);
 
-		double x = mX + mItemImage->GetWidth() / 2.0 + cs;
-		double y = mY + mItemImage->GetHeight() / 2.0 + sn * mT;
+		double x = GetX() + GetItemImage()->GetWidth() / 2.0 + cs;
+		double y = GetY() + GetItemImage()->GetHeight() / 2.0 + sn * mT;
 
-		needle->setCoordinates(x, y);
+		needle->SetCoordinates(x, y);
 		needle->SetOrigin(x, y);
 
-		double newAngle = (i / 4.0) * pi;
+		double newAngle = (i / 4.0) * GetPi();
 		needle->SetAngle(newAngle);
 		
 		if (IsTower() == false)
@@ -39,7 +39,7 @@ void CTowerProjectile::ArmTower()
 		}
 
 		mProjectiles.push_back(needle);
-		mGame->Add(needle);
+		GetGame()->Add(needle);
 	}
 }
 
@@ -50,7 +50,7 @@ void CTowerProjectile::Update(double elapsed)
 {
 	// This if statement probably isnt nessicary, since we now just 
 	// don't call update when the game isnt active
-	if (mGame->GetGameActive() == true) 
+	if (GetGame()->GetGameActive() == true) 
 	{
 		mTimeUntilFire -= elapsed;
 		if (mTimeUntilFire <= 0)

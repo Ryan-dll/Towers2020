@@ -43,20 +43,20 @@ public:
 	 * Setter for X position
 	 * \param xPos desired X position
 	 */
-	void setX(int xPos) { mX = xPos; mXInit = xPos; }
+	void SetX(double xPos) override { CItem::SetX(xPos); mXInit = xPos; }
 
 	/**
 	 * Setter for Y position
 	 * \param yPos desired Y position
 	 */
-	void setY(int yPos) { mY = yPos; mYInit = yPos; }
+	void SetY(double yPos) override { CItem::SetY(yPos); mYInit = yPos; }
 
 	/**
 	* Setter for Y and X positions
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	void setCoordinates(int yPos, int xPos) { this->mX = xPos; this->mY = yPos; mXInit = xPos; mYInit = yPos; }
+	void SetCoordinates(double yPos, double xPos) override { CItem::SetX(xPos); CItem::SetY(yPos); mXInit = xPos; mYInit = yPos; }
 
 	/**
 	* Get current diameter of ring

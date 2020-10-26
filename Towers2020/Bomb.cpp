@@ -13,8 +13,8 @@ using namespace Gdiplus;
 
 CBomb::CBomb(CGame* game) : CItem(game)
 {
-	mXInit = mX;
-	mYInit = mY;
+	mXInit = GetX();
+	mYInit = GetY();
 }
 
 void CBomb::Update(double elapsed)
@@ -24,13 +24,13 @@ void CBomb::Update(double elapsed)
 		if (mDiameter < mDiameterMax)
 		{
 			mDiameter += elapsed * mFireRate;
-			mX -= elapsed * mFireRate / 2.35;
-			mY -= elapsed * mFireRate / 2.35;
+			SetX(GetX() - elapsed * mFireRate / 2.35);
+			SetY(GetY() - elapsed * mFireRate / 2.35);
 		}
 		else {
 			mDiameter = mDiameterInitial;
-			mX = mXInit;
-			mY = mYInit;
+			SetX(mXInit);
+			SetY(mYInit);
 			mActive = false;
 		}
 	}
@@ -39,5 +39,5 @@ void CBomb::Update(double elapsed)
 void CBomb::Draw(Gdiplus::Graphics* graphics)
 {
 	SolidBrush brush(Color(128, 0, 0));
-	graphics->FillEllipse(&brush, mX, mY, mDiameter, mDiameter);
+	graphics->FillEllipse(&brush, GetX(), GetY(), mDiameter, mDiameter);
 }

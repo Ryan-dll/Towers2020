@@ -43,13 +43,13 @@ public:
 	 * Setter for X position
 	 * \param xPos desired X position
 	 */
-	virtual void setX(double xPos) override { mX = xPos; ring->setX(xPos + 32.5); }
+	virtual void SetX(double xPos) override { CItem::SetX(xPos); ring->SetX(xPos + 32.5); }
 
 	/**
 	 * Setter for Y position
 	 * \param yPos desired Y position
 	 */
-	virtual void setY(double yPos) override { mY = yPos; ring->setY(yPos + 32.5);
+	virtual void SetY(double yPos) override { CItem::SetY(yPos); ring->SetY(yPos + 32.5);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	virtual void setCoordinates(double xPos, double yPos) override { mX = xPos; mY = yPos; ring->setX(xPos + 32.5); ring->setY(yPos + 32.5);}
+	virtual void SetCoordinates(double xPos, double yPos) override { SetX(xPos); SetY(yPos); ring->SetX(xPos + 32.5); ring->SetY(yPos + 32.5);}
 
 	/**
 	* Get ring

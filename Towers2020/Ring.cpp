@@ -17,8 +17,8 @@ using namespace std;
 
 CRing::CRing(CGame* game) : CItem(game)
 {
-	mXInit = mX;
-	mYInit = mY;
+	mXInit = GetX();
+	mYInit = GetY();
 }
 
 void CRing::Update(double elapsed)
@@ -58,5 +58,5 @@ void CRing::Update(double elapsed)
 void CRing::Draw(Gdiplus::Graphics* graphics)
 {
 	Pen pen(Color(255, 0, 0), 2);
-	graphics->DrawEllipse(&pen, mX-(mDiameter/2), mY-(mDiameter/2), mDiameter, mDiameter);
+	graphics->DrawEllipse(&pen, GetX()-(mDiameter/2), GetY()-(mDiameter/2), mDiameter, mDiameter);
 }

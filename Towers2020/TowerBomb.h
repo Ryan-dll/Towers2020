@@ -41,22 +41,20 @@ public:
 	 * Setter for X position
 	 * \param xPos desired X position
 	 */
-	void setX(double xPos) override { mX = xPos; bomb->setX(xPos + 21); }
+	void SetX(double xPos) override { CItem::SetX(xPos); bomb->SetX(xPos + 21); }
 
 	/**
 	 * Setter for Y position
 	 * \param yPos desired Y position
 	 */
-	void setY(double yPos) override {
-		mY = yPos; bomb->setY(yPos + 21);
-	}
+	void SetY(double yPos) override { CItem::SetY(yPos); bomb->SetY(yPos + 21);	}
 
 	/**
 	* Setter for Y and X positions
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	void setCoordinates(double xPos, double yPos) override { mX = xPos; mY = yPos; bomb->setX(xPos + 21); bomb->setY(yPos + 21); }
+	void SetCoordinates(double xPos, double yPos) override { CItem::SetX(xPos); CItem::SetY(yPos); bomb->SetX(xPos + 21); bomb->SetY(yPos + 21); }
 
 	/**
 	* Get bomb

@@ -37,7 +37,7 @@ namespace Testing
 			CGame game;
 			
 			auto testTower1 = make_shared<CTowerEight>(&game);
-			testTower1->setCoordinates(100, 100);
+			testTower1->SetCoordinates(100, 100);
 
 			Assert::IsTrue(testTower1->GetListLen() == 0);
 			testTower1->ArmTower();
@@ -51,7 +51,7 @@ namespace Testing
 			testTower1->Fire();
 			Assert::IsTrue(testTower1->GetListLen() == 8);
 
-			testTower1->setCoordinates(200, 200);
+			testTower1->SetCoordinates(200, 200);
 
 			Assert::IsTrue(testTower1->GetX() == 200);
 			Assert::IsTrue(testTower1->GetY() == 200);
@@ -62,7 +62,7 @@ namespace Testing
 			CGame game;
 
 			auto testTower1 = make_shared<CTowerRing>(&game);
-			testTower1->setCoordinates(100, 100);
+			testTower1->SetCoordinates(100, 100);
 
 			game.Add(testTower1);
 
@@ -76,7 +76,7 @@ namespace Testing
 			Assert::IsTrue(testTower1->getRing()->isActive());
 			Assert::IsTrue(testTower1->getRing()->getRingDiameter() >= 20);
 
-			testTower1->setCoordinates(200, 200);
+			testTower1->SetCoordinates(200, 200);
 			Assert::IsTrue(testTower1->GetX() == 200);
 			Assert::IsTrue(testTower1->GetY() == 200);
 		}
@@ -86,7 +86,7 @@ namespace Testing
 			CGame game;
 
 			auto testTower2 = make_shared<CTowerCross>(&game);
-			testTower2->setCoordinates(100, 100);
+			testTower2->SetCoordinates(100, 100);
 
 			Assert::IsTrue(testTower2->GetCrossStatus() == true);
 
@@ -101,7 +101,7 @@ namespace Testing
 			testTower2->Fire();
 			Assert::IsTrue(testTower2->GetCrossStatus() == true);
 
-			testTower2->setCoordinates(200, 200);
+			testTower2->SetCoordinates(200, 200);
 
 			Assert::IsTrue(testTower2->GetX() == 200);
 			Assert::IsTrue(testTower2->GetY() == 200);

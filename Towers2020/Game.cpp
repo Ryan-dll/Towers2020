@@ -257,7 +257,7 @@ void CGame::OnMouseMove(UINT nFlags, int x, int y)
         // move it while the left button is down.
         if (nFlags & MK_LBUTTON)
         {
-            mGrabbedItem->setCoordinates(oX, oY);
+            mGrabbedItem->SetCoordinates(oX, oY);
         }
         else
         {
@@ -288,8 +288,8 @@ void CGame::Update(double elapsed)
                 mBalloonDispatchTime -= 0.375;
                 shared_ptr<CBalloon> balloon;
                 balloon = make_shared<CBalloon>(this);
-                balloon->setX(mStart->GetX() - 32);
-                balloon->setY(mStart->GetY());
+                balloon->SetX(mStart->GetX() - 32);
+                balloon->SetY(mStart->GetY());
                 // THis is completely wrong.  Re-read the project description!!! 
                 //AddBalloon(shared_ptr<CItem>(balloon));
                 Add(shared_ptr<CItem>(balloon));
@@ -414,7 +414,7 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
         std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
-        newTower->setCoordinates(1050, 200);
+        newTower->SetCoordinates(1050, 200);
         this->Add(newTower);
         return newTower;
     }
@@ -426,7 +426,7 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
         std::shared_ptr<CTowerRing> newTower = std::make_shared<CTowerRing>(this);
-        newTower->setCoordinates(x, y);
+        newTower->SetCoordinates(x, y);
         this->Add(newTower);
         return newTower;
     }
@@ -438,7 +438,7 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
         std::shared_ptr<CTowerCross> newTower = std::make_shared<CTowerCross>(this);
-        newTower->setCoordinates(1050, 200);
+        newTower->SetCoordinates(1050, 200);
         this->Add(newTower);
         return newTower;
     }
@@ -450,7 +450,7 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
         std::shared_ptr<CTowerBomb> newTower = std::make_shared<CTowerBomb>(this);
-        newTower->setCoordinates(1050, 200);
+        newTower->SetCoordinates(1050, 200);
         this->Add(newTower);
         return newTower;
     }

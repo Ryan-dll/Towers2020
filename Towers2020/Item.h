@@ -32,13 +32,15 @@ public:
      * Setter for X position
 	 * \param xPos desired X position
      */
-	virtual void setX(double xPos) { mX = xPos; }
+	virtual void SetX(double xPos) { mX = xPos; }
 
     /**
      * Setter for Y position
 	 * \param yPos desired Y position
      */
-	virtual void setY(double yPos) { mY = yPos; }
+	virtual void SetY(double yPos) { mY = yPos; }
+
+	virtual void SetId(std::wstring id) { mId = id; }
 
 	/// Load item from xml
 	virtual void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
@@ -69,7 +71,7 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	virtual void setCoordinates(double xPos, double yPos) { mX = xPos; mY = yPos; }
+	virtual void SetCoordinates(double xPos, double yPos) { mX = xPos; mY = yPos; }
 	
 	/**  Test this item to see if it has been clicked on
 	* \param x X location on the item to test
@@ -120,7 +122,11 @@ protected:
 	*/
 	CGame * GetGame() { return mGame; };
 
-protected:
+	std::shared_ptr<Gdiplus::Bitmap> GetItemImage() { return mItemImage; }
+
+	double GetPi() { return pi;  }
+
+private:
 	/// X position of item
 	double mX = 0;
 
