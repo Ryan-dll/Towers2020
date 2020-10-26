@@ -69,7 +69,7 @@ void CProjectile::Update(double elapsed)
             double distance = sqrt((dx * dx) + (dy * dy));
             if (distance < 24)
             {
-                mGame->TakeBalloon(balloon);
+                mGame->TakeBalloon(balloon, 10);
             }
         }
 

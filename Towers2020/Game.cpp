@@ -658,14 +658,13 @@ void CGame::ArmTowers()
 }
 
 
-void CGame::TakeBalloon(CBalloon * balloon)
+void CGame::TakeBalloon(CBalloon * balloon, int points)
 {
-    ScheduleDelete(balloon);
-    // TODO: reduce the score
+    ScheduleDelete(pair<CItem *,int>(balloon, points));
 }
 
 
-void CGame::ScheduleDelete(CItem * item)
+void CGame::ScheduleDelete(pair<CItem *, int> item)
 {
     mToDelete.push_back(item);
 }
@@ -678,11 +677,12 @@ void CGame::DeleteScheduled()
         //shared_ptr<CItem> test(item);
         //auto loc = find(mAllGameItems.begin(), mAllGameItems.end(), *item);
 
-        auto loc = find_if(mAllGameItems.begin(), mAllGameItems.end(), [item](shared_ptr<CItem> shared_item) { return shared_item.get() == item; });
+        auto loc = find_if(mAllGameItems.begin(), mAllGameItems.end(), [item](shared_ptr<CItem> shared_item) { return shared_item.get() == item.first; });
 
         if (loc != mAllGameItems.end())
         {
             mAllGameItems.erase(loc);
+            mScore += item.second;
         }
     }
     mToDelete.clear();

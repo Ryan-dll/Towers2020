@@ -41,7 +41,7 @@ void CRing::Update(double elapsed)
 				double distance = sqrt( (dx * dx) + (dy * dy));
 				if (distance < mDiameter/2)
 				{
-					CItem::GetGame()->TakeBalloon(balloon);
+					CItem::GetGame()->TakeBalloon(balloon, 3);
 				}
 			}
 		}
