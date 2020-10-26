@@ -41,11 +41,11 @@ public:
 
 	/// Used to calc distance between previous points
 	/// \return Difference in X coordinates
-	double XDifference() { return mX - mLastX; }
+	double XDifference() { return GetX() - mLastX; }
 
 	/// Used to calc distance between previous points
 	/// \return Difference in X coordinates
-	double YDifference() { return mY - mLastY; }
+	double YDifference() { return GetY() - mLastY; }
 
 	/// Arms the tower with X number of projectiles
 	virtual void ArmTower() {};

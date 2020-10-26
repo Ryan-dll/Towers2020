@@ -108,10 +108,19 @@ public:
 	*/
 	int GetYGrid() { return mYGrid; };
 
+	/// Set the XY grid of the item
 	void SetGrid(int xGrid, int yGrid);
+
 
 protected:
 
+	/**
+	* Return a pointer to the game
+	* \return Y position
+	*/
+	CGame * GetGame() { return mGame; };
+
+protected:
 	/// X position of item
 	double mX = 0;
 

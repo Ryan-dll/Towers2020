@@ -21,6 +21,7 @@
 #include "Dashboard.h"
 #include "TileCollector.h"
 #include "RoadCollector.h"
+#include "TowerCollector.h"
 #include "Balloon.h"
 #include "Ring.h"
 #include "TowerRing.h"
@@ -221,11 +222,6 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
         i->Draw(graphics);
     }
 
-    for (auto i : mAllBalloons)
-    {
-        i->Draw(graphics);
-    }
-
     // Draw the dashboard
     dashboard->Draw(graphics);
 
@@ -290,13 +286,13 @@ void CGame::Update(double elapsed)
             if (mBalloonDispatchTime > 0.375)
             {
                 mBalloonDispatchTime -= 0.375;
-                // Add test balloon
                 shared_ptr<CBalloon> balloon;
                 balloon = make_shared<CBalloon>(this);
                 balloon->setX(mStart->GetX() - 32);
                 balloon->setY(mStart->GetY());
-                AddBalloon(shared_ptr<CItem>(balloon));
-                //Add(shared_ptr<CItem>(balloon));
+                // THis is completely wrong.  Re-read the project description!!! 
+                //AddBalloon(shared_ptr<CItem>(balloon));
+                Add(shared_ptr<CItem>(balloon));
                 mStart->GiveBalloon(balloon);
                 mBalloonNum--;
             }
@@ -312,24 +308,6 @@ void CGame::Update(double elapsed)
 void CGame::Add(std::shared_ptr<CItem> item)
 {
     mAllGameItems.push_back(item);
-}
-
-/**
-* Update list of towers holding darts
-* \param item Item to add to the collection
-*/
-void CGame::AddTower(std::shared_ptr<CTower> item)
-{
-    mAllTowers.push_back(item);
-}
-
-/**
-* Update list of balloon
-* \param item Item to add to the collection
-*/
-void CGame::AddBalloon(std::shared_ptr<CItem> item)
-{
-    mAllBalloons.push_back(item);
 }
 
 /**
@@ -421,6 +399,7 @@ std::shared_ptr<CItem> CGame::HitTest(int x, int y)
 */
 std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
 {
+    
     double wid = 100;
     double hit = 100;
 
@@ -433,7 +412,6 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
         std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
         newTower->setCoordinates(1050, 200);
         this->Add(newTower);
-        this->AddTower(newTower);
         return newTower;
     }
 
@@ -446,7 +424,6 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
         std::shared_ptr<CTowerRing> newTower = std::make_shared<CTowerRing>(this);
         newTower->setCoordinates(1050, 200);
         this->Add(newTower);
-        this->AddTower(newTower);
         return newTower;
     }
 
@@ -459,7 +436,6 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
         std::shared_ptr<CTowerCross> newTower = std::make_shared<CTowerCross>(this);
         newTower->setCoordinates(1050, 200);
         this->Add(newTower);
-        this->AddTower(newTower);
         return newTower;
     }
 
@@ -472,7 +448,6 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
         std::shared_ptr<CTowerBomb> newTower = std::make_shared<CTowerBomb>(this);
         newTower->setCoordinates(1050, 200);
         this->Add(newTower);
-        this->AddTower(newTower);
         return newTower;
     }
 
@@ -484,13 +459,19 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
 
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
+        // This is completely wrong.  This project is all about visitors
+        // If you had read the first page of the project description, you 
+        // would know these things
+
         if (mGameActive == false)
         {
+
             mGameActive = true;
-            for (auto& i : mAllTowers)
+            /*for (auto& i : mAllTowers)
             {
                 i->ArmTower();
-            }
+            }*/
+            ArmTowers();
         }
         else
         {
@@ -507,13 +488,13 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
         if (mGameActive == true)
         {
             mGameActive = false;
-            ClearTower();
-            ClearBalloon();
+            // Clear and reload level
             mBalloonNum = 10;
         }
     }
 
     return nullptr;
+    
 }
 
 /** Take the item passed in and move its location to the
@@ -657,5 +638,17 @@ void CGame::Save(const wstring& filename)
     catch (CXmlNode::Exception ex)
     {
         AfxMessageBox(ex.Message().c_str());
+    }
+}
+
+void CGame::ArmTowers()
+{
+    vector<CTower*> towers;
+    CTowerCollector collector;
+    Accept(&collector);
+    towers = collector.GetTowers();
+    for (auto tower : towers)
+    {
+        tower->ArmTower();
     }
 }

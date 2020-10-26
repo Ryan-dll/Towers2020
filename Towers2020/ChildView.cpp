@@ -90,6 +90,7 @@ void CChildView::OnPaint()
 	}
 
 	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
+	
 	/*
 	* Compute the elapsed time since the last draw
 	*/

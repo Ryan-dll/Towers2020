@@ -8,7 +8,6 @@
 
 #include "pch.h"
 #include "TowerEight.h"
-#include "TowerVisitor.h"
 #include "Projectile.h"
 
 
@@ -24,15 +23,6 @@ CTowerEight::CTowerEight(CGame * game) : CTowerProjectile(game)
 	CItem::SetImage(image);
 	/// Prepare for firing
 	
-}
-
-/**
- * Accept function for visitor
- * \param visitor Pointer to the visitor
- */
-void CTowerEight::Accept(CTowerVisitor* visitor)
-{
-	visitor->VisitTowerEight(this);
 }
 
 void CTowerEight::Fire()

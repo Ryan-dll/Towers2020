@@ -45,6 +45,10 @@ void CTileRoad::Update(double elapsed)
 			{
 				mNext->GiveBalloon(balloon);
 			}
+			else
+			{
+				
+			}
 			t -= 1;
 			balloon->SetT(t);
 		}

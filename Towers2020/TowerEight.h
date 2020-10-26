@@ -32,9 +32,6 @@ public:
 	/// Construct the TowerEight
 	CTowerEight(CGame* game);
 
-	/// Accepts the Tower visitor
-	virtual void Accept(CTowerVisitor* visitor);
-
 	/// Overriden Fire Tower Function
 	virtual void Fire() override;
 

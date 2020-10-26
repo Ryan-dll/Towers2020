@@ -13,9 +13,9 @@ class CTileOpen;
 class CTileRoad;
 class CTileTrees;
 class CTowerEight;
-//class CTowerRing;
-//class CTowerCross;
-//class CTowerBomb;
+class CTowerRing;
+class CTowerCross;
+class CTowerBomb;
 
 
 /**
@@ -48,14 +48,14 @@ public:
     
 	/** Visit a CTowerCross object 
      * \param towercross The towercross we are visiting */
-    //virtual void VisitTowerCross(CTowerCross *towercross) {}
+    virtual void VisitTowerCross(CTowerCross *towercross) {}
 
 	/** Visit a CTowerRing object 
      * \param towerring The towerring we are visiting */
-    //virtual void VisitTowerRing(CTowerRing *towerring) {}
+    virtual void VisitTowerRing(CTowerRing *towerring) {}
 
 	/** Visit a CTowerBomb object 
      * \param towerbomb The towerbomb we are visiting */
-    //virtual void VisitTowerBomb(CTowerBomb *towerbomb) {}
+    virtual void VisitTowerBomb(CTowerBomb *towerbomb) {}
 };
 

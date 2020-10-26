@@ -24,6 +24,7 @@ CProjectile::CProjectile(CGame* game) : CItem(game)
  */
 void CProjectile::Draw(Gdiplus::Graphics* graphics)
 {
+    
     if (mActive == true) 
     {
         int wid = mItemImage->GetWidth();

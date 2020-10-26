@@ -119,6 +119,11 @@ double CItem::Distance(std::shared_ptr<CItem> other)
     return sqrt(dx * dx + dy * dy);
 }
 
+/**
+* Set the XY grid of the item
+* \param xGrid X grid position
+* \param yGrid Y grid position
+*/
 void CItem::SetGrid( int xGrid, int yGrid) 
 {
     mXGrid = xGrid; 

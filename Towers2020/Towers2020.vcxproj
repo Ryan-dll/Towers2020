@@ -211,12 +211,12 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="TowerBomb.h" />
+    <ClInclude Include="TowerCollector.h" />
     <ClInclude Include="TowerCross.h" />
     <ClInclude Include="TowerEight.h" />
     <ClInclude Include="TowerRing.h" />
     <ClInclude Include="TowerProjectile.h" />
     <ClInclude Include="Towers2020.h" />
-    <ClInclude Include="TowerVisitor.h" />
     <ClInclude Include="TileTrees.h" />
     <ClInclude Include="XmlNode.h" />
   </ItemGroup>
@@ -247,12 +247,12 @@
     </ClCompile>
     <ClCompile Include="TileRoad.cpp" />
     <ClCompile Include="TowerBomb.cpp" />
+    <ClCompile Include="TowerCollector.cpp" />
     <ClCompile Include="TowerCross.cpp" />
     <ClCompile Include="TowerEight.cpp" />
     <ClCompile Include="TowerRing.cpp" />
     <ClCompile Include="TowerProjectile.cpp" />
     <ClCompile Include="Towers2020.cpp" />
-    <ClCompile Include="TowerVisitor.cpp" />
     <ClCompile Include="TileTrees.cpp" />
     <ClCompile Include="XmlNode.cpp" />
   </ItemGroup>

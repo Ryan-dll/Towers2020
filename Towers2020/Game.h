@@ -56,12 +56,6 @@ public:
 	/// Add item to the collection
 	void Add(std::shared_ptr<CItem> item);
 
-	/// Add projectile tower to the collection
-	void AddTower(std::shared_ptr<CTower> item);
-
-	/// Add balloon to the collection
-	void AddBalloon(std::shared_ptr<CItem> item);
-
 	/// Add image from Dashboard to the collection
 	void AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image);
 	
@@ -135,36 +129,19 @@ public:
 	*/
 	void Clear() { mAllGameItems.clear(); }
 
-	/**
-	*  Clear the tower data.
-	*
-	* Deletes all known towers in the game.
-	*/
-	void ClearTower() { mAllTowers.clear(); }
-
-	/**
-	*  Clear the balloon data.
-	*
-	* Deletes all known balloons in the game.
-	*/
-	void ClearBalloon() { mAllBalloons.clear(); }
-
 	/*
 	* Setter for number of balloon
 	* \param num the number of balloon
 	*/
 	void SetBalloonNum(int num) { mBalloonNum = num; }
 
+	/// Arm all the towers at the start of a round
+	void ArmTowers();
+
 private:
 	/// All game items
 	std::vector<std::shared_ptr<CItem>> mAllGameItems;
 
-	/// All Projectile towers
-	std::vector<std::shared_ptr<CTower>> mAllTowers;
-
-	/// All balloons
-	std::vector<std::shared_ptr<CItem>> mAllBalloons;
-	
 	/// All game items
 	std::vector<std::shared_ptr<Gdiplus::Bitmap>> mAllDashboardImages;
 

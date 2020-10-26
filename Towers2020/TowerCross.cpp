@@ -8,7 +8,6 @@
 
 #include "pch.h"
 #include "TowerCross.h"
-#include "TowerVisitor.h"
 #include "Projectile.h"
 
 
@@ -34,7 +33,7 @@ CTowerCross::CTowerCross(CGame* game) : CTowerProjectile(game)
  */
 void CTowerCross::Accept(CItemVisitor* visitor)
 {
-	//visitor->VisitTowerCross(this);
+	visitor->VisitTowerCross(this);
 }
 
 void CTowerCross::Fire()
