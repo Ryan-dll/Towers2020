@@ -47,7 +47,7 @@ void CTileRoad::Update(double elapsed)
 			}
 			else
 			{
-				
+				CItem::GetGame()->TakeBalloon(balloon);
 			}
 			t -= 1;
 			balloon->SetT(t);

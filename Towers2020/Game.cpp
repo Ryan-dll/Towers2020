@@ -297,6 +297,10 @@ void CGame::Update(double elapsed)
                 mBalloonNum--;
             }
         }
+        if (mToDelete.size() > 0)
+        {
+            DeleteScheduled();
+        }
     }
 }
 
@@ -334,8 +338,8 @@ void CGame::LoadImages()
         L"roadEW.png", L"roadEWstart.png", L"roadNE.png", L"roadNS.png",
         L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
         L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
-        L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png", L"tower-cross.png",
-        L"button-replay.png", L"button-stop.png"
+        L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png",
+        L"tower-cross.png", L"button-replay.png", L"button-stop.png"
     };
     
     for (wstring filename : mKeys)
@@ -651,4 +655,32 @@ void CGame::ArmTowers()
     {
         tower->ArmTower();
     }
+}
+
+
+void CGame::TakeBalloon(std::shared_ptr<CBalloon> balloon)
+{
+    ScheduleDelete(shared_ptr<CItem>(balloon));
+    // TODO: reduce the score
+}
+
+
+void CGame::ScheduleDelete(std::shared_ptr<CItem> item)
+{
+    mToDelete.push_back(item);
+}
+
+void CGame::DeleteScheduled()
+{
+    for (auto item : mToDelete)
+    {
+        // Remove the item from the main collection
+        auto loc = find(begin(mAllGameItems), end(mAllGameItems), shared_ptr<CItem>(item));
+
+        if (loc != end(mAllGameItems))
+        {
+            mAllGameItems.erase(loc);
+        }
+    }
+    mToDelete.clear();
 }
