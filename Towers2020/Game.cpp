@@ -288,8 +288,27 @@ void CGame::Update(double elapsed)
                 mBalloonDispatchTime -= 0.375;
                 shared_ptr<CBalloon> balloon;
                 balloon = make_shared<CBalloon>(this);
-                balloon->SetX(mStart->GetX() - 32);
-                balloon->SetY(mStart->GetY());
+                wstring input = mStart->GetIn();
+                if (input == L"N")
+                {
+                    balloon->SetX(mStart->GetX());
+                    balloon->SetY(mStart->GetY() - 32);
+                } 
+                else if (input == L"S")
+                {
+                    balloon->SetX(mStart->GetX());
+                    balloon->SetY(mStart->GetY() + 32);
+                }
+                else if (input == L"W")
+                {
+                    balloon->SetX(mStart->GetX() + 32);
+                    balloon->SetY(mStart->GetY());
+                }
+                else if (input == L"E")
+                {
+                    balloon->SetX(mStart->GetX() - 32);
+                    balloon->SetY(mStart->GetY());
+                }
                 // THis is completely wrong.  Re-read the project description!!! 
                 //AddBalloon(shared_ptr<CItem>(balloon));
                 Add(shared_ptr<CItem>(balloon));
@@ -516,6 +535,21 @@ void CGame::LoadToFront(std::shared_ptr<CItem> item)
 }
 
 /**
+* Local Function for getting a road with a specific grid position
+* \param roads The collection of roads
+* \param gridX the X grid position
+* \param gridY the Y grid position
+* \returns iterator at the spot where it was found
+*/
+vector<CTileRoad*>::iterator GetRoad(vector<CTileRoad*> & roads, int gridX, int gridY)
+{
+    return find_if(roads.begin(), roads.end(), [gridX, gridY](CTileRoad* road)
+    {
+        return (road->GetXGrid() == gridX && road->GetYGrid() == gridY);
+    });
+}
+
+/**
 * Setup the path for the balloons to follow
 */
 void CGame::SetupPath()
@@ -545,10 +579,54 @@ void CGame::SetupPath()
         return;
     }
     // Give a starting direction and a road type find the next direction
-    wstring current = L"E"; // Hardcode this for now, we can fix later
+    // Find the starting direction
     int gridX = mStartX;
     int gridY = mStartY;
+
     
+    wstring current = L""; // Hardcode this for now, we can fix later
+    wstring iType = start->GetType();
+    vector<wchar_t> v(iType.begin(), iType.end());
+    for (auto ch : v)
+    { 
+        if (ch == L'N')
+        {
+            // See if there is road to north
+            auto testRoad = GetRoad(roads, gridX, gridY - 1);
+            if (testRoad != roads.end() && current.empty())
+            {
+                current = L"N";
+            }
+        }
+        else if (ch == L'S')
+        {
+            // See if there is road to north
+            auto testRoad = GetRoad(roads, gridX, gridY + 1);
+            if (testRoad != roads.end() && current.empty())
+            {
+                current = L"S";
+            }
+        }
+        else if (ch == L'E')
+        {
+            // See if there is road to north
+            auto testRoad = GetRoad(roads, gridX + 1, gridY);
+            if (testRoad != roads.end() && current.empty())
+            {
+                current = L"E";
+            }
+        }
+        else if (ch == L'W')
+        {
+            // See if there is road to north
+            auto testRoad = GetRoad(roads, gridX - 1, gridY);
+            if (testRoad != roads.end() && current.empty())
+            {
+                current = L"W";
+            }
+        }
+    }
+
     auto oldPtr = start;
     mStart = start;
     // Move through all the roads until we get to the end
@@ -572,10 +650,7 @@ void CGame::SetupPath()
         else if (type == L"W") gridX--;
         else if (type == L"E") gridX++;
         oldPtr->SetOut(type);
-        auto newIt = find_if(roads.begin(), roads.end(), [gridX, gridY](CTileRoad* road)
-            {
-                return (road->GetXGrid() == gridX && road->GetYGrid() == gridY);
-            });
+        auto newIt = GetRoad(roads, gridX, gridY);
         if (newIt == roads.end())
         {
             // path stops here.

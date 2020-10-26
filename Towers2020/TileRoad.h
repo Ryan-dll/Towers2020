@@ -56,6 +56,12 @@ public:
      * \param out The outgoing direction
      */
     void SetOut(std::wstring out) { mOut = out; }
+    
+    /**
+     * Get the direction the ballon comes from
+     * \returns the direction
+     */
+    std::wstring GetIn() { return mIn; }
 
     /**
      * Give balloon to this road
