@@ -660,7 +660,7 @@ void CGame::ArmTowers()
 
 void CGame::TakeBalloon(CBalloon * balloon)
 {
-    ScheduleDelete((CItem *) balloon);
+    ScheduleDelete(balloon);
     // TODO: reduce the score
 }
 
@@ -675,9 +675,12 @@ void CGame::DeleteScheduled()
     for (auto item : mToDelete)
     {
         // Remove the item from the main collection
-        auto loc = find(begin(mAllGameItems), end(mAllGameItems), shared_ptr<CItem>(item));
+        //shared_ptr<CItem> test(item);
+        //auto loc = find(mAllGameItems.begin(), mAllGameItems.end(), *item);
 
-        if (loc != end(mAllGameItems))
+        auto loc = find_if(mAllGameItems.begin(), mAllGameItems.end(), [item](shared_ptr<CItem> shared_item) { return shared_item.get() == item; });
+
+        if (loc != mAllGameItems.end())
         {
             mAllGameItems.erase(loc);
         }

@@ -36,15 +36,13 @@ void CRing::Update(double elapsed)
 			vector<CBalloon*> balloons = bc.GetBalloons();
 			for (auto balloon : balloons)
 			{
-				double dx = GetX() + mDiameter/2 - balloon->GetX()+32;
-				double dy = GetY() + mDiameter/2 - balloon->GetY()+32;
-				double distance = sqrt( dx * dx + dy * dy);
-				if (distance < mDiameter)
+				double dx = balloon->GetX() + 32 - GetX() + (mDiameter/2);
+				double dy = (GetY() + (mDiameter/2)) - balloon->GetY() + 32;
+				double distance = sqrt( (dx * dx) + (dy * dy));
+				if (distance < mDiameter/2)
 				{
-					//CItem::GetGame()->TakeBalloon(balloon);
+					CItem::GetGame()->TakeBalloon(balloon);
 				}
-				CItem::GetGame()->TakeBalloon(balloon);
-
 			}
 		}
 		else 
