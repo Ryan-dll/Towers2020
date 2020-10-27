@@ -402,6 +402,13 @@ shared_ptr<Bitmap> CGame::GetImage(wstring filename)
     return image;
 }
 
+
+/**
+* Check if an item is clicked by the mouse
+* \param x The x coordinate
+* \param y The y coordinate
+* \returns pointer to item
+*/
 std::shared_ptr<CItem> CGame::HitTest(int x, int y)
 {
     for (auto i = mAllGameItems.rbegin(); i != mAllGameItems.rend(); i++)

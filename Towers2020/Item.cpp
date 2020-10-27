@@ -37,6 +37,7 @@ void CItem::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
  * Save the arrtibutes to an item node
  * 
  * \param node The node we are going to be a child of
+ * \return XmlNode
  */
 std::shared_ptr<xmlnode::CXmlNode> 
 CItem::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)

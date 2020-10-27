@@ -23,6 +23,11 @@ CMessage::~CMessage()
 {
 }
 
+/**
+ * Draw the begin message
+ * \param graphics The graphics context
+ * \param level The level number
+ */
 void CMessage::DrawBeginMessage(Graphics* graphics, int level)
 {
 	FontFamily fontFamily(L"Arial");

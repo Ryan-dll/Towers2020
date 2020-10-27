@@ -59,10 +59,10 @@ public:
 	/// Add image from Dashboard to the collection
 	void AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image);
 	
-	// Get Pointer to image object
+	/// Get Pointer to image object
 	std::shared_ptr<Gdiplus::Bitmap> GetImage(std::wstring filename);
 	
-	// Load images at the beginning of the game
+	/// Load images at the beginning of the game
 	void LoadImages();
 	
 	/// Hit Test for the item

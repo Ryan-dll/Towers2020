@@ -26,6 +26,11 @@ void CTile::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
     //mId = node->GetAttributeValue(L"id", L"");
 }
 
+/**
+ * Save the tile to xml
+ * \param node The node 
+ * \return the node
+ */
 std::shared_ptr<xmlnode::CXmlNode> CTile::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
     auto itemNode = node->AddChild(L"tile");

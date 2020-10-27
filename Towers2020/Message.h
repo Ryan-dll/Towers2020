@@ -19,7 +19,8 @@ public:
 	CMessage();
 
 	~CMessage();
-
-	void DrawBeginMessage(Gdiplus::Graphics* graphics, int);
+	
+	/// Draw the begin message
+	void DrawBeginMessage(Gdiplus::Graphics* graphics, int level);
 };
 
