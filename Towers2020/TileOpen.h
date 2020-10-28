@@ -34,5 +34,18 @@ public:
      * \param visitor The visitor we accept */
     virtual void Accept(CItemVisitor *visitor) override { visitor->VisitTileOpen(this); }
 
+    /// Setter for Occupado
+    /// \param newVal New value of the boolean (taken or not)
+    void SetIsOccupied(bool newVal) { IsOccupied = newVal; }
+
+    /// Getter for Ocupado
+    /// \return Status of tile occupation
+    bool GetIsOccupied() { return IsOccupied; }
+
+private:
+
+    /// Determines if tile currently has a tower on it
+    bool IsOccupied = false;
+
 };
 

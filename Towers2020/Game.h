@@ -50,6 +50,9 @@ public:
 	/// Mouse click	
 	void OnLButtonDown(int x, int y);
 
+	/// Mouse released
+	void OnLButtonUp(double x, double y);
+
 	/// Mouse mouse
 	void OnMouseMove(UINT nFlags, int x, int y);
 
@@ -91,7 +94,7 @@ public:
 	int getScore() { return mScore; };
 
 	/**
-	* Get game score
+	* Convert coordinate to pixel
 	* \param pixel The thing we're converting
 	* \return New virtual pixel
 	*/
@@ -151,6 +154,15 @@ public:
 
 	/// Delete all items scheduled to be deleted
 	void DeleteScheduled();
+
+	/**
+	* Determines if a tower can be placed in a location
+	* \param x coordinate in x direction
+	* \param y coordinate in y direction
+	* \param tower Tower we're comparing
+	* \return true if a location is found, false otherwise
+	*/
+	bool CheckForPlacement(std::shared_ptr<CItem> tower, double x, double y);
 
 private:
 	/// All game items
