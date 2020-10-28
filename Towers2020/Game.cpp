@@ -22,7 +22,7 @@
 #include "TileCollector.h"
 #include "RoadCollector.h"
 #include "TowerCollector.h"
-#include "BalloonCollector.h"
+#include "TileOpenCollector.h"
 #include "Balloon.h"
 #include "Ring.h"
 #include "TowerRing.h"
@@ -45,8 +45,8 @@ CGame::CGame()
     //std::wstring testimage = L"Images/test.png";
     //image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
     LoadImages();
-    dashboard = make_unique<CDashboard>(this);
-    
+    mDashboard = make_unique<CDashboard>(this);
+    mGrabbedItem = nullptr;
     //auto testTower = make_shared<CTowerEight>(this);
     //testTower->setCoordinates(300, 200);
     //testTower->ArmTower();
@@ -224,7 +224,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     }
 
     // Draw the dashboard
-    dashboard->Draw(graphics);
+    mDashboard->Draw(graphics);
 
 }
 
@@ -237,8 +237,46 @@ void CGame::OnLButtonDown(int x, int y)
 {
     double oX = (x - mXOffset) / mScale;
     double oY = (y - mYOffset) / mScale;
-    mGrabbedItem = DashHitTest(oX, oY);
 
+    if (!mGameActive)
+    {
+        if ((0 <= oX) && (oX <= 1024) && (0 <= oY) && (oY <= 1024))
+        {
+            // Try and find a tower to grab
+            // Get all the towers
+            vector<CTower*> towers;
+            CTowerCollector towerCollector;
+            Accept(&towerCollector);
+            towers = towerCollector.GetTowers();
+
+            auto found = find_if(towers.begin(), towers.end(), [oX, oY](CTower* tower)
+                {
+                    bool xWithin = (tower->GetX() < oX) && (tower->GetX() + 65 > oX);
+                    bool yWithin = (tower->GetY() < oY) && (tower->GetY() + 65 > oY);
+                    return xWithin && yWithin;
+                });
+            if (found != towers.end())
+            {
+                mGrabbedItem = *found;
+                // Set the old tile that the tower used to reside on to free
+                mGrabbedItem->GetPlaced()->SetIsOccupied(false);
+                mGrabbedItem->SetPlaced(nullptr);
+            }
+        }
+    }
+    if ((1024 <= oX) && (oX <= 1224) && (0 <= oY) && (oY <= 1024))
+    {
+        mGrabbedItem = mDashboard->DashHitTest(oX, oY);
+    }
+}
+/**
+* Handle when mouse is released
+* \param x X location clicked on
+* \param y Y location clicked on
+*/
+void CGame::OnLButtonUp(double x, double y)
+{
+    bool Check = CheckForPlacement(mGrabbedItem,x,y);
 }
 
 /**
@@ -260,12 +298,6 @@ void CGame::OnMouseMove(UINT nFlags, int x, int y)
         {
             mGrabbedItem->SetCoordinates(oX, oY);
         }
-        else
-        {
-            // When the left button is released, we release the
-            // item.
-            mGrabbedItem = nullptr;
-        }
     }
 }
 
@@ -277,11 +309,6 @@ void CGame::Update(double elapsed)
 {
     if (mGameActive)
     {
-        for (auto item : mAllGameItems)
-        {
-            item->Update(elapsed);
-        }
-
         if (mStart != nullptr && mBalloonNum > 0)
         {
             mBalloonDispatchTime += elapsed;
@@ -318,13 +345,15 @@ void CGame::Update(double elapsed)
                 mBalloonNum--;
             }
         }
+        for (auto item : mAllGameItems)
+        {
+            item->Update(elapsed);
+        }
         if (mToDelete.size() > 0)
         {
             DeleteScheduled();
         }
-
     }
-
 }
 
 	
@@ -336,16 +365,6 @@ void CGame::Add(std::shared_ptr<CItem> item)
 {
     mAllGameItems.push_back(item);
 }
-
-/**
-* Update objects in the playing area
-* \param image Item to add to the collection
-*/
-void CGame::AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image)
-{
-    mAllDashboardImages.push_back(image);
-}
-
 
 /**
 * Load the images for objects into all of the main maps
@@ -361,7 +380,7 @@ void CGame::LoadImages()
         L"roadEW.png", L"roadEWstart.png", L"roadNE.png", L"roadNS.png",
         L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
         L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
-        L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png",
+        L"trees2.png", L"trees3.png", L"trees4.png", L"new-Cross-Tower.png",
         L"tower-cross.png", L"button-replay.png", L"button-stop.png"
     };
     
@@ -425,115 +444,11 @@ std::shared_ptr<CItem> CGame::HitTest(int x, int y)
 
     return nullptr;
 }
-/**
-* Returns a pointer to a new tower if clicked
-* \param x Coordinate
-* \param y Coordinate
-* \return Shared pointer to new tower
-*/
-std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
-{
-    
-    double wid = 100;
-    double hit = 100;
-
-    // Test for TowerEight
-    double testX = x - 1074.0 - 40 + wid / 2;
-    double testY = y - 200.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
-        newTower->SetCoordinates(1050, 200);
-        this->Add(newTower);
-        return newTower;
-    }
-
-    // Test for TowerRing
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 350.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        std::shared_ptr<CTowerRing> newTower = std::make_shared<CTowerRing>(this);
-        newTower->SetCoordinates(x, y);
-        this->Add(newTower);
-        return newTower;
-    }
-
-    // Test for TowerCross
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 500.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        std::shared_ptr<CTowerCross> newTower = std::make_shared<CTowerCross>(this);
-        newTower->SetCoordinates(1050, 200);
-        this->Add(newTower);
-        return newTower;
-    }
-
-    // Test for TowerBomb
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 650.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        std::shared_ptr<CTowerBomb> newTower = std::make_shared<CTowerBomb>(this);
-        newTower->SetCoordinates(1050, 200);
-        this->Add(newTower);
-        return newTower;
-    }
-
-    // Test for Go and Stop Button
-    wid = 180;
-    hit = 90;
-    testX = x - 1034.0 - 40 + wid / 2;
-    testY = y - 800.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        // This is completely wrong.  This project is all about visitors
-        // If you had read the first page of the project description, you 
-        // would know these things
-
-        if (mGameActive == false)
-        {
-
-            mGameActive = true;
-            /*for (auto& i : mAllTowers)
-            {
-                i->ArmTower();
-            }*/
-            ArmTowers();
-        }
-        else
-        {
-            mGameActive = false;
-        }
-    }
-
-    // Test for Replay Button
-    testX = x - 1034.0 - 40 + wid / 2;
-    testY = y - 900.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        if (mGameActive == true)
-        {
-            mGameActive = false;
-            // Clear and reload level
-            mBalloonNum = 10;
-        }
-    }
-
-    return nullptr;
-    
-}
 
 /** Take the item passed in and move its location to the
 *   front of list
 */
+/*
 void CGame::LoadToFront(std::shared_ptr<CItem> item)
 {
     auto loc = find(begin(mAllGameItems), end(mAllGameItems), item);
@@ -543,7 +458,7 @@ void CGame::LoadToFront(std::shared_ptr<CItem> item)
         mAllGameItems.erase(loc);
         mAllGameItems.push_back(item);
     }
-}
+}*/
 
 /**
 * Local Function for getting a road with a specific grid position
@@ -598,9 +513,9 @@ void CGame::SetupPath()
     wstring current = L""; // Hardcode this for now, we can fix later
     wstring iType = start->GetType();
     vector<wchar_t> v(iType.begin(), iType.end());
-    for (auto ch : v)
+    for (int i = 0; i < v.size(); i++)
     { 
-        if (ch == L'N')
+        if (v.at(i) == L'N')
         {
             // See if there is road to north
             auto testRoad = GetRoad(roads, gridX, gridY - 1);
@@ -609,7 +524,7 @@ void CGame::SetupPath()
                 current = L"N";
             }
         }
-        else if (ch == L'S')
+        else if (v.at(i) == L'S')
         {
             // See if there is road to north
             auto testRoad = GetRoad(roads, gridX, gridY + 1);
@@ -618,7 +533,7 @@ void CGame::SetupPath()
                 current = L"S";
             }
         }
-        else if (ch == L'E')
+        else if (v.at(i) == L'E')
         {
             // See if there is road to north
             auto testRoad = GetRoad(roads, gridX + 1, gridY);
@@ -627,7 +542,7 @@ void CGame::SetupPath()
                 current = L"E";
             }
         }
-        else if (ch == L'W')
+        else if (v.at(i) == L'W')
         {
             // See if there is road to north
             auto testRoad = GetRoad(roads, gridX - 1, gridY);
@@ -783,4 +698,49 @@ void CGame::DeleteScheduled()
         }
     }
     mToDelete.clear();
+}
+
+/**
+* Determines if a tower can be placed in a location
+* \param x coordinate in x direction
+* \param y coordinate in y direction
+* \param tower Tower we're comparing
+* \return true if a location is found, false otherwise
+*/
+bool CGame::CheckForPlacement(CTower* tower, double x, double y)
+{
+    if (mGrabbedItem != nullptr)
+    {
+        CTileOpenCollector OpenCollect;
+        Accept(&OpenCollect);
+        std::vector<CTileOpen*> tiles = OpenCollect.GetTiles();
+        
+        for (auto tile : tiles)
+        {
+            double oX = (x - mXOffset) / mScale;
+            double oY = (y - mYOffset) / mScale;
+            double TileX = tile->GetX();
+            double TileY = tile->GetY();
+            if (oX > TileX && oX < (TileX + 64) && oY > TileY && oY < (TileY + 64) && (tile->GetIsOccupied() == false) && tower != nullptr)
+            {
+                tile->SetIsOccupied(true);
+                // This keeps track of the tile the tower is placed on for easy moving
+                tower->SetPlaced(tile);
+                tower->SetCoordinates(TileX, TileY);
+                mGrabbedItem = nullptr;
+                return true;
+            }
+        }
+        
+        if (!mAllGameItems.empty()) 
+        {
+            auto loc = find_if(mAllGameItems.begin(), mAllGameItems.end(), [tower](shared_ptr<CItem> shared_item) { return shared_item.get() == tower; });
+            if (loc != end(mAllGameItems))
+            {
+                mAllGameItems.erase(loc);
+            }
+        }
+    }
+    mGrabbedItem = nullptr;
+    return false;
 }

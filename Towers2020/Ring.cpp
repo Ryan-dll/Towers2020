@@ -56,7 +56,10 @@ void CRing::Update(double elapsed)
 }
 
 void CRing::Draw(Gdiplus::Graphics* graphics)
-{
-	Pen pen(Color(255, 0, 0), 2);
-	graphics->DrawEllipse(&pen, GetX()-(mDiameter/2), GetY()-(mDiameter/2), mDiameter, mDiameter);
+{	
+	if (mActive)
+	{
+		Pen pen(Color(255, 0, 0), 2);
+		graphics->DrawEllipse(&pen, GetX() - (mDiameter / 2), GetY() - (mDiameter / 2), mDiameter, mDiameter);
+	}
 }

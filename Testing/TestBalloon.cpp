@@ -20,10 +20,6 @@ namespace Testing
 			::SetCurrentDirectory(g_dir);
 		}
 		
-		TEST_METHOD(TestNothing)
-		{
-			// This is an empty test just to ensure the system is working
-		}
 
 		TEST_METHOD(TestBalloonRoad)
 		{

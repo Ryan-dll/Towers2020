@@ -28,13 +28,13 @@ public:
      * Return the X position in the grid
      * \returns X position in the grid
      */
-    int GetXGrid() { return mXGrid; }
+    //int GetXGrid() { return mXGrid; }
 
     /**
      * Return the Y position in the grid
      * \returns Y position in the grid
      */
-    int GetYGrid() { return mYGrid; }
+    //int GetYGrid() { return mYGrid; }
 
     /**
      * Return the image for the road

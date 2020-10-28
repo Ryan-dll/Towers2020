@@ -208,6 +208,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="TileOpenCollector.h" />
     <ClInclude Include="TileRoad.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Tower.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="TileOpenCollector.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="ItemVisitor.cpp" />
     <ClCompile Include="Message.cpp" />

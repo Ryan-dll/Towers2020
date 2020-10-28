@@ -53,6 +53,10 @@ public:
 	/// Save item to xml file
 	virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
+	void SetPlaced(CTileOpen* placed) { mPlaced = placed; }
+
+	CTileOpen* GetPlaced() { return mPlaced; }
+
 protected:
 	/// Time it takes to reload a shot
 	double mTimeBetween = 5;
@@ -68,5 +72,9 @@ protected:
 
 	/// Last location in Y direction
 	double mLastY = 0;
+
+	/// The tile on which we are placed
+	CTileOpen* mPlaced;
+	
 };
 
