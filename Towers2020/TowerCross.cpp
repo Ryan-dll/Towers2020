@@ -19,7 +19,7 @@ using namespace std;
  */
 CTowerCross::CTowerCross(CGame* game) : CTowerProjectile(game)
 {
-	wstring image = L"tower-cross.png";
+	wstring image = L"new-Cross-Tower.png";
 	CItem::SetImage(image);
 	mTimeBetween = 1.75;
 	mTimeUntilFire = 1.75;

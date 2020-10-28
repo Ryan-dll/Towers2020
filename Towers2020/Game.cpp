@@ -361,7 +361,7 @@ void CGame::LoadImages()
         L"roadEW.png", L"roadEWstart.png", L"roadNE.png", L"roadNS.png",
         L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
         L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
-        L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png",
+        L"trees2.png", L"trees3.png", L"trees4.png", L"new-Cross-Tower.png",
         L"tower-cross.png", L"button-replay.png", L"button-stop.png"
     };
     
