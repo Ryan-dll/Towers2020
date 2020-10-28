@@ -11,6 +11,7 @@
 #include "Game.h"
 
 class CGame;
+class CTower;
 
  /**
  * CDashboard class
@@ -30,6 +31,9 @@ public:
 
 	void Draw(Gdiplus::Graphics* graphics);
 	void setLevelStarted(bool started);
+	
+	/// Return the item the user clicked on in the dashboard
+	CTower* DashHitTest(int x, int y);
 
 private:
 	/// Pointer to the Game we belong to
