@@ -9,6 +9,13 @@
 #include "pch.h"
 #include "Dashboard.h"
 #include <string>
+#include "Item.h"
+#include "Tower.h"
+#include "TowerProjectile.h"
+#include "TowerEight.h"
+#include "TowerCross.h"
+#include "TowerRing.h"
+#include "TowerBomb.h"
 
 using namespace std;
 using namespace Gdiplus;
@@ -43,19 +50,12 @@ CDashboard::CDashboard(CGame* game)
     mGame = game;
 
     towerEight = mGame->GetImage(L"tower8.png");
-    mGame->AddDashImage(towerEight);
     towerCross = mGame->GetImage(L"new-Cross-Tower.png");
-    mGame->AddDashImage(towerCross);
     towerBomb = mGame->GetImage(L"tower-bomb.png");
-    mGame->AddDashImage(towerRing);
     towerRing = mGame->GetImage(L"tower-rings.png");
-    mGame->AddDashImage(towerBomb);
     goBtn = mGame->GetImage(L"button-go.png");
-    mGame->AddDashImage(goBtn);
     replayBtn = mGame->GetImage(L"button-replay.png");
-    mGame->AddDashImage(replayBtn);
     stopBtn = mGame->GetImage(L"button-stop.png");
-    mGame->AddDashImage(stopBtn);
 }
 
 /**
@@ -140,4 +140,88 @@ void CDashboard::setLevelStarted(bool started)
 {
     //levelStarted = started;
     mGame->SetGameActive(true);
+}
+
+/**
+* Returns a pointer to a new tower if clicked
+* \param x Coordinate
+* \param y Coordinate
+* \return Shared pointer to new tower
+*/
+CTower * CDashboard::DashHitTest(int x, int y)
+{
+
+    double wid = 100;
+    double hit = 100;
+
+    // Test for TowerEight
+    double testX = x - 1074.0 - 40 + wid / 2;
+    double testY = y - 200.0 - 40 + hit / 2;
+
+    std::shared_ptr<CTower> newTower;
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        newTower = std::make_shared<CTowerEight>(mGame);
+        newTower->SetCoordinates(1050, 200);
+        mGame->Add(newTower);
+        return newTower.get();
+    }
+
+    // Test for TowerRing
+    testX = x - 1074.0 - 40 + wid / 2;
+    testY = y - 350.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        newTower = std::make_shared<CTowerRing>(mGame);
+        newTower->SetCoordinates(x, y);
+        mGame->Add(newTower);
+        return newTower.get();
+    }
+
+    // Test for TowerCross
+    testX = x - 1074.0 - 40 + wid / 2;
+    testY = y - 500.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        newTower = std::make_shared<CTowerCross>(mGame);
+        newTower->SetCoordinates(1050, 200);
+        mGame->Add(newTower);
+        return newTower.get();
+    }
+
+    // Test for TowerBomb
+    testX = x - 1074.0 - 40 + wid / 2;
+    testY = y - 650.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+        newTower = std::make_shared<CTowerBomb>(mGame);
+        newTower->SetCoordinates(1050, 200);
+        mGame->Add(newTower);
+        return newTower.get();
+    }
+
+    // Test for Go and Stop Button
+    wid = 180;
+    hit = 90;
+    testX = x - 1034.0 - 40 + wid / 2;
+    testY = y - 800.0 - 40 + hit / 2;
+
+    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    {
+
+        if (!mGame->GetGameActive())
+        {
+
+            mGame->SetGameActive(true);
+            mGame->ArmTowers();
+        }
+        else
+        {
+            mGame->SetGameActive(false);
+        }
+    }
+    return nullptr;
 }

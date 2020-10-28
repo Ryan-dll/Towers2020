@@ -46,6 +46,5 @@ private:
 
     /// Determines if tile currently has a tower on it
     bool IsOccupied = false;
-
 };
 

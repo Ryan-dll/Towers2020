@@ -45,8 +45,8 @@ CGame::CGame()
     //std::wstring testimage = L"Images/test.png";
     //image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
     LoadImages();
-    dashboard = make_unique<CDashboard>(this);
-    
+    mDashboard = make_unique<CDashboard>(this);
+    mGrabbedItem = nullptr;
     //auto testTower = make_shared<CTowerEight>(this);
     //testTower->setCoordinates(300, 200);
     //testTower->ArmTower();
@@ -224,7 +224,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     }
 
     // Draw the dashboard
-    dashboard->Draw(graphics);
+    mDashboard->Draw(graphics);
 
 }
 
@@ -237,7 +237,33 @@ void CGame::OnLButtonDown(int x, int y)
 {
     double oX = (x - mXOffset) / mScale;
     double oY = (y - mYOffset) / mScale;
-    mGrabbedItem = DashHitTest(oX, oY);
+    if ((0 <= oX) && (oX <= 1024) && (0 <= oY) && (oY <= 1024))
+    {
+        // Try and find a tower to grab
+        // Get all the towers
+        vector<CTower*> towers;
+        CTowerCollector towerCollector;
+        Accept(&towerCollector);
+        towers = towerCollector.GetTowers();
+
+        auto found = find_if(towers.begin(), towers.end(), [oX, oY](CTower* tower)
+            {
+                bool xWithin = (tower->GetX() < oX) && (tower->GetX() + 65 > oX);
+                bool yWithin = (tower->GetY() < oY) && (tower->GetY() + 65 > oY);
+                return xWithin && yWithin;
+            });
+        if (found != towers.end())
+        {
+            mGrabbedItem = *found;
+            // Set the old tile that the tower used to reside on to free
+            mGrabbedItem->GetPlaced()->SetIsOccupied(false);
+            mGrabbedItem->SetPlaced(nullptr);
+        }
+    }
+    else if ((1024 <= oX) && (oX <= 1224) && (0 <= oY) && (oY <= 1024))
+    {
+        mGrabbedItem = mDashboard->DashHitTest(oX, oY);
+    }
 
 }
 /**
@@ -338,16 +364,6 @@ void CGame::Add(std::shared_ptr<CItem> item)
 }
 
 /**
-* Update objects in the playing area
-* \param image Item to add to the collection
-*/
-void CGame::AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image)
-{
-    mAllDashboardImages.push_back(image);
-}
-
-
-/**
 * Load the images for objects into all of the main maps
 */
 void CGame::LoadImages()
@@ -425,108 +441,11 @@ std::shared_ptr<CItem> CGame::HitTest(int x, int y)
 
     return nullptr;
 }
-/**
-* Returns a pointer to a new tower if clicked
-* \param x Coordinate
-* \param y Coordinate
-* \return Shared pointer to new tower
-*/
-std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
-{
-    
-    double wid = 100;
-    double hit = 100;
-
-    // Test for TowerEight
-    double testX = x - 1074.0 - 40 + wid / 2;
-    double testY = y - 200.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        std::shared_ptr<CTowerEight> newTower = std::make_shared<CTowerEight>(this);
-        newTower->SetCoordinates(1050, 200);
-        this->Add(newTower);
-        return newTower;
-    }
-
-    // Test for TowerRing
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 350.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        std::shared_ptr<CTowerRing> newTower = std::make_shared<CTowerRing>(this);
-        newTower->SetCoordinates(x, y);
-        this->Add(newTower);
-        return newTower;
-    }
-
-    // Test for TowerCross
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 500.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        std::shared_ptr<CTowerCross> newTower = std::make_shared<CTowerCross>(this);
-        newTower->SetCoordinates(1050, 200);
-        this->Add(newTower);
-        return newTower;
-    }
-
-    // Test for TowerBomb
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 650.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        std::shared_ptr<CTowerBomb> newTower = std::make_shared<CTowerBomb>(this);
-        newTower->SetCoordinates(1050, 200);
-        this->Add(newTower);
-        return newTower;
-    }
-
-    // Test for Go and Stop Button
-    wid = 180;
-    hit = 90;
-    testX = x - 1034.0 - 40 + wid / 2;
-    testY = y - 800.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-
-        if (mGameActive == false)
-        {
-
-            mGameActive = true;
-            ArmTowers();
-        }
-        else
-        {
-            mGameActive = false;
-        }
-    }
-
-    // Test for Replay Button
-    testX = x - 1034.0 - 40 + wid / 2;
-    testY = y - 900.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        if (mGameActive == true)
-        {
-            mGameActive = false;
-            // Clear and reload level
-            mBalloonNum = 10;
-        }
-    }
-
-    return nullptr;
-    
-}
 
 /** Take the item passed in and move its location to the
 *   front of list
 */
+/*
 void CGame::LoadToFront(std::shared_ptr<CItem> item)
 {
     auto loc = find(begin(mAllGameItems), end(mAllGameItems), item);
@@ -536,7 +455,7 @@ void CGame::LoadToFront(std::shared_ptr<CItem> item)
         mAllGameItems.erase(loc);
         mAllGameItems.push_back(item);
     }
-}
+}*/
 
 /**
 * Local Function for getting a road with a specific grid position
@@ -778,29 +697,39 @@ void CGame::DeleteScheduled()
     mToDelete.clear();
 }
 
-bool CGame::CheckForPlacement(std::shared_ptr<CItem> tower, double x, double y)
+/**
+* Determines if a tower can be placed in a location
+* \param x coordinate in x direction
+* \param y coordinate in y direction
+* \param tower Tower we're comparing
+* \return true if a location is found, false otherwise
+*/
+bool CGame::CheckForPlacement(CTower* tower, double x, double y)
 {
     CTileOpenCollector OpenCollect;
     Accept(&OpenCollect);
     std::vector<CTileOpen*> tiles = OpenCollect.GetTiles();
+    
     for (auto tile : tiles)
     {
         double oX = (x - mXOffset) / mScale;
         double oY = (y - mYOffset) / mScale;
         double TileX = tile->GetX();
         double TileY = tile->GetY();
-        if (oX > TileX && oX < (TileX + 64) && oY > TileY && oY < (TileY + 64) && (tile->GetIsOccupied() == false))
+        if (oX > TileX && oX < (TileX + 64) && oY > TileY && oY < (TileY + 64) && (tile->GetIsOccupied() == false) && tower != nullptr)
         {
             tile->SetIsOccupied(true);
+            // This keeps track of the tile the tower is placed on for easy moving
+            tower->SetPlaced(tile);
             tower->SetCoordinates(TileX, TileY);
             mGrabbedItem = nullptr;
             return true;
         }
     }
+    
     if (!mAllGameItems.empty()) 
     {
-        auto loc = find(begin(mAllGameItems), end(mAllGameItems), tower);
-
+        auto loc = find_if(mAllGameItems.begin(), mAllGameItems.end(), [tower](shared_ptr<CItem> shared_item) { return shared_item.get() == tower; });
         if (loc != end(mAllGameItems))
         {
             mAllGameItems.erase(loc);

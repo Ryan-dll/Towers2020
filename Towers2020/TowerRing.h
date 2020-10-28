@@ -24,7 +24,7 @@ public:
 	/// Construct the Tower
 	/// \param game Game context
 	CTowerRing(CGame* game);
-
+	
 	/// Fire ring out of towers.
 	virtual void Fire();
 
@@ -37,7 +37,7 @@ public:
 
 	/** Accept a visitor
 	 * \param visitor The visitor we accept */
-	virtual void Accept(CItemVisitor* visitor) {};
+	virtual void Accept(CItemVisitor* visitor) { visitor->VisitTowerRing(this); };
 
 	/**
 	 * Setter for X position

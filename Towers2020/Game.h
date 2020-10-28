@@ -59,9 +59,6 @@ public:
 	/// Add item to the collection
 	void Add(std::shared_ptr<CItem> item);
 
-	/// Add image from Dashboard to the collection
-	void AddDashImage(std::shared_ptr<Gdiplus::Bitmap> image);
-	
 	/// Get Pointer to image object
 	std::shared_ptr<Gdiplus::Bitmap> GetImage(std::wstring filename);
 	
@@ -71,12 +68,9 @@ public:
 	/// Hit Test for the item
 	std::shared_ptr<CItem> HitTest(int x, int y);
 
-	/// Hit Tesst for dash items
-	std::shared_ptr<CItem> DashHitTest(int x, int y);
-
 	/// Adds item to front of the list in display
 	///  \param item to be loaded up
-	void LoadToFront(std::shared_ptr<CItem> item);
+	//void LoadToFront(std::shared_ptr<CItem> item);
 
 	/// Iterate through the field to place all the roads
 	void SetupPath();
@@ -155,14 +149,9 @@ public:
 	/// Delete all items scheduled to be deleted
 	void DeleteScheduled();
 
-	/**
-	* Determines if a tower can be placed in a location
-	* \param x coordinate in x direction
-	* \param y coordinate in y direction
-	* \param tower Tower we're comparing
-	* \return true if a location is found, false otherwise
-	*/
-	bool CheckForPlacement(std::shared_ptr<CItem> tower, double x, double y);
+	/// Determines if a tower can be placed in a location
+	bool CheckForPlacement(CTower* tower, double x, double y);
+
 
 private:
 	/// All game items
@@ -171,17 +160,14 @@ private:
 	/// Items to delete
 	std::vector<std::pair<CItem *, int>> mToDelete;
 
-	/// All game items
-	std::vector<std::shared_ptr<Gdiplus::Bitmap>> mAllDashboardImages;
-
 	/// All the image files, used for any instance of an item
 	std::map<std::wstring, std::shared_ptr<Gdiplus::Bitmap>> mImageFiles;
 
 	/// Dashboard for the game
-	std::unique_ptr<CDashboard> dashboard;
+	std::unique_ptr<CDashboard> mDashboard;
 
 	/// Any item we are currently dragging
-	std::shared_ptr<CItem> mGrabbedItem;
+	CTower* mGrabbedItem;
 
 	/// Game score
 	int mScore = 0;
