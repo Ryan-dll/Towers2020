@@ -37,10 +37,6 @@ public:
 	/// \param elapsed elapsed time chunk
 	virtual void Update(double elapsed) override;
 
-	/// Sets a flag for Tower8 vs Cross
-	/// \returns if its a tower
-	virtual bool IsTower() { return false; }
-
 protected:
 	/// List of projectile pointers in tower
 	std::vector < std::shared_ptr<CProjectile> > mProjectiles;

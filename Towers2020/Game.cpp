@@ -22,6 +22,7 @@
 #include "TileCollector.h"
 #include "RoadCollector.h"
 #include "TowerCollector.h"
+#include "TileOpenCollector.h"
 #include "Balloon.h"
 #include "Ring.h"
 #include "TowerRing.h"
@@ -239,6 +240,15 @@ void CGame::OnLButtonDown(int x, int y)
     mGrabbedItem = DashHitTest(oX, oY);
 
 }
+/**
+* Handle when mouse is released
+* \param x X location clicked on
+* \param y Y location clicked on
+*/
+void CGame::OnLButtonUp(double x, double y)
+{
+    bool Check = CheckForPlacement(mGrabbedItem,x,y);
+}
 
 /**
 * Handle a click on the game area
@@ -258,12 +268,6 @@ void CGame::OnMouseMove(UINT nFlags, int x, int y)
         if (nFlags & MK_LBUTTON)
         {
             mGrabbedItem->SetCoordinates(oX, oY);
-        }
-        else
-        {
-            // When the left button is released, we release the
-            // item.
-            mGrabbedItem = nullptr;
         }
     }
 }
@@ -357,7 +361,7 @@ void CGame::LoadImages()
         L"roadEW.png", L"roadEWstart.png", L"roadNE.png", L"roadNS.png",
         L"roadNW.png", L"roadSE.png", L"roadSW.png", L"test.png",
         L"tower8.png", L"tower-bomb.png", L"tower-rings.png", L"trees1.png",
-        L"trees2.png", L"trees3.png", L"trees4.png", L"special-dart.png",
+        L"trees2.png", L"trees3.png", L"trees4.png", L"new-Cross-Tower.png",
         L"tower-cross.png", L"button-replay.png", L"button-stop.png"
     };
     
@@ -489,18 +493,11 @@ std::shared_ptr<CItem> CGame::DashHitTest(int x, int y)
 
     if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
     {
-        // This is completely wrong.  This project is all about visitors
-        // If you had read the first page of the project description, you 
-        // would know these things
 
         if (mGameActive == false)
         {
 
             mGameActive = true;
-            /*for (auto& i : mAllTowers)
-            {
-                i->ArmTower();
-            }*/
             ArmTowers();
         }
         else
@@ -779,4 +776,36 @@ void CGame::DeleteScheduled()
         }
     }
     mToDelete.clear();
+}
+
+bool CGame::CheckForPlacement(std::shared_ptr<CItem> tower, double x, double y)
+{
+    CTileOpenCollector OpenCollect;
+    Accept(&OpenCollect);
+    std::vector<CTileOpen*> tiles = OpenCollect.GetTiles();
+    for (auto tile : tiles)
+    {
+        double oX = (x - mXOffset) / mScale;
+        double oY = (y - mYOffset) / mScale;
+        double TileX = tile->GetX();
+        double TileY = tile->GetY();
+        if (oX > TileX && oX < (TileX + 64) && oY > TileY && oY < (TileY + 64) && (tile->GetIsOccupied() == false))
+        {
+            tile->SetIsOccupied(true);
+            tower->SetCoordinates(TileX, TileY);
+            mGrabbedItem = nullptr;
+            return true;
+        }
+    }
+    if (!mAllGameItems.empty()) 
+    {
+        auto loc = find(begin(mAllGameItems), end(mAllGameItems), tower);
+
+        if (loc != end(mAllGameItems))
+        {
+            mAllGameItems.erase(loc);
+        }
+    }
+    mGrabbedItem = nullptr;
+    return false;
 }

@@ -44,7 +44,7 @@ CDashboard::CDashboard(CGame* game)
 
     towerEight = mGame->GetImage(L"tower8.png");
     mGame->AddDashImage(towerEight);
-    towerCross = mGame->GetImage(L"tower-cross.png");
+    towerCross = mGame->GetImage(L"new-Cross-Tower.png");
     mGame->AddDashImage(towerCross);
     towerBomb = mGame->GetImage(L"tower-bomb.png");
     mGame->AddDashImage(towerRing);

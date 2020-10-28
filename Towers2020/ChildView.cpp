@@ -208,6 +208,7 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 void CChildView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	OnMouseMove(nFlags, point);
+	mGame.OnLButtonUp(point.x,point.y);
 }
 
 /**
