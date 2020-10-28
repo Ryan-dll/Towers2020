@@ -799,7 +799,12 @@ bool CGame::CheckForPlacement(std::shared_ptr<CItem> tower, double x, double y)
     }
     if (!mAllGameItems.empty()) 
     {
-        mAllGameItems.pop_back();
+        auto loc = find(begin(mAllGameItems), end(mAllGameItems), tower);
+
+        if (loc != end(mAllGameItems))
+        {
+            mAllGameItems.erase(loc);
+        }
     }
     mGrabbedItem = nullptr;
     return false;
