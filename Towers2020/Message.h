@@ -36,7 +36,6 @@ public:
 	/**
 	 * Draw the end message
 	 * \param graphics The graphics context
-	 * \param level The level number
 	 */
 	void DrawEndMessage(Gdiplus::Graphics* graphics);
 };

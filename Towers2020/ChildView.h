@@ -54,8 +54,11 @@ private:
 	long long mStartTime = 0;
 	/// If mStartTime timestamp has been set
 	bool mStarted = false;
+	/// If mEndMessageTime timestamp has been set
+	bool mEndMessageShown = false;
+	/// Timestamp of end message start
+	long long mEndMessageTime = 0;
 
-	//double badTime;
 
 // Operations
 public:

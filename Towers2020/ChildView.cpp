@@ -150,7 +150,18 @@ void CChildView::OnPaint()
 			
 			if (timePassed > 3 && mDisplayed && !mLevelStart && mGame.GetGameActive() && bc.GetBalloons().size() == 0)
 			{
-				mMessage.DrawEndMessage(&graphics);
+
+				if (!mEndMessageShown)
+				{
+					mEndMessageTime = time.QuadPart;
+					mEndMessageShown = true;
+				}
+
+				long long timer = time.QuadPart - mEndMessageTime;
+				double timePassed = double(timer) / mTimeFreq;
+				if (timePassed < 3) {
+					mMessage.DrawEndMessage(&graphics);
+				}
 			}
 		}
 
