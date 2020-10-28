@@ -276,10 +276,6 @@ void CGame::Update(double elapsed)
 {
     if (mGameActive)
     {
-        for (auto item : mAllGameItems)
-        {
-            item->Update(elapsed);
-        }
         if (mStart != nullptr && mBalloonNum > 0)
         {
             mBalloonDispatchTime += elapsed;
@@ -315,6 +311,10 @@ void CGame::Update(double elapsed)
                 mStart->GiveBalloon(balloon);
                 mBalloonNum--;
             }
+        }
+        for (auto item : mAllGameItems)
+        {
+            item->Update(elapsed);
         }
         if (mToDelete.size() > 0)
         {
@@ -594,9 +594,9 @@ void CGame::SetupPath()
     wstring current = L""; // Hardcode this for now, we can fix later
     wstring iType = start->GetType();
     vector<wchar_t> v(iType.begin(), iType.end());
-    for (auto ch : v)
+    for (int i = 0; i < v.size(); i++)
     { 
-        if (ch == L'N')
+        if (v.at(i) == L'N')
         {
             // See if there is road to north
             auto testRoad = GetRoad(roads, gridX, gridY - 1);
@@ -605,7 +605,7 @@ void CGame::SetupPath()
                 current = L"N";
             }
         }
-        else if (ch == L'S')
+        else if (v.at(i) == L'S')
         {
             // See if there is road to north
             auto testRoad = GetRoad(roads, gridX, gridY + 1);
@@ -614,7 +614,7 @@ void CGame::SetupPath()
                 current = L"S";
             }
         }
-        else if (ch == L'E')
+        else if (v.at(i) == L'E')
         {
             // See if there is road to north
             auto testRoad = GetRoad(roads, gridX + 1, gridY);
@@ -623,7 +623,7 @@ void CGame::SetupPath()
                 current = L"E";
             }
         }
-        else if (ch == L'W')
+        else if (v.at(i) == L'W')
         {
             // See if there is road to north
             auto testRoad = GetRoad(roads, gridX - 1, gridY);

@@ -20,7 +20,6 @@ using namespace Gdiplus;
 
 CChildView::CChildView()
 {
-	//mGame = CGame();
 }
 
 CChildView::~CChildView()
