@@ -237,34 +237,37 @@ void CGame::OnLButtonDown(int x, int y)
 {
     double oX = (x - mXOffset) / mScale;
     double oY = (y - mYOffset) / mScale;
-    if ((0 <= oX) && (oX <= 1024) && (0 <= oY) && (oY <= 1024))
-    {
-        // Try and find a tower to grab
-        // Get all the towers
-        vector<CTower*> towers;
-        CTowerCollector towerCollector;
-        Accept(&towerCollector);
-        towers = towerCollector.GetTowers();
 
-        auto found = find_if(towers.begin(), towers.end(), [oX, oY](CTower* tower)
-            {
-                bool xWithin = (tower->GetX() < oX) && (tower->GetX() + 65 > oX);
-                bool yWithin = (tower->GetY() < oY) && (tower->GetY() + 65 > oY);
-                return xWithin && yWithin;
-            });
-        if (found != towers.end())
+    if (!mGameActive)
+    {
+        if ((0 <= oX) && (oX <= 1024) && (0 <= oY) && (oY <= 1024))
         {
-            mGrabbedItem = *found;
-            // Set the old tile that the tower used to reside on to free
-            mGrabbedItem->GetPlaced()->SetIsOccupied(false);
-            mGrabbedItem->SetPlaced(nullptr);
+            // Try and find a tower to grab
+            // Get all the towers
+            vector<CTower*> towers;
+            CTowerCollector towerCollector;
+            Accept(&towerCollector);
+            towers = towerCollector.GetTowers();
+
+            auto found = find_if(towers.begin(), towers.end(), [oX, oY](CTower* tower)
+                {
+                    bool xWithin = (tower->GetX() < oX) && (tower->GetX() + 65 > oX);
+                    bool yWithin = (tower->GetY() < oY) && (tower->GetY() + 65 > oY);
+                    return xWithin && yWithin;
+                });
+            if (found != towers.end())
+            {
+                mGrabbedItem = *found;
+                // Set the old tile that the tower used to reside on to free
+                mGrabbedItem->GetPlaced()->SetIsOccupied(false);
+                mGrabbedItem->SetPlaced(nullptr);
+            }
         }
     }
-    else if ((1024 <= oX) && (oX <= 1224) && (0 <= oY) && (oY <= 1024))
+    if ((1024 <= oX) && (oX <= 1224) && (0 <= oY) && (oY <= 1024))
     {
         mGrabbedItem = mDashboard->DashHitTest(oX, oY);
     }
-
 }
 /**
 * Handle when mouse is released

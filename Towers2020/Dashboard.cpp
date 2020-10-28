@@ -154,54 +154,59 @@ CTower * CDashboard::DashHitTest(int x, int y)
     double wid = 100;
     double hit = 100;
 
-    // Test for TowerEight
     double testX = x - 1074.0 - 40 + wid / 2;
     double testY = y - 200.0 - 40 + hit / 2;
 
-    std::shared_ptr<CTower> newTower;
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+    if (!mGame->GetGameActive())
     {
-        newTower = std::make_shared<CTowerEight>(mGame);
-        newTower->SetCoordinates(1050, 200);
-        mGame->Add(newTower);
-        return newTower.get();
+        // Test for TowerEight
+
+        std::shared_ptr<CTower> newTower;
+        if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+        {
+            newTower = std::make_shared<CTowerEight>(mGame);
+            newTower->SetCoordinates(1050, 200);
+            mGame->Add(newTower);
+            return newTower.get();
+        }
+
+        // Test for TowerRing
+        testX = x - 1074.0 - 40 + wid / 2;
+        testY = y - 350.0 - 40 + hit / 2;
+
+        if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+        {
+            newTower = std::make_shared<CTowerRing>(mGame);
+            newTower->SetCoordinates(x, y);
+            mGame->Add(newTower);
+            return newTower.get();
+        }
+
+        // Test for TowerCross
+        testX = x - 1074.0 - 40 + wid / 2;
+        testY = y - 500.0 - 40 + hit / 2;
+
+        if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+        {
+            newTower = std::make_shared<CTowerCross>(mGame);
+            newTower->SetCoordinates(1050, 200);
+            mGame->Add(newTower);
+            return newTower.get();
+        }
+
+        // Test for TowerBomb
+        testX = x - 1074.0 - 40 + wid / 2;
+        testY = y - 650.0 - 40 + hit / 2;
+
+        if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
+        {
+            newTower = std::make_shared<CTowerBomb>(mGame);
+            newTower->SetCoordinates(1050, 200);
+            mGame->Add(newTower);
+            return newTower.get();
+        }
     }
 
-    // Test for TowerRing
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 350.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        newTower = std::make_shared<CTowerRing>(mGame);
-        newTower->SetCoordinates(x, y);
-        mGame->Add(newTower);
-        return newTower.get();
-    }
-
-    // Test for TowerCross
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 500.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        newTower = std::make_shared<CTowerCross>(mGame);
-        newTower->SetCoordinates(1050, 200);
-        mGame->Add(newTower);
-        return newTower.get();
-    }
-
-    // Test for TowerBomb
-    testX = x - 1074.0 - 40 + wid / 2;
-    testY = y - 650.0 - 40 + hit / 2;
-
-    if (testX > 0 && testY > 0 && testX <= wid && testY <= hit)
-    {
-        newTower = std::make_shared<CTowerBomb>(mGame);
-        newTower->SetCoordinates(1050, 200);
-        mGame->Add(newTower);
-        return newTower.get();
-    }
 
     // Test for Go and Stop Button
     wid = 180;
