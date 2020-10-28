@@ -780,32 +780,36 @@ void CGame::DeleteScheduled()
 
 bool CGame::CheckForPlacement(std::shared_ptr<CItem> tower, double x, double y)
 {
-    CTileOpenCollector OpenCollect;
-    Accept(&OpenCollect);
-    std::vector<CTileOpen*> tiles = OpenCollect.GetTiles();
-    for (auto tile : tiles)
+    if (mGrabbedItem != nullptr) 
     {
-        double oX = (x - mXOffset) / mScale;
-        double oY = (y - mYOffset) / mScale;
-        double TileX = tile->GetX();
-        double TileY = tile->GetY();
-        if (oX > TileX && oX < (TileX + 64) && oY > TileY && oY < (TileY + 64) && (tile->GetIsOccupied() == false))
+        CTileOpenCollector OpenCollect;
+        Accept(&OpenCollect);
+        std::vector<CTileOpen*> tiles = OpenCollect.GetTiles();
+        for (auto tile : tiles)
         {
-            tile->SetIsOccupied(true);
-            tower->SetCoordinates(TileX, TileY);
-            mGrabbedItem = nullptr;
-            return true;
+            double oX = (x - mXOffset) / mScale;
+            double oY = (y - mYOffset) / mScale;
+            double TileX = tile->GetX();
+            double TileY = tile->GetY();
+            if (oX > TileX && oX < (TileX + 64) && oY > TileY && oY < (TileY + 64) && (tile->GetIsOccupied() == false))
+            {
+                tile->SetIsOccupied(true);
+                tower->SetCoordinates(TileX, TileY);
+                mGrabbedItem = nullptr;
+                return true;
+            }
         }
-    }
-    if (!mAllGameItems.empty()) 
-    {
-        auto loc = find(begin(mAllGameItems), end(mAllGameItems), tower);
+        if (!mAllGameItems.empty())
+        {
+            auto loc = find(begin(mAllGameItems), end(mAllGameItems), tower);
 
-        if (loc != end(mAllGameItems))
-        {
-            mAllGameItems.erase(loc);
+            if (loc != end(mAllGameItems))
+            {
+                mAllGameItems.erase(loc);
+            }
         }
     }
+
     mGrabbedItem = nullptr;
     return false;
 }
