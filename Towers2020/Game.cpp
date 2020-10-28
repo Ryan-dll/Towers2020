@@ -706,33 +706,36 @@ void CGame::DeleteScheduled()
 */
 bool CGame::CheckForPlacement(CTower* tower, double x, double y)
 {
-    CTileOpenCollector OpenCollect;
-    Accept(&OpenCollect);
-    std::vector<CTileOpen*> tiles = OpenCollect.GetTiles();
-    
-    for (auto tile : tiles)
+    if (mGrabbedItem != nullptr)
     {
-        double oX = (x - mXOffset) / mScale;
-        double oY = (y - mYOffset) / mScale;
-        double TileX = tile->GetX();
-        double TileY = tile->GetY();
-        if (oX > TileX && oX < (TileX + 64) && oY > TileY && oY < (TileY + 64) && (tile->GetIsOccupied() == false) && tower != nullptr)
+        CTileOpenCollector OpenCollect;
+        Accept(&OpenCollect);
+        std::vector<CTileOpen*> tiles = OpenCollect.GetTiles();
+        
+        for (auto tile : tiles)
         {
-            tile->SetIsOccupied(true);
-            // This keeps track of the tile the tower is placed on for easy moving
-            tower->SetPlaced(tile);
-            tower->SetCoordinates(TileX, TileY);
-            mGrabbedItem = nullptr;
-            return true;
+            double oX = (x - mXOffset) / mScale;
+            double oY = (y - mYOffset) / mScale;
+            double TileX = tile->GetX();
+            double TileY = tile->GetY();
+            if (oX > TileX && oX < (TileX + 64) && oY > TileY && oY < (TileY + 64) && (tile->GetIsOccupied() == false) && tower != nullptr)
+            {
+                tile->SetIsOccupied(true);
+                // This keeps track of the tile the tower is placed on for easy moving
+                tower->SetPlaced(tile);
+                tower->SetCoordinates(TileX, TileY);
+                mGrabbedItem = nullptr;
+                return true;
+            }
         }
-    }
-    
-    if (!mAllGameItems.empty()) 
-    {
-        auto loc = find_if(mAllGameItems.begin(), mAllGameItems.end(), [tower](shared_ptr<CItem> shared_item) { return shared_item.get() == tower; });
-        if (loc != end(mAllGameItems))
+        
+        if (!mAllGameItems.empty()) 
         {
-            mAllGameItems.erase(loc);
+            auto loc = find_if(mAllGameItems.begin(), mAllGameItems.end(), [tower](shared_ptr<CItem> shared_item) { return shared_item.get() == tower; });
+            if (loc != end(mAllGameItems))
+            {
+                mAllGameItems.erase(loc);
+            }
         }
     }
     mGrabbedItem = nullptr;
