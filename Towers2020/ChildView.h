@@ -42,10 +42,20 @@ private:
 	int mLevel = 1;
 	/// Indicator of whether draw start message
 	bool mLevelStart = false;
+	/// Indicator of whether draw end message
+	bool mLevelEnd = false;
 	/// Indicator of whether displayed or not
 	bool mDisplayed = false;
-	/// The message timer
+	/// The start message timer
 	long long mDisplayTime = 0;
+	/// The end message timer
+	long long mDisplayTimeEnd = 0;
+	/// Timestamp of game start
+	long long mStartTime = 0;
+	/// If mStartTime timestamp has been set
+	bool mStarted = false;
+
+	//double badTime;
 
 // Operations
 public:

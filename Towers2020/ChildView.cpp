@@ -13,6 +13,7 @@
 #endif
 #include "Game.h"
 #include <iostream>
+#include "BalloonCollector.h"
 
 using namespace Gdiplus;
 
@@ -89,7 +90,7 @@ void CChildView::OnPaint()
 	long long diff = time.QuadPart - mLastTime;
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
-	
+
 	//
 	// Prevent tunnelling
 	//
@@ -106,17 +107,17 @@ void CChildView::OnPaint()
 		mGame.Update(elapsed);
 	}
 
-    CPaintDC paintDC(this);     // device context for painting
-    CDoubleBufferDC dc(&paintDC); // device context for painting
+	CPaintDC paintDC(this);     // device context for painting
+	CDoubleBufferDC dc(&paintDC); // device context for painting
 
-    Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context]
+	Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context]
 
 	CRect rect;
 	GetClientRect(&rect);
 
 
 	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
-	
+
 
 	if (mLevelStart)
 	{
@@ -134,7 +135,50 @@ void CChildView::OnPaint()
 		mLevelStart = false;
 	}
 
-	
+		CBalloonCollector bc;
+		mGame.Accept(&bc);
+
+		if (mGame.GetGameActive() && !mStarted)
+		{
+			mStartTime = time.QuadPart;
+			mStarted = true;
+		}
+
+		if (mGame.GetGameActive()) {
+			long long timer = time.QuadPart - mStartTime;
+			double timePassed = double(timer) / mTimeFreq;
+			
+			if (timePassed > 3 && mDisplayed && !mLevelStart && mGame.GetGameActive() && bc.GetBalloons().size() == 0)
+			{
+				mMessage.DrawEndMessage(&graphics);
+			}
+		}
+
+
+/*
+	CBalloonCollector bc;
+	mGame.Accept(&bc);
+
+	if (mLevelStart2)
+	{
+		if (bc.GetBalloons().size() == 0)
+		{
+			mMessage.DrawEndMessage(&graphics);
+		}
+
+		if (!mDisplayed2)
+		{
+			mDisplayTime2 = time.QuadPart;
+			mDisplayed2 = true;
+		}
+	}
+	long long continued2 = time.QuadPart - mDisplayTime2;
+	double passTime2 = double(continued2) / mTimeFreq;
+	if (passTime2 > 1)
+	{
+		mLevelStart2 = false;
+	}
+*/
 }
 
 

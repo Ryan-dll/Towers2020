@@ -18,6 +18,7 @@
 #include "Tile.h"
 #include "TileRoad.h"
 #include "Tower.h"
+#include "Message.h"
 
 class CItem;
 class CDashboard;
@@ -215,6 +216,9 @@ private:
 
 	/// Number of bombs on the level
 	int bombCount = 0;
+
+	/// The in-game message
+	CMessage mMessage;
 
 };
 

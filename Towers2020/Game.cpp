@@ -22,6 +22,7 @@
 #include "TileCollector.h"
 #include "RoadCollector.h"
 #include "TowerCollector.h"
+#include "BalloonCollector.h"
 #include "Balloon.h"
 #include "Ring.h"
 #include "TowerRing.h"
@@ -280,6 +281,7 @@ void CGame::Update(double elapsed)
         {
             item->Update(elapsed);
         }
+
         if (mStart != nullptr && mBalloonNum > 0)
         {
             mBalloonDispatchTime += elapsed;
@@ -320,7 +322,9 @@ void CGame::Update(double elapsed)
         {
             DeleteScheduled();
         }
+
     }
+
 }
 
 	
