@@ -727,7 +727,7 @@ bool CGame::CheckForPlacement(CTower* tower, double x, double y)
 void CGame::Clear() 
 { 
     mAllGameItems.clear(); 
-    bombCount = 0;
+    mBombCount = 0;
     mGameActive = false;
     mBalloonNum = 25;
     mBalloonDispatchTime = 0;
