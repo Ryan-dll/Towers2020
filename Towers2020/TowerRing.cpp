@@ -15,8 +15,8 @@ using namespace std;
 CTowerRing::CTowerRing(CGame* game) : CTower(game)
 {
 
-	ring = make_unique<CRing>(game);
-	GetGame()->Add(ring);
+	mRing = make_unique<CRing>(game);
+	GetGame()->Add(mRing);
 
 	wstring image = L"tower-rings.png";
 	CItem::SetImage(image);
@@ -24,7 +24,7 @@ CTowerRing::CTowerRing(CGame* game) : CTower(game)
 
 void CTowerRing::Fire()
 {
-	ring->Fire();
+	mRing->Fire();
 }
 
 void CTowerRing::Update(double elapsed)

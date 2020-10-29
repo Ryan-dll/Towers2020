@@ -30,7 +30,7 @@ public:
 	CDashboard(CGame* game);
 
 	void Draw(Gdiplus::Graphics* graphics);
-	void setLevelStarted(bool started);
+	void SetLevelStarted(bool started);
 	
 	/// Return the item the user clicked on in the dashboard
 	CTower* DashHitTest(int x, int y);

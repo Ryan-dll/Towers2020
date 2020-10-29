@@ -43,13 +43,13 @@ public:
 	 * Setter for X position
 	 * \param xPos desired X position
 	 */
-	virtual void SetX(double xPos) override { CItem::SetX(xPos); ring->SetX(xPos + 32.5); }
+	virtual void SetX(double xPos) override { CItem::SetX(xPos); mRing->SetX(xPos + 32.5); }
 
 	/**
 	 * Setter for Y position
 	 * \param yPos desired Y position
 	 */
-	virtual void SetY(double yPos) override { CItem::SetY(yPos); ring->SetY(yPos + 32.5);
+	virtual void SetY(double yPos) override { CItem::SetY(yPos); mRing->SetY(yPos + 32.5);
 	}
 
 	/**
@@ -57,17 +57,17 @@ public:
 	* \param yPos desired Y position
 	* \param xPos desired X position
 	*/
-	virtual void SetCoordinates(double xPos, double yPos) override { SetX(xPos); SetY(yPos); ring->SetX(xPos + 32.5); ring->SetY(yPos + 32.5);}
+	virtual void SetCoordinates(double xPos, double yPos) override { SetX(xPos); SetY(yPos); mRing->SetX(xPos + 32.5); mRing->SetY(yPos + 32.5);}
 
 	/**
 	* Get ring
 	* \return the ring
 	*/
-	std::shared_ptr<CRing> getRing() { return ring; };
+	std::shared_ptr<CRing> getRing() { return mRing; };
 
 protected:
 	/// Ring belonging to the tower
-	std::shared_ptr<CRing> ring;
+	std::shared_ptr<CRing> mRing;
 
 	/// Time it takes to reload a shot
 	double mTimeBetween = 5;

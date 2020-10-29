@@ -69,12 +69,12 @@ namespace Testing
 			Assert::IsTrue(testTower1->GetX() == 100);
 			Assert::IsTrue(testTower1->GetY() == 100);
 
-			Assert::IsFalse(testTower1->getRing()->isActive());
+			Assert::IsFalse(testTower1->getRing()->IsActive());
 
-			Assert::IsTrue(testTower1->getRing()->getRingDiameter() == 20);
+			Assert::IsTrue(testTower1->getRing()->GetRingDiameter() == 20);
 			testTower1->Fire();
-			Assert::IsTrue(testTower1->getRing()->isActive());
-			Assert::IsTrue(testTower1->getRing()->getRingDiameter() >= 20);
+			Assert::IsTrue(testTower1->getRing()->IsActive());
+			Assert::IsTrue(testTower1->getRing()->GetRingDiameter() >= 20);
 
 			testTower1->SetCoordinates(200, 200);
 			Assert::IsTrue(testTower1->GetX() == 200);

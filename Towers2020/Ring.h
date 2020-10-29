@@ -68,13 +68,13 @@ public:
 	* Get current diameter of ring
 	* \return diameter of ring
 	*/
-	int getRingDiameter() { return mDiameter; };
+	int GetRingDiameter() { return mDiameter; };
 
 	/**
 	* Is ring active
 	* \return if active
 	*/
-	bool isActive() { return mActive; };
+	bool IsActive() { return mActive; };
 
 private:
 	/// Current diameter of the ring
