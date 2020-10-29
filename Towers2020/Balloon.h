@@ -18,9 +18,13 @@ class CBalloon : public CItem
 public:
 	CBalloon() = delete;
 
+	/**
+	 * Copy constructor (disabled)
+	 */
 	CBalloon(const CBalloon&) = delete;
 
     /// Default Constructor
+    /// \param game The game we belong to
     CBalloon(CGame* game);
 
     /** Accept a visitor 

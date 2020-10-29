@@ -22,6 +22,9 @@ class CRing :
 public:
 	CRing() = delete;
 
+	/**
+	 * Copy constructor (disabled)
+	 */
 	CRing(const CRing&) = delete;
 
 	/**

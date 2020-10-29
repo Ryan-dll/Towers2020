@@ -21,6 +21,9 @@ class CDashboard
 public:
 	CDashboard() = delete;
 
+	/**
+	 * Copy constructor (disabled)
+	 */
 	CDashboard(const CDashboard&) = delete;
 
 	/// Constructor

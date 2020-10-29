@@ -19,6 +19,9 @@ class CTowerRing :
 public:
 	CTowerRing() = delete;
 
+	/**
+	 * Copy constructor (disabled)
+	 */
 	CTowerRing(const CTowerRing&) = delete;
 
 	/// Construct the Tower

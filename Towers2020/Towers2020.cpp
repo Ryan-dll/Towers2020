@@ -24,7 +24,6 @@ END_MESSAGE_MAP()
 
 
 // CTowers2020App construction
-
 CTowers2020App::CTowers2020App() noexcept
 {
 	// support Restart Manager
@@ -49,8 +48,8 @@ CTowers2020App::CTowers2020App() noexcept
 CTowers2020App theApp;
 
 
-// CTowers2020App initialization
-
+/// CTowers2020App initialization
+/// \returns BOOL
 BOOL CTowers2020App::InitInstance()
 {
 	// InitCommonControlsEx() is required on Windows XP if an application
@@ -124,6 +123,8 @@ BOOL CTowers2020App::InitInstance()
 	return TRUE;
 }
 
+/// CTowers2020App exiting
+/// \returns BOOL
 int CTowers2020App::ExitInstance()
 {
 	Gdiplus::GdiplusShutdown(gdiplusToken);	

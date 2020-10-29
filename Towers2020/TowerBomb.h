@@ -17,6 +17,9 @@ class CTowerBomb :
 public:
 	CTowerBomb() = delete;
 
+	/**
+	 * Copy constructor (disabled)
+	 */
 	CTowerBomb(const CTowerBomb&) = delete;
 
 	/// Construct the Tower

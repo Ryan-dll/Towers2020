@@ -72,10 +72,6 @@ public:
 	/// Hit Test for the item
 	std::shared_ptr<CItem> HitTest(int x, int y);
 
-	/// Adds item to front of the list in display
-	///  \param item to be loaded up
-	//void LoadToFront(std::shared_ptr<CItem> item);
-
 	/// Iterate through the field to place all the roads
 	void SetupPath();
 

@@ -16,6 +16,9 @@ class CBomb :
 public:
 	CBomb() = delete;
 
+	/**
+	 * Copy constructor (disabled)
+	 */
 	CBomb(const CBomb&) = delete;
 
 	/**

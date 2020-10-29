@@ -20,6 +20,9 @@ class CItem
 public:
 	CItem() = delete;
 
+	/**
+	 * Copy constructor (disabled)
+	 */
 	CItem(const CItem&) = delete;
 	
     /**
