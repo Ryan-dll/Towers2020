@@ -195,10 +195,10 @@ private:
 	float mYOffset = 0;
 	
 	/// Game area width in virtual pixels
-    const static int mWidth = 1224;
+    const static int mWidthVp = 1224;
 
     /// Game area height in virtual pixels
-    const static int mHeight = 1024;
+    const static int mHeightVp = 1024;
 
 	/// Pointer to the first tile in the road
 	CTileRoad* mStart = nullptr;
