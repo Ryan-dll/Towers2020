@@ -15,10 +15,10 @@ using namespace std;
 
 CTowerBomb::CTowerBomb(CGame* game) : CTower(game)
 {
-	bomb = make_unique<CBomb>(game);
-	GetGame()->Add(bomb);
+	mBomb = make_unique<CBomb>(game);
+	GetGame()->Add(mBomb);
 	GetGame()->IncreaseBombCount();
-	mTimeUntilFire = game->getBombCount() * 3.0;
+	mTimeUntilFire = game->GetBombCount() * 3.0;
 
 
 	wstring image = L"tower-bomb.png";
@@ -27,7 +27,7 @@ CTowerBomb::CTowerBomb(CGame* game) : CTower(game)
 
 void CTowerBomb::Fire()
 {
-	bomb->Fire();
+	mBomb->Fire();
 }
 
 void CTowerBomb::Update(double elapsed)
@@ -36,10 +36,10 @@ void CTowerBomb::Update(double elapsed)
 	{
 		mTimeUntilFire -= elapsed;
 
-		if (mTimeUntilFire <= 0 && !bombUsed)
+		if (mTimeUntilFire <= 0 && !mBombUsed)
 		{
 			Fire();
-			bombUsed = true;
+			mBombUsed = true;
 		}
 	}
 }

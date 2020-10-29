@@ -36,15 +36,15 @@ public:
 
     /// Setter for Occupado
     /// \param newVal New value of the boolean (taken or not)
-    void SetIsOccupied(bool newVal) { IsOccupied = newVal; }
+    void SetIsOccupied(bool newVal) { mIsOccupied = newVal; }
 
     /// Getter for Ocupado
     /// \return Status of tile occupation
-    bool GetIsOccupied() { return IsOccupied; }
+    bool GetIsOccupied() { return mIsOccupied; }
 
 private:
 
     /// Determines if tile currently has a tower on it
-    bool IsOccupied = false;
+    bool mIsOccupied = false;
 };
 

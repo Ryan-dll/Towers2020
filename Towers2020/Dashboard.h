@@ -31,9 +31,7 @@ public:
 
 	/// Draw the dashboard
 	void Draw(Gdiplus::Graphics* graphics);
-
-	/// Set the level as started
-	void setLevelStarted(bool started);
+	void SetLevelStarted(bool started);
 	
 	/// Return the item the user clicked on in the dashboard
 	CTower* DashHitTest(int x, int y);

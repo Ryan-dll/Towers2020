@@ -176,15 +176,15 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     //
     // Automatic Scaling
     //
-    float scaleX = float(width) / float(Width);
-    float scaleY = float(height) / float(Height);
+    float scaleX = float(width) / float(mWidthVp);
+    float scaleY = float(height) / float(mHeightVp);
     mScale = min(scaleX, scaleY);
 
     // Ensure it is centered horizontally
-    mXOffset = (float)((width - CGame::Width * mScale) / 2);
+    mXOffset = (float)((width - CGame::mWidthVp * mScale) / 2);
 
     // Ensure it is centered vertically
-    mYOffset = (float)((height - CGame::Height * mScale) / 2);
+    mYOffset = (float)((height - CGame::mHeightVp * mScale) / 2);
 
     graphics->TranslateTransform(mXOffset, mYOffset);
     graphics->ScaleTransform(mScale, mScale);

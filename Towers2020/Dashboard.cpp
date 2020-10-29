@@ -96,7 +96,7 @@ void CDashboard::Draw(Graphics* graphics)
         &text);    // The brush to draw the text with
 
     // Score number
-    const wstring score_wstr = to_wstring(mGame->getScore());
+    const wstring score_wstr = to_wstring(mGame->GetScore());
     const WCHAR* score_wchar = score_wstr.c_str();
     graphics->DrawString(score_wchar,  // String to draw
         -1,         // String length, -1 so it figures it out on its own
@@ -146,7 +146,7 @@ void CDashboard::Draw(Graphics* graphics)
  * 
  * \param started whether game is started
  */
-void CDashboard::setLevelStarted(bool started)
+void CDashboard::SetLevelStarted(bool started)
 {
     //levelStarted = started;
     mGame->SetGameActive(true);

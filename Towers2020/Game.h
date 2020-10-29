@@ -89,7 +89,7 @@ public:
 	* Get game score
 	* \return score of the game
 	*/
-	int getScore() { return mScore; };
+	int GetScore() { return mScore; };
 
 	/**
 	* Convert coordinate to pixel
@@ -108,13 +108,13 @@ public:
 	/**
 	* Increase number of bombs on level by 1
 	*/
-	void IncreaseBombCount() { bombCount++; };
+	void IncreaseBombCount() { mBombCount++; };
 
 	/**
 	* Get number of bombs on level
 	* \return number of bombs
 	*/
-	int getBombCount() { return bombCount; };
+	int GetBombCount() { return mBombCount; };
 
 	/**
 	* Getter for gameactive
@@ -194,10 +194,10 @@ private:
 	float mYOffset = 0;
 	
 	/// Game area width in virtual pixels
-    const static int Width = 1224;
+    const static int mWidthVp = 1224;
 
     /// Game area height in virtual pixels
-    const static int Height = 1024;
+    const static int mHeightVp = 1024;
 
 	/// Pointer to the first tile in the road
 	CTileRoad* mStart = nullptr;
@@ -212,7 +212,7 @@ private:
 	bool mGameActive = false;
 
 	/// Number of bombs on the level
-	int bombCount = 0;
+	int mBombCount = 0;
 
 	/// The in-game message
 	CMessage mMessage;
