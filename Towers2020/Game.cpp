@@ -39,53 +39,26 @@ map<wstring, map<wstring, wstring>> declarations;
 
 std::unique_ptr<Gdiplus::Bitmap> image;
 
+
+/**
+ * Constructor
+ */
 CGame::CGame()
 {
-    // Load test image from file
-    //std::wstring testimage = L"Images/test.png";
-    //image = unique_ptr<Bitmap>(Bitmap::FromFile(testimage.c_str()));
     LoadImages();
     mDashboard = make_unique<CDashboard>(this);
     mGrabbedItem = nullptr;
-    //auto testTower = make_shared<CTowerEight>(this);
-    //testTower->setCoordinates(300, 200);
-    //testTower->ArmTower();
-    //this->Add(testTower);
+}
 
-    //auto testTower2 = make_shared<CTowerCross>(this);
-    //testTower2->setCoordinates(100, 200);
-    //testTower2->ArmTower();
-    //this->Add(testTower2);
-
-    // Test adding ring
-    //auto ring = make_shared<CRing>(this);
-    //ring->setCoordinates(600, 600);
-    //this->Add(ring);
-
-    //// Test adding ring Tower
-    //auto ringTower = make_shared<CTowerRing>(this);
-    //ringTower->setCoordinates(500, 600);
-    //this->Add(ringTower);
-    //ringTower->ArmTower();
-
-    //// Test adding bomb Tower
-    //auto bombTower = make_shared<CTowerBomb>(this);
-    //bombTower->setCoordinates(200, 200);
-    //this->Add(bombTower);
-    //bombTower->ArmTower();
-
-    //// Test adding bomb Tower 2
-    //auto bombTower2 = make_shared<CTowerBomb>(this);
-    //bombTower2->setCoordinates(200, 400);
-    //this->Add(bombTower2);
-    //bombTower2->ArmTower();
-
-    //// Test adding bomb Tower 3
-    //auto bombTower3 = make_shared<CTowerBomb>(this);
-    //bombTower3->setCoordinates(200, 600);
-    //this->Add(bombTower3);
-    //bombTower3->ArmTower();
-
+/**
+ * Destructor
+ */
+CGame::~CGame()
+{
+    mStart = nullptr;
+    mGrabbedItem = nullptr;
+    mAllGameItems.clear();
+    mImageFiles.clear();
 }
 
 /**
@@ -743,4 +716,19 @@ bool CGame::CheckForPlacement(CTower* tower, double x, double y)
     }
     mGrabbedItem = nullptr;
     return false;
+}
+
+
+/**
+*  Clear the game item data.
+*
+* Deletes all known items in the game.
+*/
+void CGame::Clear() 
+{ 
+    mAllGameItems.clear(); 
+    bombCount = 0;
+    mGameActive = false;
+    mBalloonNum = 25;
+    mBalloonDispatchTime = 0;
 }

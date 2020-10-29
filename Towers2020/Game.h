@@ -30,8 +30,11 @@ class CTower;
 class CGame
 {
 public:
-	// Constructor
+	/// Constructor
 	CGame();
+
+	/// Destructor
+	~CGame();
 
 	/// Load the level from an XML file	
 	void Load(const std::wstring& filename);
@@ -125,12 +128,8 @@ public:
 	*/
 	void SetGameActive(bool status) { mGameActive = status; }
 
-	/**
-	*  Clear the game item data.
-	*
-	* Deletes all known items in the game.
-	*/
-	void Clear() { mAllGameItems.clear(); }
+	/// Clear the game item data.
+	void Clear();
 
 	/**
 	* Setter for number of balloon
@@ -207,7 +206,7 @@ private:
 	double mBalloonDispatchTime = 0;
 	
 	/// Number of balloons to send per level
-	int mBalloonNum = 10;
+	int mBalloonNum = 25;
 
 	/// Has the game started yet
 	bool mGameActive = false;

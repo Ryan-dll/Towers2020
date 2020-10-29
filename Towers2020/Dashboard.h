@@ -23,13 +23,16 @@ public:
 
 	CDashboard(const CDashboard&) = delete;
 
-	/**
-	 * CItem constructor
-	 * \param game Pointer to the game which we belong
-	 */
+	/// Constructor
 	CDashboard(CGame* game);
 
+	/// Destructor
+	~CDashboard();
+
+	/// Draw the dashboard
 	void Draw(Gdiplus::Graphics* graphics);
+
+	/// Set the level as started
 	void setLevelStarted(bool started);
 	
 	/// Return the item the user clicked on in the dashboard

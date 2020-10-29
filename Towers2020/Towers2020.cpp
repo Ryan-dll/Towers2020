@@ -9,7 +9,6 @@
 #include "Towers2020.h"
 #include "MainFrm.h"
 
-#include "ChildFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

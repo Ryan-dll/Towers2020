@@ -5,7 +5,7 @@
  *
  * Main header file for the Towers2020 application
  */
-
+/** \cond */
 #pragma once
 
 #ifndef __AFXWIN_H__
@@ -49,3 +49,5 @@ private:
 };
 
 extern CTowers2020App theApp;
+/** \endcond */
+

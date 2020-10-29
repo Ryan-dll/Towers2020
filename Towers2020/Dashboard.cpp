@@ -38,13 +38,14 @@ shared_ptr<Bitmap> towerRing;
 /// Pointer to image for Go Button
 shared_ptr<Bitmap> goBtn;
 
-/// Pointer to image for Replay Button
-shared_ptr<Bitmap> replayBtn;
-
 /// Pointer to image for Stop Button
 shared_ptr<Bitmap> stopBtn;
 
 
+/**
+ * CDashboard Constructor
+ * \param game Pointer to the game which we belong
+ */
 CDashboard::CDashboard(CGame* game)
 {
     mGame = game;
@@ -54,8 +55,21 @@ CDashboard::CDashboard(CGame* game)
     towerBomb = mGame->GetImage(L"tower-bomb.png");
     towerRing = mGame->GetImage(L"tower-rings.png");
     goBtn = mGame->GetImage(L"button-go.png");
-    replayBtn = mGame->GetImage(L"button-replay.png");
     stopBtn = mGame->GetImage(L"button-stop.png");
+}
+
+/**
+ * CDashboard Destructor
+ */
+CDashboard::~CDashboard()
+{
+
+    towerEight.reset();
+    towerCross.reset();
+    towerBomb.reset();
+    towerRing.reset();
+    goBtn.reset();
+    stopBtn.reset();
 }
 
 /**
@@ -122,10 +136,6 @@ void CDashboard::Draw(Graphics* graphics)
     {
         graphics->DrawImage(stopBtn.get(),
             1034, 800,
-            180, 90);
-
-        graphics->DrawImage(replayBtn.get(),
-            1034, 900,
             180, 90);
     }
 }

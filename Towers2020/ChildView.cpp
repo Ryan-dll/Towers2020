@@ -41,6 +41,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_LEVELS_LEVEL1, &CChildView::OnLevelsLevel1)
 	ON_COMMAND(ID_LEVELS_LEVEL2, &CChildView::OnLevelsLevel2)
 	ON_COMMAND(ID_FILE_SAVEAS, &CChildView::OnFileSaveas)
+	ON_COMMAND(ID_LEVELS_LEVEL3, &CChildView::OnLevelsLevel3)
 END_MESSAGE_MAP()
 
 
@@ -79,6 +80,12 @@ void CChildView::OnPaint()
 
 		mLastTime = time.QuadPart;
 		mTimeFreq = double(freq.QuadPart);
+
+		std::wstring filename = L"levels\\level1.xml";
+		mGame.Load(filename);
+		mLevelStart = true;
+		mLevel = 1;
+		mDisplayed = false;
 	}
 
 	/*
@@ -134,35 +141,70 @@ void CChildView::OnPaint()
 		mLevelStart = false;
 	}
 
-		CBalloonCollector bc;
-		mGame.Accept(&bc);
+	CBalloonCollector bc;
+	mGame.Accept(&bc);
 
-		if (mGame.GetGameActive() && !mStarted)
+	if (mGame.GetGameActive() && !mStarted)
+	{
+		mStartTime = time.QuadPart;
+		mStarted = true;
+	}
+
+	if (mGame.GetGameActive()) {
+		long long timer = time.QuadPart - mStartTime;
+		double timePassed = double(timer) / mTimeFreq;
+		
+		if (timePassed > 3 && mDisplayed && !mLevelStart && mGame.GetGameActive() && bc.GetBalloons().size() == 0)
 		{
-			mStartTime = time.QuadPart;
-			mStarted = true;
-		}
 
-		if (mGame.GetGameActive()) {
-			long long timer = time.QuadPart - mStartTime;
-			double timePassed = double(timer) / mTimeFreq;
-			
-			if (timePassed > 3 && mDisplayed && !mLevelStart && mGame.GetGameActive() && bc.GetBalloons().size() == 0)
+			if (!mEndMessageShown)
 			{
+				mEndMessageTime = time.QuadPart;
+				mEndMessageShown = true;
+			}
 
-				if (!mEndMessageShown)
+			long long timer = time.QuadPart - mEndMessageTime;
+			double timePassed = double(timer) / mTimeFreq;
+			if (timePassed < 3) {
+				mMessage.DrawEndMessage(&graphics);
+			}
+			else
+			{
+				// Reset game and load next level
+				if (mLevel == 1)
 				{
-					mEndMessageTime = time.QuadPart;
-					mEndMessageShown = true;
+					mGame.SetGameActive(false);
+					std::wstring filename = L"levels\\level2.xml";
+					mGame.Load(filename);
+					mLevelStart = true;
+					mLevel = 2;
+					mDisplayed = false;
+					mStarted = false;
+					mEndMessageShown = false;
+					Invalidate();
 				}
-
-				long long timer = time.QuadPart - mEndMessageTime;
-				double timePassed = double(timer) / mTimeFreq;
-				if (timePassed < 3) {
-					mMessage.DrawEndMessage(&graphics);
+				else if (mLevel == 2)
+				{
+					mGame.SetGameActive(false);
+					std::wstring filename = L"levels\\level3.xml";
+					mGame.Load(filename);
+					mLevelStart = true;
+					mLevel = 3;
+					mDisplayed = false;
+					mStarted = false;
+					mEndMessageShown = false;
+					Invalidate();
+				}
+				else
+				{
+					// Just stop the game, the user can reload if they would like
+					mGame.SetGameActive(false);
+					mStarted = false;
+					mEndMessageShown = false;
 				}
 			}
 		}
+	}
 
 
 /*
@@ -214,7 +256,7 @@ void CChildView::OnFileLoad()
 
 /**
 * Load file
-* \param: pCmdUI UI
+* \param pCmdUI UIA
 */
 void CChildView::OnUpdateFileLoad32776(CCmdUI* pCmdUI)
 {
@@ -225,6 +267,7 @@ void CChildView::OnUpdateFileLoad32776(CCmdUI* pCmdUI)
 /**
 * Override Default function
 * \param pDC idk
+* \return BOOL
 */
 BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 {
@@ -278,6 +321,9 @@ void CChildView::OnMouseMove(UINT nFlags, CPoint point)
 }
 
 
+/**
+ * Called when the user selects Level 0
+ */
 void CChildView::OnLevelsLevel0()
 {
 	std::wstring filename = L"levels\\level0.xml";
@@ -289,6 +335,9 @@ void CChildView::OnLevelsLevel0()
 }
 
 
+/**
+ * Called when the user selects Level 1
+ */
 void CChildView::OnLevelsLevel1()
 {
 	std::wstring filename = L"levels\\level1.xml";
@@ -300,6 +349,9 @@ void CChildView::OnLevelsLevel1()
 }
 
 
+/**
+ * Called when the user selects Level 2
+ */
 void CChildView::OnLevelsLevel2()
 {
 	std::wstring filename = L"levels\\level2.xml";
@@ -311,6 +363,22 @@ void CChildView::OnLevelsLevel2()
 }
 
 
+/**
+ * Called when the user selects Level 3
+ */
+void CChildView::OnLevelsLevel3()
+{
+	std::wstring filename = L"levels\\level3.xml";
+	mGame.Load(filename);
+	mLevelStart = true;
+	mLevel = 3;
+	mDisplayed = false;
+	Invalidate();
+}
+
+/**
+ * Called when the user selects Save
+ */
 void CChildView::OnFileSaveas()
 {
 	CFileDialog dlg(false,  // false = Save dialog box
@@ -325,3 +393,5 @@ void CChildView::OnFileSaveas()
 
 	mGame.Save(filename);
 }
+
+

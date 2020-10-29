@@ -53,8 +53,16 @@ public:
 	/// Save item to xml file
 	virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
+	/**
+	* Set the tile we are placed on
+	* \param placed The tile we are placed on
+	*/
 	void SetPlaced(CTileOpen* placed) { mPlaced = placed; }
 
+	/**
+	* Get the tile we are placed on
+	* \return The tile we are placed on
+	*/
 	CTileOpen* GetPlaced() { return mPlaced; }
 
 protected:

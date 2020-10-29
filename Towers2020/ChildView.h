@@ -88,5 +88,6 @@ public:
 	afx_msg void OnLevelsLevel1();
 	afx_msg void OnLevelsLevel2();
 	afx_msg void OnFileSaveas();
+	afx_msg void OnLevelsLevel3();
 };
 
