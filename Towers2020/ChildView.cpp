@@ -195,12 +195,17 @@ void CChildView::OnPaint()
 					mEndMessageShown = false;
 					Invalidate();
 				}
-				else
+				else if(mLevel == 3)
 				{
-					// Just stop the game, the user can reload if they would like
 					mGame.SetGameActive(false);
+					std::wstring filename = L"levels\\level3.xml";
+					mGame.Load(filename);
+					mLevelStart = true;
+					mLevel = 3;
+					mDisplayed = false;
 					mStarted = false;
 					mEndMessageShown = false;
+					Invalidate();
 				}
 			}
 		}
